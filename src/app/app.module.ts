@@ -10,13 +10,17 @@ import { FooterComponent } from './footer/footer.component';
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { LoginComponent } from './login/login.component';
+import { SupportComponent } from './support/support.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    SupportComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,

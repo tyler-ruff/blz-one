@@ -1,20 +1,27 @@
-# blz.one
-SAAS hub for services offered by Blazed Labs LLC.
+# Blazed One
+Discover a solution like no other, where customer experience means everything.
 
-## Dependencies
+## Made With
+This package is made with:
+- [Fire-Angular](https://github.com/blazed-space/fire-angular)
+- [Auth0](https://auth0.com/)
 
-This project uses:
-* Tailwind
-* Next.js
-* Firebase
-* Stripe
-
-## How to run this?
-
-Simply run,
+## Installing
+To install, run the following command at the root of the directory:
 ```sh
-npm run dev
+npm install
 ```
 
-To spin up a simple dev server, and navigate to [localhost:3000](http://localhost:3000/).
+## Live Development Server
+To run a live dev server, first ensure you have NPM installed. Then, if you have not already, install the Angular CLI,
+
+```sh
+npm install -g @angular/cli
+```
+
+Once installed, you can run a simple development server with the following command:
+
+```sh
+ng serve
+```
 

@@ -18,9 +18,14 @@ import { SettingsComponent } from './settings/settings.component';
 import { DriveComponent } from './drive/drive.component';
 import { TerminalComponent } from './terminal/terminal.component';
 
+import { LazyLoadDirective } from './lazyload.directive';
+import { RemoveSpacesPipe } from './remove-spaces/remove-spaces.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
+    LazyLoadDirective,
+    RemoveSpacesPipe,
     HeaderComponent,
     FooterComponent,
     LoginComponent,
@@ -44,7 +49,7 @@ import { TerminalComponent } from './terminal/terminal.component';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

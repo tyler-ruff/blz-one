@@ -12,6 +12,11 @@ import { AuthModule } from '@auth0/auth0-angular';
 import { LoginComponent } from './login/login.component';
 import { SupportComponent } from './support/support.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ProfileComponent } from './profile/profile.component';
+import { UserComponent } from './user/user.component';
+import { SettingsComponent } from './settings/settings.component';
+import { DriveComponent } from './drive/drive.component';
+import { TerminalComponent } from './terminal/terminal.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,12 @@ import { LoadingComponent } from './loading/loading.component';
     FooterComponent,
     LoginComponent,
     SupportComponent,
-    LoadingComponent
+    LoadingComponent,
+    ProfileComponent,
+    UserComponent,
+    SettingsComponent,
+    DriveComponent,
+    TerminalComponent
   ],
   imports: [
     BrowserModule,

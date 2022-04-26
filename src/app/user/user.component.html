@@ -1,0 +1,62 @@
+<!--
+
+            <div class="mb-5">
+            <img class="block mx-auto mb-5 object-cover object-center rounded" alt="Profile Picture" src="{{ user.picture }}">
+            <div class="flex flex-col text-center w-full mb-5">
+                <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">
+                    {{ user.name }}
+                </h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+                    {{ user.email }}
+                </p>
+            </div>
+          </div>
+
+
+-->
+
+<ng-container *ngIf="auth.user$ | async as user">
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-5 mx-auto flex flex-wrap flex-col">
+          <div class="flex mx-auto flex-wrap mb-20">
+            <a [routerLink]="['/user/profile']" [routerLinkActive]="['is-active']" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-500 hover:text-gray-900 tracking-wider">
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 mr-3" viewBox="0 0 24 24">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+              <span>
+                Profile
+              </span>
+            </a>
+            <a [routerLink]="['/user/settings']" [routerLinkActive]="['is-active']" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-500 hover:text-gray-900 tracking-wider">
+               <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                   <path fill-rule="evenodd" d="M11.405 3.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 01-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 01.872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 012.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 012.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 01.872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 01-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 01-2.105-.872l-.1-.34zM10 12.93a2.929 2.929 0 100-5.858 2.929 2.929 0 000 5.858z" clip-rule="evenodd"/>
+               </svg>
+               <span class="ml-2">
+                Settings
+              </span>
+            </a>
+            <a [routerLink]="['/user/drive']" [routerLinkActive]="['is-active']" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-500 hover:text-gray-900 tracking-wider">
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M11.828 5h3.982a2 2 0 011.992 2.181l-.637 7A2 2 0 0115.174 16H4.826a2 2 0 01-1.991-1.819l-.637-7a1.99 1.99 0 01.342-1.31L2.5 5a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 0011.828 5zm-8.322.12C3.72 5.042 3.95 5 4.19 5h5.396l-.707-.707A1 1 0 008.172 4H4.5a1 1 0 00-1 .981l.006.139z" clip-rule="evenodd"/>
+              </svg>
+              <span class="ml-2">
+                Drive
+              </span>
+            </a>
+            <a [routerLink]="['/user/terminal']" [routerLinkActive]="['is-active']" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-500 hover:text-gray-900 tracking-wider">
+              <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm9.5 5.5h-3a.5.5 0 000 1h3a.5.5 0 000-1zm-6.354-.354L6.793 8.5 5.146 6.854a.5.5 0 11.708-.708l2 2a.5.5 0 010 .708l-2 2a.5.5 0 01-.708-.708z" clip-rule="evenodd"/>
+              </svg>
+              <span class="ml-2">
+                CLI
+              </span>
+            </a>
+          </div>
+          <div class="menu-divider h-1 w-full rounded"></div>
+        </div>
+      </section>
+      <section>
+          <router-outlet></router-outlet>
+      </section>
+    </ng-container>

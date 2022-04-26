@@ -1,0 +1,24 @@
+svg {
+    display: inline;
+}
+
+.section-title {
+    text-align: center;
+    border-bottom: 1px solid #333;
+    width: 760px;
+    max-width:100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.more-button{
+    text-align:center;
+}
+
+#user-profile-overview{
+    position: relative;
+    width:300px;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}

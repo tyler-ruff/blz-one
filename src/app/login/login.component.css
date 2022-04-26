@@ -1,0 +1,8 @@
+.is-active {
+    color: #4d29ba;
+}
+@media only screen and (max-width: 767px) {
+    .menu-seperator {
+        display:none;
+    }
+}

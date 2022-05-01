@@ -20,12 +20,14 @@ import { TerminalComponent } from './terminal/terminal.component';
 
 import { LazyLoadDirective } from './lazyload.directive';
 import { RemoveSpacesPipe } from './remove-spaces/remove-spaces.pipe';
+import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LazyLoadDirective,
     RemoveSpacesPipe,
+    MakeUrlSafePipe,
     HeaderComponent,
     FooterComponent,
     LoginComponent,

@@ -11,7 +11,7 @@ import { DriveComponent } from './drive/drive.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { UnknownComponent } from './unknown/unknown.component';
 
- import { AuthGuard } from '@auth0/auth0-angular';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 const routes: Routes = [
   { path: 'products', component: ProductsComponent },

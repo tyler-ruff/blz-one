@@ -13,9 +13,60 @@
         padding-bottom: 10px;
         margin-left:10px;
     }
+    .main-block{
+        text-align: center;
+    }
     .main-block-home{
         max-width:100%;
         padding-left:20px;
         padding-right:10px;
+        margin-bottom:0px;
+    }
+    .main-block-home-splatter{
+        display:none;
+    }
+}
+@media only screen and (max-width: 400px){
+    .main-block-home{
+        padding-top:5px;
+    }
+    .main-block-home-inner{
+        margin-bottom:25px;
+    }
+    .main-block-home-inner h1{
+        font-size: 40px;
+    }
+    .main-block-home-inner p{
+        display:none;
+    }
+}
+/* For Galaxy Fold and XS screens (<280px viewport width) */
+@media only screen and (max-width: 280px){
+    .main-block{
+        padding-top:0;
+        margin-bottom:20px;
+    }
+    .home-cta a{
+        padding:0;
+        margin:0;
+        margin-top:15px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left:0px;
+    }
+    .main-block-home{
+        max-width:100%;
+        padding-left:0px;
+        padding-right:0px;
+        padding-bottom:0;
+    }
+    .main-block-home-inner{
+        padding-left:5px;
+        padding-right:10px;
+        margin-bottom:15px;
+    }
+    .main-block-home-inner h1{
+        padding-left:0;
+        font-size: 30px;
     }
 }

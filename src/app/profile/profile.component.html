@@ -1,64 +1,188 @@
 <ng-container *ngIf="auth.user$ | async as user">
-    
-    <section class="mt-10" id="user-profile-overview">
-        <div class="flex flex-col justify-center max-w-xs p-6 pt-2 shadow-md rounded-xl sm:px-12 dark:bg-coolGray-900 dark:text-coolGray-100">
-            <img src="{{ user.picture }}" class="w-32 h-32 mx-auto rounded-full aspect-square">
-            <div class="space-y-4 text-center divide-y divide-coolGray-700">
-                <div class="my-4 space-y-1">
-                    <ng-container *ngIf="user.name === user.email; then noName; else displayName">
-                        <!-- Profile Header -->
-                    </ng-container>
-                    <ng-template #noName>
-                        <h2 class="text-xl font-semibold sm:text-2xl">
-                            {{ user.nickname }}
-                        </h2>
-                    </ng-template>
-                    <ng-template #displayName>
-                        <h2 class="text-xl font-semibold sm:text-2xl">
-                            {{ user.name }}
-                        </h2>
-                    </ng-template>
-                </div>
-                <div class="flex justify-center pt-2 space-x-4 align-center">
-                    <p class="px-5 pt-4 text-xs sm:text-base">
-                        {{ user.email }}
-                    </p>
-                    <!--
-                        Social Links:
-                        <div>
-                            <a href="" aria-label="GitHub" class="p-2 rounded-md dark:text-coolGray-100 hover:dark:text-violet-400">
-                                <svg viewBox="0 0 496 512" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
-                                    <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path>
-                                </svg>
-                            </a>
-                        </div>
-                        <a rel="noopener noreferrer" href="#" aria-label="Dribble" class="p-2 rounded-md dark:text-coolGray-100 hover:dark:text-violet-400">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
-                                <path d="M256 8C119.252 8 8 119.252 8 256s111.252 248 248 248 248-111.252 248-248S392.748 8 256 8zm163.97 114.366c29.503 36.046 47.369 81.957 47.835 131.955-6.984-1.477-77.018-15.682-147.502-6.818-5.752-14.041-11.181-26.393-18.617-41.614 78.321-31.977 113.818-77.482 118.284-83.523zM396.421 97.87c-3.81 5.427-35.697 48.286-111.021 76.519-34.712-63.776-73.185-116.168-79.04-124.008 67.176-16.193 137.966 1.27 190.061 47.489zm-230.48-33.25c5.585 7.659 43.438 60.116 78.537 122.509-99.087 26.313-186.36 25.934-195.834 25.809C62.38 147.205 106.678 92.573 165.941 64.62zM44.17 256.323c0-2.166.043-4.322.108-6.473 9.268.19 111.92 1.513 217.706-30.146 6.064 11.868 11.857 23.915 17.174 35.949-76.599 21.575-146.194 83.527-180.531 142.306C64.794 360.405 44.17 310.73 44.17 256.323zm81.807 167.113c22.127-45.233 82.178-103.622 167.579-132.756 29.74 77.283 42.039 142.053 45.189 160.638-68.112 29.013-150.015 21.053-212.768-27.882zm248.38 8.489c-2.171-12.886-13.446-74.897-41.152-151.033 66.38-10.626 124.7 6.768 131.947 9.055-9.442 58.941-43.273 109.844-90.795 141.978z"></path>
-                            </svg>
-                        </a>
-                        <a rel="noopener noreferrer" href="#" aria-label="Twitter" class="p-2 rounded-md dark:text-coolGray-100 hover:dark:text-violet-400">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
-                                <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
-                            </svg>
-                        </a>
-                        <a rel="noopener noreferrer" href="#" aria-label="Email" class="p-2 rounded-md dark:text-coolGray-100 hover:dark:text-violet-400">
-                            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 fill-current">
-                                <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"></path>
-                            </svg>
-                        </a>
-                    -->
-                </div>
-            </div>
+    <section>
+        <div class="relative max-w-3xl mt-5 mx-auto text-center">
+            <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black top-1/2"></span>
+            <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+                <i>
+                    <svg class="mb-1" width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M7 13.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm-3 1a1 1 0 100-2 1 1 0 000 2zm0 4a1 1 0 100-2 1 1 0 000 2zm0 4a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                    </svg>
+                </i>
+                Table of Contents
+            </h2>
         </div>
+        <ul class="text-center max-w-xs mt-5 relative mx-auto">
+            <li class="py-3">
+                <a href="/user/profile#posts" class="hover:underline">
+                    &bull; Recent Posts
+                </a>
+            </li>
+            <li class="py-3">
+                <a href="/user/profile#releases" class="hover:underline">
+                   &bull; Popular Releases
+                </a>
+            </li>
+            <li class="py-3">
+                <a href="/user/profile#documents" class="hover:underline">
+                    &bull; Documents
+                </a>
+            </li>
+            <li class="py-3">
+                <a href="/user/profile#films" class="hover:underline">
+                    &bull; Films
+                </a>
+            </li>
+        </ul>
     </section>
-
-
     <section class="my-10" id="user-profile-software">
         <div class="max-w-screen-xl px-4 py-8 mx-auto">
             <div class="relative max-w-3xl mx-auto text-center">
                 <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black top-1/2"></span>
-                <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+                <h2 id="posts" class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+                    <i>
+                        <svg class="mb-1" width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8.207 13.293L7.5 14a5.5 5.5 0 110-11h5a5.5 5.5 0 110 11s-1.807 2.169-4.193 2.818C7.887 16.933 7.449 17 7 17c.291-.389.488-.74.617-1.052C8.149 14.649 7.5 14 7.5 14c.707-.707.708-.707.708-.706h.001l.002.003.004.004.01.01a1.184 1.184 0 01.074.084c.039.047.085.108.134.183.097.15.206.36.284.626.114.386.154.855.047 1.394.717-.313 1.37-.765 1.895-1.201a10.266 10.266 0 001.013-.969l.05-.056.01-.012m0 0A1 1 0 0112.5 13a4.5 4.5 0 100-9h-5a4.5 4.5 0 000 9 1 1 0 01.707.293" clip-rule="evenodd"/>
+                        </svg>
+                    </i>
+                    Recent Posts
+                </h2>
+            </div>
+            <div class="grid grid-cols-1 mt-8 md:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
+                <article class="p-1 shadow-xl rounded-2xl bg-gradient-to-r from-gray-400 to-gray-600">
+                    <a href="" class="flex flex-col justify-end h-full p-6 bg-gray-200 sm:p-8 rounded-xl hover:bg-opacity-90">
+                      <div class="mt-16">
+                        <p class="text-xs font-medium text-gray-500">
+                          26/05/2021
+                        </p>
+                        <h5 class="mt-2 text-xl font-bold text-gray-500">
+                          Custom Helper to Improve the Rails phone_to Helper
+                        </h5>
+                        <div class="flex items-center justify-between mt-6">
+                          <p class="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-600">
+                            Rails
+                          </p>
+                          <ul class="flex space-x-1">
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Snippet
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Info
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Tip
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                  <article class="p-1 shadow-xl rounded-2xl bg-gradient-to-r from-gray-400 to-gray-600">
+                    <a href="" class="flex flex-col justify-end h-full p-6 bg-gray-200 sm:p-8 rounded-xl hover:bg-opacity-90">
+                      <div class="mt-16">
+                        <p class="text-xs font-medium text-gray-500">
+                          26/05/2021
+                        </p>
+                        <h5 class="mt-2 text-xl font-bold text-gray-500">
+                          Custom Helper to Improve the Rails phone_to Helper
+                        </h5>
+                        <div class="flex items-center justify-between mt-6">
+                          <p class="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-600">
+                            Rails
+                          </p>
+                          <ul class="flex space-x-1">
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Snippet
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Info
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Tip
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                  <article class="p-1 shadow-xl rounded-2xl bg-gradient-to-r from-gray-400 to-gray-600">
+                    <a href="" class="flex flex-col justify-end h-full p-6 bg-gray-200 sm:p-8 rounded-xl hover:bg-opacity-90">
+                      <div class="mt-16">
+                        <p class="text-xs font-medium text-gray-500">
+                          26/05/2021
+                        </p>
+                        <h5 class="mt-2 text-xl font-bold text-gray-500">
+                          Custom Helper to Improve the Rails phone_to Helper
+                        </h5>
+                        <div class="flex items-center justify-between mt-6">
+                          <p class="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-600">
+                            Rails
+                          </p>
+                          <ul class="flex space-x-1">
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Snippet
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Info
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Tip
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+                  <article class="p-1 shadow-xl rounded-2xl bg-gradient-to-r from-gray-400 to-gray-600">
+                    <a href="" class="flex flex-col justify-end h-full p-6 bg-gray-200 sm:p-8 rounded-xl hover:bg-opacity-90">
+                      <div class="mt-16">
+                        <p class="text-xs font-medium text-gray-500">
+                          26/05/2021
+                        </p>
+                        <h5 class="mt-2 text-xl font-bold text-gray-500">
+                          Custom Helper to Improve the Rails phone_to Helper
+                        </h5>
+                        <div class="flex items-center justify-between mt-6">
+                          <p class="text-lg font-medium text-transparent bg-clip-text bg-gradient-to-r from-gray-500 to-gray-600">
+                            Rails
+                          </p>
+                          <ul class="flex space-x-1">
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Snippet
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Info
+                            </li>
+                            <li class="inline-block rounded-full text-white text-xs font-medium px-3 py-1.5 bg-gray-800">
+                              Tip
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </a>
+                  </article>
+
+
+
+            </div>
+        </div>
+        <div class="more-button mt-10">
+            <a href="/posts/by-user/{{ user.name | removeSpaces }}" class="px-8 py-3 font-semibold rounded bg-gray-700 hover:bg-gray-800 text-white">
+                <i>
+                    <svg width="25" height="25" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M4 4.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5V5a.5.5 0 00-.5-.5H4zM5 5H4v1h1V5z" clip-rule="evenodd"/>
+                        <path d="M7 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM7.5 9a.5.5 0 000 1h9a.5.5 0 000-1h-9zm0 4a.5.5 0 000 1h9a.5.5 0 000-1h-9z"/>
+                        <path fill-rule="evenodd" d="M3.5 9a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v1a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V9zM4 9h1v1H4V9zm0 3.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H4zm1 .5H4v1h1v-1z" clip-rule="evenodd"/>
+                    </svg>
+                </i>
+                View All Posts
+            </a>
+        </div>
+    </section>
+    <section class="my-10" id="user-profile-software">
+        <div class="max-w-screen-xl px-4 py-8 mx-auto">
+            <div class="relative max-w-3xl mx-auto text-center">
+                <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black top-1/2"></span>
+                <h2 id="releases" class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
                     <i>
                         <svg class="mb-1" width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16 4H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1zM4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4z" clip-rule="evenodd"/>
                             <path fill-rule="evenodd" d="M17 8H3V7h14v1z" clip-rule="evenodd"/>
@@ -193,7 +317,7 @@
             </div>
         </div>
         <div class="more-button mt-10">
-            <a href="/software/by-dev/{{ user.name | removeSpaces }}" class="px-8 py-3 font-semibold rounded bg-gray-700 hover:bg-gray-800 text-white">
+            <a href="/software/by-user/{{ user.name | removeSpaces }}" class="px-8 py-3 font-semibold rounded bg-gray-700 hover:bg-gray-800 text-white">
                 <i>
                     <svg width="25" height="25" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 4.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5V5a.5.5 0 00-.5-.5H4zM5 5H4v1h1V5z" clip-rule="evenodd"/>
@@ -213,9 +337,9 @@
         <div class="relative max-w-3xl mx-auto text-center">
             <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black top-1/2"></span>
     
-            <h2 class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+            <h2 id="documents" class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
                 <i>
-                    <svg width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.214 3.072c1.599-.32 3.702-.363 5.14 1.074a.5.5 0 01.146.354v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 012 15.5v-11a.5.5 0 01.276-.447L2.5 4.5l-.224-.447.002-.001.004-.002.013-.006a5.116 5.116 0 01.22-.103 12.958 12.958 0 012.7-.869zM3 4.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V4.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 003 4.82z" clip-rule="evenodd"/>
+                    <svg class="mb-1" width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.214 3.072c1.599-.32 3.702-.363 5.14 1.074a.5.5 0 01.146.354v11a.5.5 0 01-.854.354c-.843-.844-2.115-1.059-3.47-.92-1.344.14-2.66.617-3.452 1.013A.5.5 0 012 15.5v-11a.5.5 0 01.276-.447L2.5 4.5l-.224-.447.002-.001.004-.002.013-.006a5.116 5.116 0 01.22-.103 12.958 12.958 0 012.7-.869zM3 4.82v9.908c.846-.343 1.944-.672 3.074-.788 1.143-.118 2.387-.023 3.426.56V4.718c-1.063-.929-2.631-.956-4.09-.664A11.958 11.958 0 003 4.82z" clip-rule="evenodd"/>
                         <path fill-rule="evenodd" d="M14.786 3.072c-1.598-.32-3.702-.363-5.14 1.074A.5.5 0 009.5 4.5v11a.5.5 0 00.854.354c.844-.844 2.115-1.059 3.47-.92 1.344.14 2.66.617 3.452 1.013A.5.5 0 0018 15.5v-11a.5.5 0 00-.276-.447L17.5 4.5l.224-.447-.002-.001-.004-.002-.013-.006-.047-.023a12.582 12.582 0 00-.799-.34 12.96 12.96 0 00-2.073-.609zM17 4.82v9.908c-.846-.343-1.944-.672-3.074-.788-1.143-.118-2.386-.023-3.426.56V4.718c1.063-.929 2.631-.956 4.09-.664A11.956 11.956 0 0117 4.82z" clip-rule="evenodd"/>
                     </svg>
                 </i>
@@ -263,4 +387,165 @@
             </a>
         </div>
     </section>
+
+    <br />
+    <br />
+
+    <section class="mb-10" id="user-profile-publications">
+        <div class="relative max-w-3xl mx-auto text-center">
+            <span class="absolute inset-x-0 h-px -translate-y-1/2 bg-black top-1/2"></span>
+    
+            <h2 id="films" class="relative inline-block px-4 text-2xl font-bold text-center bg-white">
+                <i>
+                    <svg class="mb-1" width="30" height="30" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.667 5.5c-.645 0-1.167.522-1.167 1.167v6.666c0 .645.522 1.167 1.167 1.167h6.666c.645 0 1.167-.522 1.167-1.167V6.667c0-.645-.522-1.167-1.167-1.167H4.667zM2.5 6.667C2.5 5.47 3.47 4.5 4.667 4.5h6.666c1.197 0 2.167.97 2.167 2.167v6.666c0 1.197-.97 2.167-2.167 2.167H4.667A2.167 2.167 0 012.5 13.333V6.667z" clip-rule="evenodd"/>
+                        <path fill-rule="evenodd" d="M13.25 7.65l2.768-1.605a.318.318 0 01.482.263v7.384c0 .228-.26.393-.482.264l-2.767-1.605-.502.865 2.767 1.605c.859.498 1.984-.095 1.984-1.129V6.308c0-1.033-1.125-1.626-1.984-1.128L12.75 6.785l.502.865z" clip-rule="evenodd"/>
+                    </svg>
+                </i>
+                Uploaded Films
+            </h2>
+        </div>
+        <div class="grid grid-cols-1 mt-8 md:grid-cols-1 lg:grid-cols-2 gap-x-4 gap-y-8">
+            <article class="p-6 bg-white sm:p-8 rounded-xl ring ring-indigo-50">
+                <div class="flex items-start">
+                <div
+                    class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+                    aria-hidden="true"
+                >
+                    <div class="flex items-center gap-1">
+                    <span class="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                    <span class="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                    <span class="h-4 w-0.5 rounded-full bg-indigo-500"></span>
+                    <span class="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                    <span class="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                    </div>
+                </div>
+            
+                <div class="sm:ml-8">
+                    <strong
+                    class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white"
+                    >
+                    Episode #101
+                    </strong>
+            
+                    <h2 class="mt-4 text-lg font-medium sm:text-xl">
+                    <a href="" class="hover:underline"> Some Interesting Podcast Title </a>
+                    </h2>
+            
+                    <p class="mt-1 text-sm text-gray-700">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla
+                    amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius
+                    suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid
+                    fuga. Sint.
+                    </p>
+            
+                    <div class="mt-4 sm:flex sm:items-center sm:gap-2">
+                    <div class="flex items-center text-gray-500">
+                        <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                        >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                        ></path>
+                        </svg>
+                        <p class="ml-1 text-xs font-medium">48:32 minutes</p>
+                    </div>
+            
+                    <span class="hidden sm:block" aria-hidden="true">&middot;</span>
+            
+                    <p class="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+                        Featuring <a href="" class="underline hover:text-gray-700">Barry</a>,
+                        <a href="" class="underline hover:text-gray-700">Sandra</a> and
+                        <a href="" class="underline hover:text-gray-700">August</a>
+                    </p>
+                    </div>
+                </div>
+                </div>
+            </article>
+            <article class="p-6 bg-white sm:p-8 rounded-xl ring ring-indigo-50">
+                <div class="flex items-start">
+                  <div
+                    class="hidden sm:grid sm:h-20 sm:w-20 sm:shrink-0 sm:place-content-center sm:rounded-full sm:border-2 sm:border-indigo-500"
+                    aria-hidden="true"
+                  >
+                    <div class="flex items-center gap-1">
+                      <span class="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                      <span class="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                      <span class="h-4 w-0.5 rounded-full bg-indigo-500"></span>
+                      <span class="h-6 w-0.5 rounded-full bg-indigo-500"></span>
+                      <span class="h-8 w-0.5 rounded-full bg-indigo-500"></span>
+                    </div>
+                  </div>
+              
+                  <div class="sm:ml-8">
+                    <strong
+                      class="rounded border border-indigo-500 bg-indigo-500 px-3 py-1.5 text-[10px] font-medium text-white"
+                    >
+                      Episode #101
+                    </strong>
+              
+                    <h2 class="mt-4 text-lg font-medium sm:text-xl">
+                      <a href="" class="hover:underline"> Some Interesting Podcast Title </a>
+                    </h2>
+              
+                    <p class="mt-1 text-sm text-gray-700">
+                      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam nulla
+                      amet voluptatum sit rerum, atque, quo culpa ut necessitatibus eius
+                      suscipit eum accusamus, aperiam voluptas exercitationem facere aliquid
+                      fuga. Sint.
+                    </p>
+              
+                    <div class="mt-4 sm:flex sm:items-center sm:gap-2">
+                      <div class="flex items-center text-gray-500">
+                        <svg
+                          class="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          ></path>
+                        </svg>
+                        <p class="ml-1 text-xs font-medium">48:32 minutes</p>
+                      </div>
+              
+                      <span class="hidden sm:block" aria-hidden="true">&middot;</span>
+              
+                      <p class="mt-2 text-xs font-medium text-gray-500 sm:mt-0">
+                        Featuring <a href="" class="underline hover:text-gray-700">Barry</a>,
+                        <a href="" class="underline hover:text-gray-700">Sandra</a> and
+                        <a href="" class="underline hover:text-gray-700">August</a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+          </div>
+    
+        <div class="more-button mt-10">
+            <a href="/films/by-author/{{ user.name | makeUrlSafe }}" class="px-8 py-3 font-semibold rounded bg-gray-700 hover:bg-gray-800 text-white">
+                <i>
+                    <svg width="25" height="25" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 4.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5V5a.5.5 0 00-.5-.5H4zM5 5H4v1h1V5z" clip-rule="evenodd"/>
+                        <path d="M7 5.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zM7.5 9a.5.5 0 000 1h9a.5.5 0 000-1h-9zm0 4a.5.5 0 000 1h9a.5.5 0 000-1h-9z"/>
+                        <path fill-rule="evenodd" d="M3.5 9a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v1a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V9zM4 9h1v1H4V9zm0 3.5a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H4zm1 .5H4v1h1v-1z" clip-rule="evenodd"/>
+                    </svg>
+                </i>
+                Browse Films
+            </a>
+        </div>
+    </section>
+
 </ng-container>
+
+<div class="h-1 bg-gray-200 rounded overflow-hidden"></div>

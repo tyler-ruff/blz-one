@@ -10,6 +10,7 @@ import { FooterComponent } from './footer/footer.component';
 
 import { AuthModule } from '@auth0/auth0-angular';
 import { LoginComponent } from './login/login.component';
+import { NavComponent } from './nav/nav.component';
 import { SupportComponent } from './support/support.component';
 import { LoadingComponent } from './loading/loading.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -17,7 +18,6 @@ import { UserComponent } from './user/user.component';
 import { SettingsComponent } from './settings/settings.component';
 import { DriveComponent } from './drive/drive.component';
 import { TerminalComponent } from './terminal/terminal.component';
-
 import { LazyLoadDirective } from './lazyload.directive';
 import { RemoveSpacesPipe } from './remove-spaces/remove-spaces.pipe';
 import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
@@ -31,6 +31,7 @@ import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
     HeaderComponent,
     FooterComponent,
     LoginComponent,
+    NavComponent,
     SupportComponent,
     LoadingComponent,
     ProfileComponent,
@@ -51,7 +52,7 @@ import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

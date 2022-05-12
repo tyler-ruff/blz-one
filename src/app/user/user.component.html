@@ -14,11 +14,39 @@
 
 
 -->
-
+<div class="h-1 bg-gray-200 rounded overflow-hidden"></div>
 <ng-container *ngIf="auth.user$ | async as user">
-    <section class="text-gray-600 body-font">
+    
+  <section class="mt-10" id="user-profile-overview">
+      <div class="justify-center md:max-w-xs relative mx-auto p-6 pt-2 shadow-md rounded-xl sm:px-12 dark:bg-coolGray-900 dark:text-coolGray-100">
+          <img title="Profile Picture" src="{{ user.picture }}" class="w-32 h-32 mx-auto rounded-full aspect-square">
+          <div class="space-y-4 text-center divide-y divide-coolGray-700">
+              <div class="my-4 space-y-1">
+                  <ng-container *ngIf="user.name === user.email; then noName; else displayName">
+                      <!-- Profile Header -->
+                  </ng-container>
+                  <ng-template #noName>
+                      <h2 title="Nickname" class="text-xl font-semibold sm:text-2xl">
+                          {{ user.nickname }}
+                      </h2>
+                  </ng-template>
+                  <ng-template #displayName>
+                      <h2 title="Name" class="text-xl font-semibold sm:text-2xl">
+                          {{ user.name }}
+                      </h2>
+                  </ng-template>
+              </div>
+              <div class="flex justify-center pt-2 space-x-4 align-center">
+                  <p title="Email" class="px-5 pt-4 text-xs sm:text-base">
+                      {{ user.email }}
+                  </p>
+              </div>
+          </div>
+      </div>
+  </section>
+  <section class="text-gray-600 body-font mt-5">
         <div class="container px-5 py-5 mx-auto flex flex-wrap flex-col">
-          <div class="flex mx-auto flex-wrap mb-20">
+          <div class="flex mx-auto flex-wrap mb-20 user-tabs">
             <a [routerLink]="['/user/profile']" [routerLinkActive]="['is-active']" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium inline-flex items-center leading-none border-gray-500 hover:text-gray-900 tracking-wider">
               <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5 mr-3" viewBox="0 0 24 24">
                 <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"></path>

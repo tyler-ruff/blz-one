@@ -1,0 +1,19 @@
+.is-active{
+    text-decoration: underline;
+}
+
+@media only screen and (min-width: 768px){
+    a{
+        margin-right:10px;
+    }
+}
+@media only screen and (max-width: 768px){
+    a{
+        display:block;
+        text-align: center;
+        padding-top:10px;
+        padding-bottom:10px;
+        padding-left:20px;
+        padding-right:20px;
+    }
+}

@@ -15,4 +15,10 @@
     .menu-divider{
         display:none;
     }
+    .user-tabs{
+        margin-bottom:5px;
+    }
+    .user-tabs a{
+        width:100%;
+    }
 }

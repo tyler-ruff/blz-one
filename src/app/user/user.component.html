@@ -1,20 +1,4 @@
-<!--
 
-            <div class="mb-5">
-            <img class="block mx-auto mb-5 object-cover object-center rounded" alt="Profile Picture" src="{{ user.picture }}">
-            <div class="flex flex-col text-center w-full mb-5">
-                <h1 class="text-2xl font-medium title-font mb-2 text-gray-900">
-                    {{ user.name }}
-                </h1>
-                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
-                    {{ user.email }}
-                </p>
-            </div>
-          </div>
-
-
--->
-<div class="h-1 bg-gray-200 rounded overflow-hidden"></div>
 <ng-container *ngIf="auth.user$ | async as user">
     
   <section class="mt-10" id="user-profile-overview">

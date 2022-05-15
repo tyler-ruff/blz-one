@@ -6,7 +6,15 @@
     display:inline-block;
 }
 
+@media only screen and (min-width: 769px){
+    .header-nav-burger, .header-nav-mobile, .header-nav-links-mobile{
+        display:none;
+    }
+}
 @media only screen and (max-width: 768px){
+    .header-logo {
+        display:none;
+    }
     .header-nav-burger{
         display:block;
     }
@@ -16,17 +24,11 @@
     .header-nav-links{
         display:none;
     }
-    .header-nav-links-mobile{
-        margin-top:-20px;
-        padding-top:10px;
-    }
+
 }
 
 @media only screen and (max-width: 468px){
-    .header-logo{
-        display:inline-block;
-    }
     .header-nav{
-        display:inline-block;
+        display:block;
     }
 }

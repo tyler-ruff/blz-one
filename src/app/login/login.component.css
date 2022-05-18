@@ -2,7 +2,7 @@
     color: #4d29ba;
     text-decoration: underline;
 }
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 770px) {
     .login-button{
         text-align: center;
     }

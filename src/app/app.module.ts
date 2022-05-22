@@ -21,6 +21,9 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { LazyLoadDirective } from './lazyload.directive';
 import { RemoveSpacesPipe } from './remove-spaces/remove-spaces.pipe';
 import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,10 @@ import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

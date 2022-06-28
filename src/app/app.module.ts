@@ -24,6 +24,7 @@ import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     UserComponent,
     SettingsComponent,
     DriveComponent,
-    TerminalComponent
+    TerminalComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

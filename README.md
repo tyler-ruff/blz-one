@@ -1,26 +1,26 @@
-# Blazed One
+# Blazed Space
 
-## Overview
-Integrated solution consisting of various domains of activity.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/aab79398-3282-4561-82ca-e1c9b92b1648/deploy-status)](https://app.netlify.com/sites/blz.one/deploys)
+
+Social networking platform, in the Blazed One solution.
+
+- [Visit Website](https://blz.one/)
 
 ## Learn More
-Discover a solution like no other, where customer experience meets ease of use. The Blazed One solution works to provide meaningful interfaces to external services, which we resell from upstream service providers. We provide management, support, and we consult directly with clients to assure expected operation, stability, and customer satisfaction. Explore our [services](https://www.blz.one/services) and [product offering](https://www.blz.one/products).
+Discover a solution like no other, where customer experience meets ease of use. The Blazed One platform seamlessly integrates the sub-platforms within the Blazed One solution.
 
-## For Developers
-Do not worry! While all of our services are designed for user experience and ease-of-use, we have also put just as much effort into our API's and documentation, to help make the developer's experience positive, as well. And of course, all of our code is open source. Interested in learning more? Head on over to our [Documentation](https://www.blazed.systems/docs).
+# Credits
+![Last Commit](https://img.shields.io/github/last-commit/tyler-ruff/blz-one?style=for-the-badge "Last Commit")
 
-## Made With
-- Love By Blazed Labs LLC, and;
+## Development Team
+- Maintained by: [The Blazed Development Group](https://www.facebook.com/groups/blzdev)
+- Published by: [Blazed Publishing](https://blazed.xyz/)
+- Lead Developer, Project Management: [Tyler Ruff](https://github.com/tyler-ruff)
+- UX Testing, Project Advising: Star Dom
+- Design, Project Advising: [Matthew Ruff](https://github.com/matt-ruff)
+
+## Special Thanks
 - [Fire Angular](https://github.com/blazed-space/fire-angular)
 - [AngularJS](https://angular.io/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [Auth0](https://auth0.com/)
-- [Firebase](https://firebase.google.com/)
-- [Sanity](https://sanity.io/)
-- [Stripe](https://stripe.com/)
-- [Google Drive](https://drive.google.com/)
-
-## Development Team
-- [Tyler Ruff](https://github.com/tyler-ruff)
-- [Matthew Ruff](https://github.com/matt-ruff)
-- Star Dom
+- [Netlify](https://netlify.com/)

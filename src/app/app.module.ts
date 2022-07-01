@@ -25,6 +25,12 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AboutComponent } from './about/about.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -51,6 +57,10 @@ import { AboutComponent } from './about/about.component';
       domain: 'blazed.us.auth0.com',
       clientId: '9udFBRRg3jyT30vfIzYFtkTrZBQff9tM'
     }),
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
     AppRoutingModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
@@ -60,7 +70,8 @@ import { AboutComponent } from './about/about.component';
     }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,1 +1,110 @@
-<p>settings works!</p>
+<article>
+    <div class="p-6 text-gray-900">
+        <form novalidate="" action="" class="container flex flex-col mx-auto ng-untouched ng-pristine ng-valid">
+            <fieldset class="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
+                <div class="space-y-2 col-span-full lg:col-span-1">
+                    <p class="font-medium">
+                        Account Settings
+                    </p>
+                    <p class="text-xs">
+                        General info for your user account.
+                    </p>
+                </div>
+                <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                    <div class="col-span-full sm:col-span-5">
+                        <mat-form-field class="basic-first-name" appearance="fill">
+                            <mat-label>
+                                First Name
+                            </mat-label>
+                            <input matInput placeholder="John">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-full sm:col-span-5">
+                        <mat-form-field class="basic-last-name" appearance="fill">
+                            <mat-label>
+                                Last Name
+                            </mat-label>
+                            <input matInput placeholder="Smith">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
+                <div class="space-y-2 col-span-full lg:col-span-1">
+                    <p class="font-medium">
+                        Connected Accounts
+                    </p>
+                    <p class="text-xs">
+                        External account connections.
+                    </p>
+                </div>
+                <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                    <div class="col-span-full sm:col-span-5">
+                        <mat-form-field class="connected-add" appearance="fill">
+                            <mat-label>
+                                New Connection
+                            </mat-label>
+                            <mat-select>
+                              <mat-option value="facebook">
+                                Facebook
+                              </mat-option>
+                              <mat-option value="twitter">
+                                Twitter
+                              </mat-option>
+                              <mat-option value="google">
+                                Google
+                              </mat-option>
+                              <mat-option value="blazed-space">
+                                Blazed Space
+                              </mat-option>
+                              <mat-option value="blazed-watch">
+                                Blazed Watch
+                              </mat-option>
+                              <mat-option value="blazed-world">
+                                Blazed World
+                              </mat-option>
+                              <mat-option value="blazed-games">
+                                Concrete Games
+                              </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-span-full">
+                        <div class="flex items-center space-x-2 py-3">
+                            <img src="https://blazed.sirv.com/logo/Beaker-Cobalt.png" alt="" class="w-10 h-10 rounded-full bg-gray-500 bg-gray-300">
+                            <h2 class="text-md px-3">
+                                Facebook
+                            </h2>
+                            <button type="button" class="px-4 py-2 border rounded-md bg-red-800 hover:bg-red-900 text-white border-gray-800">
+                                Remove
+                            </button>
+                        </div>
+                        <div class="flex items-center space-x-2 py-3">
+                            <img src="https://blazed.sirv.com/logo/Beaker-Cobalt.png" alt="" class="w-10 h-10 rounded-full bg-gray-500 bg-gray-300">
+                            <h2 class="text-md px-3">
+                                Blazed Watch
+                            </h2>
+                            <button type="button" class="px-4 py-2 border rounded-md bg-red-800 hover:bg-red-900 text-white border-gray-800">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm bg-gray-50">
+                <div class="space-y-2 col-span-full lg:col-span-1">
+                    <p class="font-medium">
+                        Update Account
+                    </p>
+                </div>
+                <div class="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
+                    <div class="col-span-full">
+                        <button type="submit" mat-raised-button>
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</article>

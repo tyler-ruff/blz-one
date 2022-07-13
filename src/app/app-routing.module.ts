@@ -12,12 +12,10 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { UnknownComponent } from './unknown/unknown.component';
 
 import { AuthGuard } from '@auth0/auth0-angular';
-import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'products', component: ProductsComponent },
-  { path: 'about', component: AboutComponent },
   { path: 'services', component: ServicesComponent },
   { path: 'support', component: SupportComponent },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard],

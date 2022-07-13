@@ -24,7 +24,6 @@ import { MakeUrlSafePipe } from './make-url-safe/make-url-safe.pipe';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { AboutComponent } from './about/about.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -48,8 +47,7 @@ import {MatSelectModule} from '@angular/material/select';
     UserComponent,
     SettingsComponent,
     DriveComponent,
-    TerminalComponent,
-    AboutComponent
+    TerminalComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,21 @@
+{
+  "name": "cloud-blazed-systems",
+  "version": "1.0.0",
+  "description": "Cloud control panel for Blazed Systems.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "firebase serve",
+    "build": "firebase deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyler-ruff/cloud-blazed-systems.git"
+  },
+  "author": "blazed-space",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tyler-ruff/cloud-blazed-systems/issues"
+  },
+  "homepage": "https://github.com/tyler-ruff/cloud-blazed-systems#readme"
+}

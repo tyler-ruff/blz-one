@@ -1,0 +1,91 @@
+/*
+    Blazed Fire Javascript Framework
+    https://github.com/blazed-space/fire
+*/
+function f(tag){
+    return document.createElement(tag);
+}
+
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function getPageQueryStrings(){
+    return new Proxy(new URLSearchParams(window.location.search), {
+        get: (searchParams, prop) => searchParams.get(prop),
+    });
+}
+
+function build_head(){
+    const url = window.location.href;
+    const config = {
+        title: "Blazed One",
+        description: "Build a virtual empire with Blazed City. Claim your virtual paradise, today.",
+        icon: "https://blazed.sirv.com/logo/Beaker-Cobalt.png",
+        license: "https://blazedlabs.com/license.txt",
+        humans: "https://blazedlabs.com/humans.txt",
+        twitter: "BlazedLabs",
+        fbAppId: "503698127531557",
+        company: "Blazed Labs LLC"
+    };
+    document.head.innerHTML += `
+        
+        <link rel="icon" sizes="192x192" href="${config.icon}?w=192&h=192">
+        <link rel="apple-touch-icon" href="${config.icon}?w=180&h=180">
+        <link rel="apple-touch-startup-image" href="${config.icon}?w=180&h=180">
+        <link rel="license" href="${config.license}">
+        <link rel="author" href="${config.humans}">
+        <!-- Meta Tags -->
+        <meta name="generator" content="blz-fire v2.0">
+        <meta name="google" content="nositelinkssearchbox">
+        <meta name="robots" content="index,follow">
+        <meta name="rating" content="General">
+        <meta name="msapplication-config" content="/browserconfig.xml">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="application-name" content="${config.title}">
+        <meta name="application-name" content="${config.title}">
+        <meta name="apple-mobile-web-app-title" content="${config.title}">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@${config.twitter}">
+        <meta name="twitter:url" content="${url}">
+        <meta name="twitter:title" content="${config.title}">
+        <meta name="twitter:description" content="${config.description}">
+        <meta name="twitter:image" content="${config.icon}?w=500&h=500">
+        <meta name="twitter:image:alt" content="${config.description}">
+        <meta property="fb:app_id" content="${config.fbAppId}">
+        <meta property="og:url" content="${url}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="${config.title}">
+        <meta property="og:image" content="${config.icon}?w=500&h=500">
+        <meta property="og:image:alt" content="${config.description}">
+        <meta property="og:description" content="${config.description}">
+        <meta property="og:site_name" content="${config.title}">
+        <meta property="og:locale" content="en_US">
+        <meta property="article:author" content="${config.company}">
+        <meta itemprop="name" content="${config.title}">
+        <meta itemprop="description" content="${config.description}">
+        <meta itemprop="image" content="${config.icon}?w=180&h=180">
+        `;
+}
+
+function generate_content(urlParams, user = false){
+    document.querySelector("#content");
+
+}
+
+class BlzHeader extends HTMLDivElement{
+    constructor(){
+        super();
+    }
+}
+
+class BlzFooter extends HTMLDivElement{
+    constructor(){
+        super();
+    }
+}
+
+
+

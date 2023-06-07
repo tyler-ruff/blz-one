@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blazed One | Login</title>
+
+    <link href="css/fire.css" rel="stylesheet" />
+    <link href="css/build.css" rel="stylesheet" />
+    <script src="js/util.js"></script>
+    <script src="js/fire.js"></script>
+
+  </head>
+  <body>
+
+    <div id="load" class="text-center">
+        <span class="loading loading-spinner loading-lg mt-10"></span>
+    </div>
+
+    <main id="content" class="hidden">
+
+        <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-lg">
+              <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
+                  Login to Blazed Nation
+              </h1>
+          
+              <p class="text-center pt-5 selection-none">
+                  <a href="/" class="hover:underline">
+                    &#8592; Return to Home
+                  </a>
+              </p>
+
+              <form action="#" id="login-form" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+                  <p class="text-center text-lg font-medium selection-none">
+                    Sign in to your account
+                  </p>
+
+                  <div id="error-box" class="hidden">
+                    <div class="alert alert-error">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <span id="error-output"></span>
+                    </div>
+                  </div>
+          
+                  <div>
+                    <label for="field-email" class="sr-only">Email</label>
+            
+                    <div class="relative">
+                        <input type="email" id="field-email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter email" required />
+            
+                        <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-gray-400"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                        >
+                            <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                            />
+                        </svg>
+                        </span>
+                    </div>
+                  </div>
+          
+                  <div>
+                  <label for="field-password" class="sr-only">Password</label>
+          
+                  <div class="relative">
+                      <input type="password" id="field-password" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter Password" required />
+          
+                      <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+                      <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="h-4 w-4 text-gray-400"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                      >
+                          <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                          <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                          />
+                      </svg>
+                      </span>
+                  </div>
+                  </div>
+          
+                  <button type="submit" class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white">
+                    Sign in
+                  </button>
+
+                  <div class="divider">OR</div>
+
+                  <button class="flex w-full btn" id="login-with-google">
+                    <i class="inline-flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 488 512" class="w-5 h-5 mr-2" fill="currentColor">
+                      <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/>
+                    </svg>
+                    </i>
+                    Login with Google
+                  </button>
+
+                  <p class="text-center text-sm text-gray-500 selection-none">
+                    No account?
+                    <a class="underline" href="/register">
+                        Sign up
+                    </a>
+                  </p>
+              </form>
+            </div>
+        </div>
+
+    </main>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-analytics.js";
+      import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+
+      import getConfig from "./js/config.js";
+
+      build_head();
+    
+      const firebaseConfig = getConfig();
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+      const auth = getAuth(app);
+
+      const provider = new GoogleAuthProvider();
+
+      onAuthStateChanged(auth, (user) => {
+          if (user) {
+              // User is signed in
+              //const uid = user.uid;
+              window.location.href = "/dashboard";
+          } else {
+              // User is signed out
+              const content = document.querySelector('#content');
+              content.classList.remove('hidden');
+              // Error Output Box
+              const errorBox = document.querySelector("#error-box");
+              const errorOutput = document.querySelector("#error-output");
+              // Login with Google
+              const loginWithGoogle = document.querySelector("#login-with-google");
+              loginWithGoogle.addEventListener("click", (event) => {
+                event.preventDefault();
+                signInWithPopup(auth, provider)
+                  .then((result) => {
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    //const credential = GoogleAuthProvider.credentialFromResult(result);
+                    //const token = credential.accessToken;
+                    // The signed-in user info.
+                    //const user = result.user;
+                    window.location.href = "/dashboard";
+                  }).catch((error) => {
+                    // Handle Errors here.
+                    // The email of the user's account used.
+                    const email = error.customData.email;
+                    // The AuthCredential type that was used.
+                    //const credential = GoogleAuthProvider.credentialFromError(error);
+                    errorOutput.innerHTML = `Error (${error.code}): ${error.message}. <i>Unable to sign on with email: ${email}.</i>`;
+                    if(errorBox.classList.contains('hidden')){
+                      errorBox.classList.remove('hidden');
+                    }
+                  });
+              });
+              // Login with Email & Password
+              const form = document.querySelector("#login-form");
+              form.addEventListener("submit", (event) => {
+                event.preventDefault();
+                // Form Fields
+                const email = document.querySelector("#field-email");
+                const password = document.querySelector("#field-password");
+                // Form Validation
+                if(email.value.length === 0 || password.value.length === 0){
+                  let errorMessage = "Error:";
+                  if(email.value.length === 0){
+                    email.classList.add('input-error');
+                    errorMessage += " Please enter your email.";
+                  } else {
+                    email.classList.remove('input-error');
+                  }
+                  if(password.value.length === 0){
+                    password.classList.add('input-error');
+                    errorMessage += " Please enter your password.";
+                  } else {
+                    password.classList.remove('input-error');
+                  }
+                  errorOutput.innerHTML = errorMessage;
+                  if(errorBox.classList.contains('hidden')){
+                    errorBox.classList.remove('hidden');
+                  }
+                } else {
+                  signInWithEmailAndPassword(auth, email.value, password.value)
+                  .then((userCredential) => {
+                    // Signed in 
+                    //const user = userCredential.user;
+                    window.location.href = "/dashboard";
+                  }).catch((error) => {
+                    let errorMessage = `Error (${error.code}): ${error.message}`;
+                    errorOutput.innerHTML = errorMessage;
+                    if(errorBox.classList.contains('hidden')){
+                      errorBox.classList.remove('hidden');
+                    }
+                  });
+
+                }
+              }, false);
+
+            }
+          });
+    </script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        loadEl.classList.add('hidden');
+      });
+    </script>
+  </body>
+</html>

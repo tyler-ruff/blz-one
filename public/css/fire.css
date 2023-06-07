@@ -1,0 +1,29 @@
+::selection{
+    background: #001778;
+    color: #fff;
+    background: rgba(0, 23, 120, 0.7);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  ::-moz-selection{
+    background: #001778;
+    color: #fff;
+    background: rgba(0, 23, 120, 0.7);
+    color: rgba(255, 255, 255, 0.5);
+  }
+  body::-webkit-scrollbar{
+      width:10px;
+  }
+
+  body::-webkit-scrollbar-track{
+      background:#727a8a;
+  }
+
+  body::-webkit-scrollbar-thumb{
+      background-color:#afb4bd;
+      border-radius:20px;
+      border:1px solid #5b626e;
+  }
+
+  body::-webkit-scrollbar-thumb:hover{
+      background-color:#5b626e;
+  }

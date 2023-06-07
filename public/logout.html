@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+            import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
+            
+            import getConfig from "./js/config.js";
+    
+            const firebaseConfig = getConfig();
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            signOut(auth).then(() => {
+                window.location.href = "/";
+            }).catch((error) => {
+                window.location.href = "/";
+            });
+
+        </script>
+    </body>
+</html>

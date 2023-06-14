@@ -1,6 +1,6 @@
 {
   "name": "cloud-blazed-systems",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Cloud control panel for Blazed Systems.",
   "main": "index.js",
   "scripts": {

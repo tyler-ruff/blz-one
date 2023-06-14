@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./public/**/*.{html,js,css}"],
+  content: ["./dist/**/*.{html,js,css}"],
   theme: {
     fontFamily: {
       sans: ['Hind Vadodara', 'sans-serif'],

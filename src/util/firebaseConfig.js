@@ -1,4 +1,3 @@
-
 export default function getConfig(){
     return {
         apiKey: "AIzaSyDJNpSgZqhn1_ipvk54wsU11UIE1BoYIfc",

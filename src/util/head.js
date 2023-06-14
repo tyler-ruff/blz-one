@@ -1,22 +1,4 @@
-/*
-    Blazed Fire Javascript Framework
-    https://github.com/blazed-space/fire
-*/
-function f(tag){
-    return document.createElement(tag);
-}
-
-function capitalize(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function getPageQueryStrings(){
-    return new Proxy(new URLSearchParams(window.location.search), {
-        get: (searchParams, prop) => searchParams.get(prop),
-    });
-}
-
-function build_head(){
+export default function build_head(){
     const url = window.location.href;
     const config = {
         title: "Blazed One",
@@ -69,23 +51,3 @@ function build_head(){
         <meta itemprop="image" content="${config.icon}?w=180&h=180">
         `;
 }
-
-function generate_content(urlParams, user = false){
-    document.querySelector("#content");
-
-}
-
-class BlzHeader extends HTMLDivElement{
-    constructor(){
-        super();
-    }
-}
-
-class BlzFooter extends HTMLDivElement{
-    constructor(){
-        super();
-    }
-}
-
-
-

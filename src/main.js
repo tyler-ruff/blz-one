@@ -1,12 +1,13 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import topbar, { show, hide } from 'topbar'
+import topbar from 'topbar'
 
 import build_head from './util/head.js'
-import getConfig from './util/firebaseConfig.js'
 
-import './style.css'
+import './assets/style.css'
+import './assets/build.css'
+
 import App from './App.vue'
 
 import Home from './pages/Home.vue'

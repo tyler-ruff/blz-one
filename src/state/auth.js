@@ -88,9 +88,8 @@ export function signUp(email, password, firstName, lastName){
     })
 }
 
-export function logout(){
-    signOut(firebase.auth);
-    const provider = new GoogleAuthProvider();
-    provider.setCustomParameters({ prompt: 'select_account' });
-    auth.loggedIn = false;
+export async function logout(){
+    signOut(firebase.auth).then(() => {
+        auth.loggedIn = false;
+    });
 }

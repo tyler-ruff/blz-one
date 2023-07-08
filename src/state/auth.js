@@ -90,7 +90,7 @@ export function signUp(email, password, firstName, lastName){
 
 export function logout(){
     signOut(firebase.auth);
-    var provider = new firebase.auth.GoogleAuthProvider(); 
+    const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
     auth.loggedIn = false;
 }

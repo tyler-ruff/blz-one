@@ -5,6 +5,7 @@ import Unknown from './../pages/Unknown.vue'
 
 import Profile from './../pages/dashboard/Profile.vue'
 import UserSettings from './../pages/dashboard/UserSettings.vue'
+import Logout from './../pages/dashboard/Logout.vue'
 
 import { auth, logout } from './../state/auth'
 
@@ -30,12 +31,10 @@ const routes = [
             return false
         }
     }, },
-    { path: '/logout', name: 'logout', afterEnter: (to, from) => {
+    { path: '/logout', name: 'logout', component: Logout, afterEnter: (to, from) => {
         if(auth.loggedIn === false){
             return false
         }
-        logout();
-        window.location.href = "/";
     }, },
     { path: '/:pathMatch(.*)*', name: 'NotFound', component: Unknown },
 ];

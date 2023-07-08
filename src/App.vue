@@ -5,9 +5,18 @@ import BlzFooter from './components/BlzFooter.vue'
 
 <template>
     <BlzHeader />
-    <main class="md:p-10 bg-gray-50">
-        <router-view></router-view>
-    </main>
+    <Suspense>
+          <template #fallback>
+              <main>
+                  <span class="loading loading-spinner loading-xl"></span>
+              </main>
+          </template>
+          <template #default>
+              <main class="p-10 bg-gray-50">
+                  <router-view></router-view>
+              </main>
+          </template>
+      </Suspense>
   <BlzFooter />
 </template>
 

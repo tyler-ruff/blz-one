@@ -124,7 +124,7 @@ function googleSubmit(){
                 </form>
                 <p class="block ext-center text-sm text-gray-800 selection-none pt-5">
                     No account?
-                    <a class="hover:underline" href="/#/register">
+                    <a class="hover:underline" href="/register">
                         Sign up
                     </a>
                 </p>

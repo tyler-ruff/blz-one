@@ -28,15 +28,15 @@ onAuthStateChanged(firebase.auth, (user) => {
         auth.menu = [
             {
                 label: "Profile",
-                url: "/#/profile"
+                url: "/profile"
             },
             {
                 label: "Settings",
-                url: "/#/settings"
+                url: "/settings"
             },
             {
                 label: "Logout",
-                url: "/#/logout"
+                url: "/logout"
             }
         ]
     } else {
@@ -44,11 +44,11 @@ onAuthStateChanged(firebase.auth, (user) => {
         auth.menu = [
             {
                 label: "Login",
-                url: "/#/login"
+                url: "/login"
             },
             {
                 label: "Register",
-                url: "/#/register"
+                url: "/register"
             }
         ]
     }

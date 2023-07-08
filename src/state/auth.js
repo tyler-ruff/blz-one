@@ -78,7 +78,7 @@ export function googleSignIn(){
 }
 
 export function signUp(email, password, firstName, lastName){
-    createUserWithEmailAndPassword(auth, email, password, )
+    createUserWithEmailAndPassword(firebase.auth, email, password, )
     .then((userCredential) => {
         updateProfile(userCredential.user, {
             'displayName': `${firstName} ${lastName}`
@@ -89,7 +89,5 @@ export function signUp(email, password, firstName, lastName){
 }
 
 export async function logout(){
-    signOut(firebase.auth).then(() => {
-        auth.loggedIn = false;
-    });
+    await signOut(firebase.auth);
 }

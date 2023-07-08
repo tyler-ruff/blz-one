@@ -91,7 +91,7 @@
                             {{ auth.name }}
                         </p>
                     </li>
-                    <li v-for="(menuItem, index) of auth.menu" :key="index">
+                    <li v-for="(menuItem, index) in auth.menu" :key="index">
                         <a v-bind:href="menuItem.url">
                             {{ menuItem.label }}
                         </a>

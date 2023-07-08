@@ -30,7 +30,7 @@ const routes = [
             return false
         }
     }, },
-    { path: '/logout', name: 'logout', beforeEnter: (to, from) => {
+    { path: '/logout', name: 'logout', afterEnter: (to, from) => {
         if(auth.loggedIn === false){
             return false
         }

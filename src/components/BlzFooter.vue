@@ -1,21 +1,15 @@
 <script setup>
+    import config from '../config/config.js';
     const currentYear = new Date().getFullYear();
 </script>
 <template>
     <footer class="footer footer-center p-10 bg-base-200 text-base-content rounded select-none">
         <div class="grid grid-flow-col gap-4">
-          <a href="/" class="link link-hover">
-            Home
-          </a> 
-          <a href="https://blazed.city/" class="link link-hover">
-            City
-          </a> 
-          <a href="https://blazed.city/docs" class="link link-hover">
-            Docs
-          </a> 
-          <a href="https://blazed.city/government/intro" class="link link-hover">
-            Government
-          </a>
+          <span v-for="(item, index) in config.footerLinks" :key="index">
+            <a v-bind:href="item.url" class="link link-hover">
+              {{ item.label }}
+            </a>
+          </span>
         </div> 
         <div>
           <div class="grid grid-flow-col gap-4">
@@ -38,7 +32,9 @@
         </div> 
         <div>
           <p class="text-gray-600">
-            Copyright &copy; <time v-bind:datetime="currentYear">{{ currentYear }}</time> Blazed Labs LLC, Ruff Management Inc. All rights reserved.
+            Copyright &copy; <time v-bind:datetime="currentYear">{{ currentYear }}</time> <a href="https://blazedlabs.com/" class="hover:underline" target="_blank">Blazed Labs LLC</a>, <a href="https://ruff-manage.com/" class="hover:underline" target="_blank">Ruff Management Inc.</a> 
+            <br />
+            All rights reserved.
           </p>
         </div>
     </footer>

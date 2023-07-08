@@ -8,8 +8,6 @@ import { onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, create
 
 import { firebase } from './app'
 
-//
-
 export const auth = reactive({
     loggedIn: false,
     name: "Not logged in.",

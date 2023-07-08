@@ -1,13 +1,6 @@
 <script setup>
 import BlzHeader from './components/BlzHeader.vue'
 import BlzFooter from './components/BlzFooter.vue'
-
-/*
-import { firebase } from './state/app'
-import { auth } from './state/auth'
-import { settings } from './state/settings'
-*/
-
 </script>
 
 <template>
@@ -17,12 +10,6 @@ import { settings } from './state/settings'
     </main>
   <BlzFooter />
 </template>
-
-<style>
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-</style>
 
 <style scoped>
 

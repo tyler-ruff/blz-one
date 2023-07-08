@@ -1,17 +1,7 @@
+import config from '../config/config.js';
 export default function build_head(){
     const url = window.location.href;
-    const config = {
-        title: "Blazed One",
-        description: "Build a virtual empire with Blazed City. Claim your virtual paradise, today.",
-        icon: "https://blazed.sirv.com/logo/Beaker-Cobalt.png",
-        license: "https://blazedlabs.com/license.txt",
-        humans: "https://blazedlabs.com/humans.txt",
-        twitter: "BlazedLabs",
-        fbAppId: "503698127531557",
-        company: "Blazed Labs LLC"
-    };
     document.head.innerHTML += `
-        
         <link rel="icon" sizes="192x192" href="${config.icon}?w=192&h=192">
         <link rel="apple-touch-icon" href="${config.icon}?w=180&h=180">
         <link rel="apple-touch-startup-image" href="${config.icon}?w=180&h=180">

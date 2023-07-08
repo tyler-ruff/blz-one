@@ -90,4 +90,5 @@ export function signUp(email, password, firstName, lastName){
 
 export function logout(){
     signOut(firebase.auth);
+    auth.loggedIn = false;
 }

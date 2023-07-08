@@ -5,7 +5,7 @@ import Unknown from './../pages/Unknown.vue'
 
 import Profile from './../pages/dashboard/Profile.vue'
 import UserSettings from './../pages/dashboard/UserSettings.vue'
-import Logout from './../pages/dashboard/Logout.vue'
+import Logout from './../pages/Logout.vue'
 
 import { auth, logout } from './../state/auth'
 

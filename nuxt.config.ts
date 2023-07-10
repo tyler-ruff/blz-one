@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
+  ssr: true,
   modules: [
     '@nuxt/content',
     '@nuxtjs/tailwindcss',

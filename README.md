@@ -1,34 +1,21 @@
 # blz.one
-A virtual authorization site.
+A community SAAS platform. Build your Nation.
 
-## Features
-- User authentication (Auth API/SDK)
-- Posts (+ Share API/SDK)
-- Comments (+ Comment API/SDK)
-- Hearts (+ Hearts API/SDK)
+## Solutions
+- Comments (embed a comment system on your site).
+- Sharing (embed a social sharing system into your site).
+- Hearts (embed a reaction/rating system into your site).
+- Centralized notification/identity platform.
 
 ## Development
-To run a local development server run:
-```
-npm run ux-dev
-```
+* This site was created with [Nuxt](https://nuxt.com/).
+* This site is deployed to [Firebase](https://firebase.google.com/).
 
-To build the project for deployment, run:
-```
-npm run build
-```
+All solutions are implemented as a APIs, so developers can directly query the Blazed One service, or they can use a distributed widget to drop it into their framework of choice.
 
-To deploy a preview:
-```
-npm run deploy-dev
-```
-
-To deploy to production:
-```
-npm run deploy
-```
-
-## Utils
-* [Vue 3](https://vuejs.org/), [vue-router](https://router.vuejs.org/) & [Vite](https://vitejs.dev/)
-* [Firebase](https://firebase.google.com/)
-* [Topbar](https://github.com/buunguyen/topbar)
+## License
+This application is covered under an [MIT License](LICENSE).
+It is 100% FOSS software, use and distribute as desired.
+No warranty provided on self-hosted distributions.
+(c) Copyright 2023 Blazed Labs LLC, Ruff Management inc.
+All Rights Reserved.

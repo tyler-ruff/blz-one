@@ -4,9 +4,6 @@
   "icon": "https://blazed.sirv.com/logo/Beaker-Cobalt.png",
   "license": "https://blazedlabs.com/license.txt",
   "humans": "https://blazedlabs.com/humans.txt",
-  "twitter": "BlazedLabs",
-  "fbAppId": "503698127531557",
-  "company": "Blazed Labs LLC",
   "menu": [
     {
       "label": "Home",

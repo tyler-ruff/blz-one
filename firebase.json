@@ -21,6 +21,10 @@
     ],
     "rewrites": [
       {
+        "source": "server/**",
+        "function": "ssrapp"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

@@ -2,7 +2,7 @@
   "name": "cloud-blazed-systems",
   "version": "1.0.1",
   "description": "Cloud control panel for Blazed Systems.",
-  "main": "server.js",
+  "main": "functions/index.js",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

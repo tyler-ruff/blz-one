@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
+    "source": ".output/server",
     "ignore": [
       "node_modules",
       ".git",
@@ -21,12 +22,7 @@
     ],
     "rewrites": [
       {
-        "source": "server/**",
-        "function": "ssrapp"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "**", "function": "server"
       }
     ]
   },

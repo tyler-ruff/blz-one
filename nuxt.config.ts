@@ -70,10 +70,6 @@ export default defineNuxtConfig({
       authDomain: firebaseConfig.authDomain,
       projectId: firebaseConfig.projectId,
       appId: firebaseConfig.appId
-    },
-    appCheck: {
-      provider: 'ReCaptchaV3',
-      key: firebaseConfig.recaptchaSiteKey || 'none'
     }
   }
 });

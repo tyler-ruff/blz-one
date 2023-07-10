@@ -9,11 +9,11 @@
       ".git",
       "firebase-debug.log",
       "firebase-debug.*.log"
-    ],
-    "source": "functions"
+    ]
   },
   "hosting": {
     "public": "dist",
+    "cleanUrls": true,
     "ignore": [
       "firebase.json",
       "**/.*",

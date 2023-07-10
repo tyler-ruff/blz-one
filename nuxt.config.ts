@@ -2,6 +2,18 @@
 import tailwindTypography from '@tailwindcss/typography'
 import tailwindForms from '@tailwindcss/forms'
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDJNpSgZqhn1_ipvk54wsU11UIE1BoYIfc",
+  authDomain: "blz-one-9e383.firebaseapp.com",
+  databaseURL: "https://blz-one-9e383-default-rtdb.firebaseio.com",
+  projectId: "blz-one-9e383",
+  storageBucket: "blz-one-9e383.appspot.com",
+  messagingSenderId: "817319905653",
+  appId: "1:817319905653:web:94174c7e723ee8d08bab3c",
+  measurementId: "G-Y5ZW5STMX1",
+  recaptchaSiteKey: "6LdlFgsnAAAAAGqHCe06GGtpQA-490hi91p25p3A"
+};
+
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
@@ -54,14 +66,14 @@ export default defineNuxtConfig({
   vuefire: {
     auth: true,
     config: {
-      apiKey: process.env.apiKey,
-      authDomain: process.env.authDomain,
-      projectId: process.env.projectId,
-      appId: process.env.appId
+      apiKey: firebaseConfig.apiKey,
+      authDomain: firebaseConfig.authDomain,
+      projectId: firebaseConfig.projectId,
+      appId: firebaseConfig.appId
     },
     appCheck: {
       provider: 'ReCaptchaV3',
-      key: process.env.recaptchaSiteKey || 'none'
+      key: firebaseConfig.recaptchaSiteKey || 'none'
     }
   }
 });

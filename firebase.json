@@ -22,9 +22,6 @@
     ],
     "rewrites": [
       {
-        "source": "**", "function": "server"
-      },
-      {
         "source": "**", "destination": "/index.html"
       }
     ]

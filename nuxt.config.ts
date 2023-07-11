@@ -23,8 +23,7 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-vuefire',
     '@vueuse/nuxt',
-    'nuxt-icon',
-    'nuxt-simple-sitemap'
+    'nuxt-icon'
   ],
   content: {
       highlight: {
@@ -71,22 +70,6 @@ export default defineNuxtConfig({
       authDomain: firebaseConfig.authDomain,
       projectId: firebaseConfig.projectId,
       appId: firebaseConfig.appId
-    }
-  },
-  sitemap: {
-    urls: ['https://blz.one/'],
-    sitemaps: {
-      posts: {
-        include: [
-          '/docs/**'
-        ]
-      },
-      pages: {
-        exclude: [
-          '/docs/**'
-        ]
-      },
-      index: []
     }
   }
 });

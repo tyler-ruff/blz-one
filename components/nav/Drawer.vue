@@ -1,4 +1,6 @@
 <script setup lang="ts">
+    import { UseSwipeDirection } from '@vueuse/core';
+
     const appConfig = useAppConfig();
     const colorMode = useColorMode();
     
@@ -43,21 +45,6 @@
             <li class="pt-5 px-10">
                 <ColorModeSwitch />
             </li>
-            <!--
-            <li class="btn-disabled pt-5 bg-transparent">
-                <hr />
-            </li>
-            <li class="btn-disabled bg-transparent">
-                <p class="text-gray-500">
-                    {{ user.name }}
-                </p>
-            </li>
-            <li v-for="(menuItem, index) in user.menu" :key="index">
-                <a v-bind:href="menuItem.url">
-                    {{ menuItem.label }}
-                </a>
-            </li>
-            -->
         </ul>
     </div>
 </template>

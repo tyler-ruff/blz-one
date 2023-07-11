@@ -4,12 +4,8 @@
   });
   const buttons = [
     {
-      label: "Login",
-      url: "/login"
-    },
-    {
-      label: "Sign Up",
-      url: "/register"
+      label: "Solutions",
+      url: "/solutions"
     }
   ];
 </script>

@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
+  ssr: true,
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
@@ -24,11 +24,39 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-icon'
   ],
+  app: {
+    head: {
+      link: [
+        {
+          rel: "icon",
+          href: "/favicon.ico"
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "/favicon-16x16.png"
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "32x32",
+          href: "/favicon-32x32.png"
+        },
+        {
+          rel: "manifest",
+          href: "/site.webmanifest"
+        },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png"
+        }
+    ]
+    }
+  },
   nitro: {
-    preset: 'firebase',
-    prerender: {
-      crawlLinks: true
-    },
+    preset: 'firebase'
   },
   colorMode: {
     classSuffix: ''
@@ -56,9 +84,6 @@ export default defineNuxtConfig({
         `./app.config.{js,ts}`
       ]
     }
-  },
-  generate: {
-    routes: ['/docs/hello']
   },
   vuefire: {
     auth: true,

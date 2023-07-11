@@ -17,6 +17,10 @@ const firebaseConfig = {
 export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: true,
+  target: 'server',
+  generate: {
+    fallback: true
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
@@ -94,10 +98,4 @@ export default defineNuxtConfig({
       appId: firebaseConfig.appId
     }
   },
-  build: {
-    extend(config, { isDev, isClient }) {
-      // Force CommonJS module resolution
-      config.resolve.mainFields = ['main', 'module', 'browser']
-    }
-  }
 });

@@ -4,7 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
-    "source": "functions",
+    "source": ".output/server",
     "predeploy": [
       "npm run build"
     ],
@@ -16,7 +16,7 @@
     ]
   },
   "hosting": {
-    "public": "dist",
+    "public": ".output/public",
     "cleanUrls": true,
     "ignore": [
       "firebase.json",
@@ -26,7 +26,7 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "ssr"
+        "destination": "/index.html"
       }
     ]
   },

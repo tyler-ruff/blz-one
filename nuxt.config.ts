@@ -63,6 +63,9 @@ export default defineNuxtConfig({
       ]
     }
   },
+  generate: {
+    routes: ['/docs/hello']
+  },
   vuefire: {
     auth: true,
     config: {

@@ -1,12 +1,12 @@
 <script setup>
-    import config from '../content/config.json'
-    import '~/assets/css/footer.css'
+    import '~/assets/css/footer.css';
+    const appConfig = useAppConfig();
     const currentYear = new Date().getFullYear();
 </script>
 <template>
     <footer class="footer footer-center p-10 bg-base-200 dark:bg-gray-900 text-base-content rounded select-none">
         <div class="grid grid-flow-col gap-4">
-          <span v-for="(item, index) in config.footerLinks" :key="index">
+          <span v-for="(item, index) in appConfig.footerLinks" :key="index">
             <a v-bind:href="item.url" class="link link-hover">
               {{ item.label }}
             </a>

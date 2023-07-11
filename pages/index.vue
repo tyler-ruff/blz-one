@@ -1,4 +1,7 @@
 <script setup>
+  definePageMeta({
+    title: "Home"
+  });
   const buttons = [
     {
       label: "Login",
@@ -8,7 +11,7 @@
       label: "Sign Up",
       url: "/register"
     }
-  ]
+  ];
 </script>
 <template>
   <div class="text-center">

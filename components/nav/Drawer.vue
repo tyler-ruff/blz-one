@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import config from '~/content/config.json';
-
+    const appConfig = useAppConfig();
     const colorMode = useColorMode();
     
     let mobileMenu = ref(false);
@@ -26,14 +25,14 @@
             <li class="justify-between">
                 <a href="/" class="cursor-pointer text-gray-800 group inline">
                     <i class="inline-flex">
-                        <img v-bind:src="colorMode.value == 'light' ? config.logo : config.logoDark" />
+                        <img v-bind:src="colorMode.value == 'light' ? appConfig.logo : appConfig.logoDark" />
                     </i>
                 </a>
             </li>
             <li class="btn-disabled pt-5 bg-transparent">
                 <hr />
             </li>
-            <li v-for="(item, index) in config.menu" :key="index">
+            <li v-for="(item, index) in appConfig.menu" :key="index">
                 <a v-bind:href="item.url">
                     {{ item.label }}
                 </a>

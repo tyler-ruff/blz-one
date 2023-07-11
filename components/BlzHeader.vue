@@ -1,6 +1,5 @@
 <script setup lang="ts">
-    import config from '~/content/config.json'
-    import '~/assets/css/header.css'
+    import '~/assets/css/header.css';
 
     const colorMode = useColorMode();
     const appConfig = useAppConfig();
@@ -11,7 +10,7 @@
         <nav class="nav-top navbar shadow-lg">
             <div class="flex-1">
                 <a v-bind:title="appConfig.title" href="/" class="btn btn-ghost hover:bg-transparent group normal-case text-xl">
-                    <img v-bind:src="colorMode.value == 'light' ? config.logo : config.logoDark" class="group-hover:opacity-75" />
+                    <img v-bind:src="colorMode.value == 'light' ? appConfig.logo : appConfig.logoDark" class="group-hover:opacity-75" />
                 </a>
             </div>
             <div class="hidden md:flex navbar-end">

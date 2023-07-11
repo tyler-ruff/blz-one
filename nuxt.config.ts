@@ -23,7 +23,8 @@ export default defineNuxtConfig({
     '@nuxtjs/color-mode',
     'nuxt-vuefire',
     '@vueuse/nuxt',
-    'nuxt-icon'
+    'nuxt-icon',
+    'nuxt-simple-sitemap'
   ],
   content: {
       highlight: {

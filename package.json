@@ -20,11 +20,11 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
+    "express": "^4.18.2",
     "firebase": "^9.22.2",
     "nuxt": "^3.6.2",
     "nuxt-vuefire": "^0.2.0",
-    "vuefire": "^3.1.1",
-    "express": "^4.18.2"
+    "vuefire": "^3.1.1"
   },
   "author": "blazed-space",
   "license": "MIT",
@@ -45,6 +45,7 @@
     "daisyui": "^3.2.1",
     "nuxt": "^3.6.2",
     "nuxt-icon": "^0.4.2",
+    "nuxt-simple-sitemap": "^3.0.8",
     "nuxt-vuefire": "^0.2.0",
     "sitemap": "^7.1.1"
   }

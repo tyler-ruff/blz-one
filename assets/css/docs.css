@@ -1,0 +1,16 @@
+.docs h2{
+    padding-top:15px;
+}
+
+.docs h2 a{
+    font-size: 23px;
+}
+
+.docs pre{
+    background: #cacaca;
+    padding:5px;
+}
+
+.dark .docs pre{
+    background: rgba(0,0,0,0.2);
+}

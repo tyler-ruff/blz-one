@@ -1,12 +1,13 @@
 <script setup>
     import '~/assets/css/docs.css'
+    const route = useRoute();
     definePageMeta({
         layout: "docs",
     });
 </script>
 <template>
     <div class="docs">
-        <ContentDoc :path="$route.path">
+        <ContentDoc :path="route.path">
             <template v-slot="{ doc }">
                 <h1 class="docs-title">
                     {{ doc.title }}

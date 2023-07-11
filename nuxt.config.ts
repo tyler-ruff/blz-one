@@ -72,5 +72,21 @@ export default defineNuxtConfig({
       projectId: firebaseConfig.projectId,
       appId: firebaseConfig.appId
     }
+  },
+  sitemap: {
+    urls: ['https://blz.one/'],
+    sitemaps: {
+      posts: {
+        include: [
+          '/docs/**'
+        ]
+      },
+      pages: {
+        exclude: [
+          '/docs/**'
+        ]
+      },
+      index: []
+    }
   }
 });

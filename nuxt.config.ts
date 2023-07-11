@@ -71,5 +71,8 @@ export default defineNuxtConfig({
       projectId: firebaseConfig.projectId,
       appId: firebaseConfig.appId
     }
+  },
+  routeRules: {
+    '/docs/**': { prerender: true }
   }
 });

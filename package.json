@@ -4,6 +4,7 @@
   "description": "Cloud control panel for Blazed Systems.",
   "main": "functions/index.js",
   "scripts": {
+    "start": "node /.output/server/index.mjs",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxi generate",

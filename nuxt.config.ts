@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: false,
+  ssr: true,
   modules: [
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
@@ -34,10 +34,10 @@ export default defineNuxtConfig({
       }
   },
   nitro: {
-    preset: 'firebase',
+    preset: 'node-server',
     prerender: {
       crawlLinks: true
-    }
+    },
   },
   colorMode: {
     classSuffix: ''

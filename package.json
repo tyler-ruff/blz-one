@@ -20,7 +20,6 @@
     "url": "git+https://github.com/tyler-ruff/cloud-blazed-systems.git"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "firebase": "^9.22.2",
     "nuxt": "^3.6.2",
     "nuxt-vuefire": "^0.2.0",
@@ -33,7 +32,6 @@
   },
   "homepage": "https://github.com/tyler-ruff/cloud-blazed-systems#readme",
   "devDependencies": {
-    "@nuxt/content": "^2.7.0",
     "@nuxt/devtools": "latest",
     "@nuxtjs/color-mode": "^3.3.0",
     "@nuxtjs/tailwindcss": "^6.8.0",

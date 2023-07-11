@@ -18,22 +18,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   modules: [
-    '@nuxt/content',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/color-mode',
     'nuxt-vuefire',
     '@vueuse/nuxt',
     'nuxt-icon'
   ],
-  content: {
-      highlight: {
-        theme: {
-          dark: 'github-dark',
-          default: 'github-light'
-        },
-        preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown', 'yaml', 'bash', 'ini']
-      }
-  },
   nitro: {
     preset: 'firebase',
     prerender: {

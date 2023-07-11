@@ -25,7 +25,7 @@ export default defineAppConfig({
         },
         {
             label: "Docs",
-            url: "/docs"
+            url: "https://blazed.city/"
         }
     ],
     footerLinks: [
@@ -39,7 +39,7 @@ export default defineAppConfig({
         },
         {
             label: "Docs",
-            url: "/docs"
+            url: "https://blazed.city/"
         }
     ]
 })

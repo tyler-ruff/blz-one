@@ -16,6 +16,7 @@ const firebaseConfig = {
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
+  ssr: false,
   modules: [
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
@@ -71,7 +72,9 @@ export default defineNuxtConfig({
       appId: firebaseConfig.appId
     }
   },
-  routeRules: {
-    '/docs/**': { prerender: true }
+  generate: {
+    routes: [
+      '/docs/hello'
+    ]
   }
 });

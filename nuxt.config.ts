@@ -93,5 +93,11 @@ export default defineNuxtConfig({
       projectId: firebaseConfig.projectId,
       appId: firebaseConfig.appId
     }
+  },
+  build: {
+    extend(config, { isDev, isClient }) {
+      // Force CommonJS module resolution
+      config.resolve.mainFields = ['main', 'module', 'browser']
+    }
   }
 });

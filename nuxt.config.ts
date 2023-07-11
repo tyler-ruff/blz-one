@@ -34,7 +34,10 @@ export default defineNuxtConfig({
       }
   },
   nitro: {
-    preset: 'firebase'
+    preset: 'firebase',
+    prerender: {
+      crawlLinks: true
+    }
   },
   colorMode: {
     classSuffix: ''

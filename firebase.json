@@ -5,9 +5,7 @@
   },
   "functions": {
     "source": ".output/server",
-    "predeploy": [
-      "npm run build"
-    ],
+    "codebase": "nuxt",
     "ignore": [
       "node_modules",
       ".git",
@@ -26,9 +24,12 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "function": "server"
       }
-    ]
+    ],
+    "frameworksBackend": {
+      "region": "us-east1"
+    }
   },
   "storage": {
     "rules": "storage.rules"

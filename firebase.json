@@ -24,7 +24,7 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "server"
+        "destination": "/index.html"
       }
     ],
     "frameworksBackend": {

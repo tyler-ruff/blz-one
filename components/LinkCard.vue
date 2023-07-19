@@ -3,7 +3,7 @@
 </script>
 <template>
     <router-link class="group" v-bind:to="url">
-        <div class="card w-96 bg-gray-600 group-hover:bg-gray-700 dark:bg-gray-700 dark:group-hover:opacity-75 text-primary-content">
+        <div class="card bg-gray-600 group-hover:bg-gray-700 dark:bg-gray-700 dark:group-hover:opacity-75 text-primary-content">
             <div class="card-body">
                 <h2 class="card-title">
                     {{ title }}

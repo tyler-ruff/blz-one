@@ -3,7 +3,7 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-  "functions": {
+  "functions": [{
     "source": ".output/server",
     "codebase": "nuxt",
     "ignore": [
@@ -13,6 +13,16 @@
       "firebase-debug.*.log"
     ]
   },
+  {
+    "source": "functions",
+    "codebase": "default",
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log"
+    ]
+  }],
   "hosting": {
     "public": ".output/public",
     "cleanUrls": true,

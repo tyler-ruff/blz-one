@@ -1,0 +1,44 @@
+[
+    {
+        "title": "Ad Network",
+        "description": "Beez Marketing is a premier marketing consultant with a top-notch ad-network. ",
+        "url": "/solutions/marketing",
+        "provider": "Beez Marketing"
+    },
+    {
+        "title": "Telecom Provider",
+        "description": "Blazed Telecom works to connect business to customers via SMS, calling, faxing, and other means.",
+        "url": "/solutions/telecom",
+        "provider": "Blazed Telecom"
+    },
+    {
+        "title": "Cloud Services",
+        "description": "Blazed Systems works to connect business to internetworked solutions and build systems of storage.",
+        "url": "/solutions/systems",
+        "provider": "Blazed Systems"
+    },
+    {
+        "title": "Project Management",
+        "description": "Blazed Quest is an AI-enabled project management solution for your business. Amplify your reach and productivity.",
+        "url": "/solutions/project",
+        "provider": "Blazed Quest"
+    },
+    {
+        "title": "Dev-Ops",
+        "description": "Blazed Development is a cloud dev-ops provider which helps developers maximize productivity.",
+        "url": "/solutions/dev",
+        "provider": "Blazed Dev"
+    },
+    {
+        "title": "Community Orchestration",
+        "description": "Blazed City is a community orchestration and governance solution. Bootstrap your next community.",
+        "url": "/solutions/community",
+        "provider": "Blazed City"
+    },
+    {
+        "title": "Publishing",
+        "description": "Blazed Publishing is a physical and digial publishing service designed for the modern age.",
+        "url": "/solutions/publishing",
+        "provider": "Blazed XYZ"
+    }
+]

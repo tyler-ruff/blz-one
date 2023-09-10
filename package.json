@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd src && npm run dev"
+    "build": "cd src && npm install && npm run dev"
   },
   "keywords": [],
   "author": "",

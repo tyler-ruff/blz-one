@@ -1,0 +1,12 @@
+{
+  "name": "blz-one",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cd src && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

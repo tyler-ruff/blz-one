@@ -1,7 +1,9 @@
+import Features from "@/components/features";
+
 export default function Page() {
   return (
     <div>
-        Blazed One Features
+        <Features />
     </div>
   )
 }

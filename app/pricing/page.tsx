@@ -1,7 +1,9 @@
+import Pricing from "@/components/pricing";
+
 export default function Page() {
     return (
       <div>
-          Blazed One Pricing
+          <Pricing />
       </div>
     )
   }

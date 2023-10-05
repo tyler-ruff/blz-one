@@ -1,6 +1,10 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { HiUserCircle } from 'react-icons/hi';
+
+import { Dropdown } from 'flowbite-react';
+import { HiUser, HiUserCircle } from 'react-icons/hi';
 
 export default function Header(){
     const loggedIn: boolean = false;
@@ -12,7 +16,7 @@ export default function Header(){
                         <Image src="/images/blz-blue.png" alt="logo" width={45} height={45} />
                     </Link>
                 </div>
-                <div className="hidden md:flex flex-none gap-2">
+                <div className="flex-none gap-2">
                     { loggedIn ? (
                         <div className="dropdown dropdown-end">
                             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
@@ -40,22 +44,24 @@ export default function Header(){
                             </ul>
                         </div>
                     ) : (
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0} className="btn btn-ghost">
-                                <HiUserCircle className="w-6 h-6" />
-                            </label>
-                            <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
-                                <li>
-                                    <Link href="/login" className="justify-between">
-                                        Login
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link href="/register">
-                                        Sign Up
-                                    </Link>
-                                </li>
-                            </ul>
+                        <div className="dropdown-end pr-3 selection-none">
+                            <Dropdown
+                                arrowIcon={false}
+                                inline
+                                label={<HiUser className="w-6 h-6" />}
+                                placement="bottom-start">
+                                <Dropdown.Header>
+                                <span className="block text-sm">
+                                    Not logged in.
+                                </span>
+                            </Dropdown.Header>
+                                <Dropdown.Item href="/login">
+                                    Login
+                                </Dropdown.Item>
+                                <Dropdown.Item href="/register">
+                                    Sign Up
+                                </Dropdown.Item>
+                            </Dropdown>
                         </div>
                     )}
                 </div>

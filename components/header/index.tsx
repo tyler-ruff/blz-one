@@ -12,7 +12,7 @@ export default function Header(){
         <header className="border-b">
             <nav className="navbar bg-base-100 shadow-md">
                 <div className="flex-1">
-                    <Link href="/" className="btn btn-ghost normal-case text-xl">
+                    <Link href="/" title="Blazed One" className="btn btn-ghost normal-case text-xl">
                         <Image src="/images/blz-blue.png" alt="logo" width={45} height={45} />
                     </Link>
                 </div>

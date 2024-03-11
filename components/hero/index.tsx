@@ -5,24 +5,29 @@ import { Button } from 'flowbite-react';
 
 const CallToAction = () => {
   return (
-    <div className="w-full bg-gradient-to-t from-gray-900 via-purple-900 to-violet-600">
-      <div className="mx-auto py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-2xl text-center">
-        <h2 className="space-y-2 text-3xl sm:text-4xl text-white font-extrabold uppercase">
-            Join Blazed today!
-        </h2>
-        <p className="mt-4 text-lg text-indigo-200 leading-6">
-          With a Blazed One account, you have access to many Blazed products and services. <Link href="https://blazedlabs.com/products" className="text-white hover:underline">View products</Link> or <Link href="https://blazed.company/services" className="text-white hover:underline">our services</Link>
+
+<section className="max-w-4xl relative mx-auto ">
+    <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16">
+        <h1 className="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+          Discover Blazed One Media
+        </h1>
+        <p className="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-400">
+          Your choice for tech, politics, and beaking news as well as entertainment.
         </p>
-        <div className="mt-10 flex flex-col sm:flex-row justify-around items-center uppercase font-medium tracking-widest">
-          <Button color="light" href="/register" className="relative mb-5 sm:mb-0 px-5 py-2 w-48 shadow">
-            Sign Up
-          </Button>
-          <Button gradientDuoTone="purpleToBlue" href="/login" className="relative px-5 py-2 w-48 rounded-md shadow">
-            Login
-          </Button>
+        <div className="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+            <a href="/explore" className="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+                Explore
+                <svg className="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                </svg>
+            </a>
+            <a href="#" className="py-3 px-5 sm:ms-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-70">
+                Learn more
+            </a>  
         </div>
-      </div>
     </div>
+</section>
+
   )
 }
 

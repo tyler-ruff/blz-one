@@ -6,3 +6,9 @@
 export interface IBurger{
     active: boolean;
 };
+
+export interface IMenuItem{
+    label: string;
+    url: string;
+    target?: string;
+};

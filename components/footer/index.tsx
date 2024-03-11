@@ -7,7 +7,7 @@ export default function Footer(){
     const year = new Date().getFullYear();
     const date = new Date().toISOString();
     return (
-        <footer className="px-4 divide-y bg-gray-100 text-gray-800">
+        <footer className="px-4 divide-y bg-gray-100 text-gray-800 border-t">
             <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
                 <div className="lg:w-1/3 select-none">
                     <a rel="noopener noreferrer" href="/" title="Blazed One Media Group" className="group flex justify-center space-x-3 lg:justify-start">

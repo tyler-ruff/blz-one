@@ -1,11 +1,37 @@
 import type { Metadata } from "next";
+import { Hind_Vadodara, DM_Serif_Display } from 'next/font/google';
+
+import Header from "./components/header/index";
+import Footer from "./components/footer";
+
+import { config } from "@/config/app";
 
 import "./globals.css";
-import { Header } from "./components";
+
+const hind = Hind_Vadodara({
+  variable: '--font-hind', 
+  subsets: ["latin"], 
+  weight: '400', 
+  display: 'swap' 
+});
+
+const dm = DM_Serif_Display({
+  variable: '--font-dm', 
+  subsets: ["latin"], 
+  weight: '400', 
+  display: 'swap'
+});
+
 
 export const metadata: Metadata = {
-  title: "Next.js on Firebase App Hosting",
-  description: "",
+  title: {
+    template: `%s | ${config.name}`,
+    default: config.name, 
+  },
+  applicationName: config.name,
+  description: 'Blazed One backend',
+  keywords: ['blazed', 'labs', 'software', 'solutions', 'company'],
+  publisher: 'Blazed Labs LLC',
 };
 
 export default function RootLayout({
@@ -13,18 +39,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className="dark-theme">
-      <head>
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-      <body>
-        <div className="dots" />
-        <Header />
-        {children}
-        <div className="bottom-gradient" />
+      <body className={`${dm.variable} ${hind.variable}`} suppressHydrationWarning>
+        <section id="blz-app">
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </section>
       </body>
     </html>
   );

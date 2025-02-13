@@ -1,3 +1,4 @@
+/*
 :root {
   --primary-contrast: #0b151e;
   --secondary-contrast: #0b151e99;
@@ -315,4 +316,60 @@ body {
     height: 400px;
     margin-bottom: -450px;
   }
+}
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+*::-webkit-scrollbar{
+  width:10px;
+}
+
+*::-webkit-scrollbar-track{
+  background:#727a8a;
+}
+
+*::-webkit-scrollbar-thumb{
+  background-color:#afb4bd;
+  border-radius:20px;
+  border:1px solid #5b626e;
+}
+
+*::-webkit-scrollbar-thumb:hover{
+  background-color:#5b626e;
+}
+
+body {
+  font-family: var(--font-hind);
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+h1, h2, h3{
+  font-family: var(--font-dm);
+}
+
+footer a:hover{
+  text-decoration: underline;
 }

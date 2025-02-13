@@ -1,7 +1,6 @@
-# Next.js on Firebase App Hosting
+# Blazed One
 
-This is an example [Next.js](https://nextjs.org/) project to demonstrate SSG,
-SSR, and ISR on [Firebase App Hosting](https://firebase.google.com/docs/app-hosting).
+The main backend solution for Blazed Labs.
 
 ## Getting Started
 

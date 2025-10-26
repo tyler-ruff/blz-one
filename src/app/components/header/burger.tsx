@@ -8,7 +8,7 @@ import { IBurger } from './data';
  */
 export default function Burger(props: IBurger){
     const isOpen = props.active;
-    const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black transition ease transform duration-300`;
+    const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-black dark:bg-gray-100 transition ease transform duration-300`;
     return (
         <button
             aria-label="Toggle mobile menu"

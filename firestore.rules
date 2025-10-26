@@ -1,0 +1,82 @@
+rules_version = '2';
+service cloud.firestore {
+	function isAdmin(email){
+  	return email.matches('^.+@blazed\\.space$');
+  }
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read;
+    }
+    match /customers/{uid} {
+      allow read: if request.auth.uid == uid;
+
+      match /checkout_sessions/{id} {
+        allow read, write: if request.auth.uid == uid;
+      }
+      match /subscriptions/{id} {
+        allow read: if request.auth.uid == uid;
+      }
+      match /payments/{id} {
+        allow read: if request.auth.uid == uid;
+      }
+    }
+    
+    match /profiles/{id} {
+    	allow read;
+      allow write, create, delete: if request.auth.uid != null
+      && request.auth.uid == id;
+    }
+    
+    match /committees/{id} {
+    	allow read: if true;
+      allow write, create, delete: if request.auth.uid != null
+      && isAdmin(request.auth.token.email);
+    }
+    
+    match /domains/{id} {
+    	allow read: if true;
+      allow write, create, delete: if request.auth.uid != null
+      && isAdmin(request.auth.token.email);
+    }
+    
+    match /posts/{id} {
+    	allow read: if true;
+      allow write, create, delete: if request.auth.uid != null
+      && isAdmin(request.auth.token.email);
+    }
+    
+    match /telephones/{id} {
+    	allow read: if true;
+      allow write, create, delete: if request.auth.uid != null
+      && isAdmin(request.auth.token.email);
+    }
+
+    match /products/{id} {
+      allow read: if true;
+      allow write, create, delete: if request.auth.uid != null
+      && isAdmin(request.auth.token.email);
+
+      match /prices/{id} {
+        allow read: if true;
+      }
+
+      match /tax_rates/{id} {
+        allow read: if true;
+      }
+    }
+    function hasBasicSubs() {
+      return request.auth.token.stripeRole == "basic";
+    }
+
+    function hasPremiumSubs() {
+      return request.auth.token.stripeRole == "premium";
+    }
+
+    match /content-basic/{doc} {
+      allow read: if hasBasicSubs() || hasPremiumSubs();
+    }
+    match /content-premium/{doc} {
+      allow read: if hasPremiumSubs();
+    }
+  }
+}

@@ -14,6 +14,8 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
     "jsx": "preserve",
     "incremental": true,
     "plugins": [
@@ -21,10 +23,10 @@
         "name": "next"
       }
     ],
-    "target": "ES2017",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+    "target": "es5"
   },
   "include": [
     "next-env.d.ts",

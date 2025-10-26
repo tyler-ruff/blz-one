@@ -16,10 +16,18 @@ const Logo = (props: ILogo) => {
             title={props.title} 
             className="flex items-center p-2 hover:opacity-75 select-none">
             <Image 
-                src="/images/blz-blue.png" 
+                src="/images/beaker-dark.png" 
+                width={40} 
+                height={40} 
+                alt="Logo"
+                className="logo-black"
+            />
+            <Image 
+                src="/images/beaker-white.png" 
                 width={40} 
                 height={40} 
                 alt="Logo" 
+                className="logo-white"
             />
         </Link>
     );

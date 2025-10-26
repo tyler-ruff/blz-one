@@ -1,31 +1,23 @@
-"use client"
-
+'use client'
 import { useState, useEffect } from "react";
 
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import { useWindowSize } from "@uidotdev/usehooks";
 
-import { mainMenu } from '@/config/menu';
-import { config } from '@/config/app';
+import { mainMenu } from '@/src/config/menu';
+import { config } from '@/src/config/app';
 
 import Logo from "./logo";
 import { Cta } from './cta';
 import Burger from "./burger";
 import { MobileNav, Nav } from "./nav";
+import UserAvatar from "./avatar";
 
-
-/**
- * Header component
- * @example <Header />
- * @returns JSX Component
- */
 export default function Header(){
     const [isOpen, setIsOpen] = useState(false);
     const pathname = usePathname();
     const size = useWindowSize();
-    
+
     const toggleBurger = async() =>{
         if(!isOpen){
           setIsOpen(true);
@@ -49,13 +41,16 @@ export default function Header(){
     }, [size.width]);
 
     return (
-        <header role="banner">
-            <nav id={`nav-${mainMenu._id}`} role="navigation" className="p-4 bg-gray-100 text-gray-800 border-b">
+         <header role="banner" id="top">
+            <nav role="navigation" aria-label="Main" id={`nav-${mainMenu._id}`} className="p-4 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 border-b shadow-lg">
                 <div className="container flex justify-between h-16 mx-auto">
                     <Logo title={config.name} />
                     <div className="flex space-x-5 pt-1">
                         <Nav pathname={pathname} />
                         {mainMenu.cta !== undefined && (<Cta label={mainMenu.cta.label} url={mainMenu.cta.href || ``} />)}
+                        <div className="hidden lg:block">
+                            <UserAvatar />
+                        </div>
                     </div>
                     <a className="lg:hidden" onClick={() => toggleBurger()}>
                         <Burger active={isOpen} />

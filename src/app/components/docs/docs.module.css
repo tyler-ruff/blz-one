@@ -1,0 +1,52 @@
+.markdown h1, .markdown h1 a{
+    font-size: 32px;
+    padding: 15px 10px;
+    color: rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+}
+
+.markdown h2, .markdown h2 a{
+    font-size: 25px;
+    padding: 10px 10px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.markdown h3{
+    font-size: 19px;
+    padding: 5px 10px;
+}
+
+.markdown h3{
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+.markdown p{
+    padding: 8px 10px;
+}
+
+.markdown ul{
+    margin-left: 20px;
+    padding: 10px 20px;
+}
+
+.markdown ul li{
+    list-style-type: disc;
+}
+
+.markdown ol{
+    margin-left: 20px;
+    padding: 10px 20px;
+}
+
+.markdown ol li{
+    list-style-type: decimal;
+}
+
+.markdown a, .markdown a:visited{
+    color: rgba(0, 7, 145, 0.8);
+}
+
+.markdown a:hover{
+    color: rgba(0, 7, 145, 0.6);
+}

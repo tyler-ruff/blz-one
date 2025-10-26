@@ -60,7 +60,7 @@ export default function HorizontalLargeStats(){
                 <div className="avatar avatar-online">
                     <div className="w-16 rounded-full">
                         {/* size: 192px */}
-                        <ProfilePicture user={user} profile={profile} size={192} />
+                        <ProfilePicture size={192} />
                     </div>
                 </div>
                 </div>

@@ -6,6 +6,8 @@ import MainHeading from "@/src/app/components/heading/main";
 import HorizontalLargeStats from "@/src/app/components/stats/horizontalLarge";
 import HorizontalSmallStats from "@/src/app/components/stats/horizontalSmall";
 import BasicTable from "@/src/app/components/table/basic";
+import { NewForm } from "./components/posts/new";
+import { ListPosts } from "./components/posts/list";
 
 export const metadata: Metadata = {
     title: 'Home',
@@ -29,16 +31,9 @@ export default function Home() {
         src="https://blazed.sirv.com/promo/Blazed-Header-600x200.png" 
       />
       */}
-      <MainHeading text="Dashboard" />
-      <HorizontalLargeStats />
-      <HorizontalSmallStats />
-      <BasicTable title="Users" data={
-        [
-          { id: 1, name: 'Alice', email: 'alice@example.com', age: 25 },
-          { id: 2, name: 'Bob', email: 'bob@example.com', age: 30 },
-          { id: 3, name: 'Charlie', email: 'charlie@example.com', age: 22 },
-        ]
-      } />
+      <MainHeading text="Feed" />
+      <NewForm />
+      <ListPosts />
     </div>
   );
 }

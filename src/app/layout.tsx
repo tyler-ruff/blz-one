@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { config, url } from '@/src/config/app';
 import { Providers } from "./providers";
 
-import BlzApp from "./components/app";
+import BlzApp from "@/src/app/components/app";
 
 import "./globals.css";
 
@@ -57,7 +57,7 @@ export const metadata: Metadata = {
 const siteSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  url: "https://blazed.work",
+  url: url,
   name: config.name,
   description: config.description,
   license: "https://blazedlabs.com/license"

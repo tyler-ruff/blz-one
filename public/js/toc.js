@@ -1,6 +1,6 @@
 function buildToc(){
     const tocRoot = document.getElementById('toc-root');
-    const content = document.getElementById('blz-content');
+    const content = document.getElementById('main-article');
 
     var headingTree = content.querySelectorAll("h1,h2,h3");
 

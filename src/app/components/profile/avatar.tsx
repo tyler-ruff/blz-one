@@ -24,7 +24,7 @@ const ProfilePicture = (props: IAvatar) => {
                     <Image
                         width={props.size || 80}
                         height={props.size || 80}
-                        title={`Logged in as: ${user.displayName}`}
+                        title={`Logged in as: ${user?.displayName || ""}`}
                         alt="Your profile picture"
                         src={`${profile?.avatar}`} />
                 );
@@ -33,7 +33,7 @@ const ProfilePicture = (props: IAvatar) => {
                     <Image
                         width={props.size || 80}
                         height={props.size || 80}
-                        title={`Logged in as: ${user.displayName}`}
+                        title={`Logged in as: ${user?.displayName || ""}`}
                         alt="Default profile picture"
                         src={`${config.defaultAvatar}?h=${props.size || 80}&w=${props.size || 80}`}/>
                 )

@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 import createMDX from "@next/mdx";
-import rehypeExternalLinks from 'rehype-external-links';
 
 const nextConfig = {
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
@@ -20,9 +19,7 @@ const nextConfig = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: [],
-    rehypePlugins: [
-      rehypeExternalLinks({target: ['_blank']})
-    ],
+    rehypePlugins: [],
     extension: /\.(md|mdx)$/,
   }
 });

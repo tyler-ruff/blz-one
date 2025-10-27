@@ -6,11 +6,9 @@ import { brand, config, social } from '@/src/config/app';
 import { linksFooter } from './data';
 import { useAuthContext } from '@/src/context/AuthContext';
 
-import { logoutUser } from '@/src/app/components/access/logout';
+import AuthBadge from '../profile/badge';
 
 export default function Footer(){
-    const { user } = useAuthContext() as { user: any };
-    
     const year = new Date().getFullYear();
     const date = new Date().toISOString();
     const CopyrightAttribute = () => {
@@ -34,11 +32,7 @@ export default function Footer(){
                                 {config.name}
                             </span>
                         </Link>
-                        <ul className="pt-3 text-center md:text-left">
-                            <li><span className="select-none">Logged in as:</span> <span className="select-all">{user.email}</span></li>
-                            <li><span className="select-none">Display Name:</span> <span className="select-all">{user.displayName}</span></li>
-                            <li className="select-none"><a className="hover:underline cursor-pointer" href="/user/account">Account</a>&nbsp;&bull;&nbsp;<a className="hover:underline cursor-pointer" href="/user/settings">Settings</a>&nbsp;&bull;&nbsp;<a className="hover:underline cursor-pointer" onClick={logoutUser}>Logout</a></li>
-                        </ul>
+                        <AuthBadge />
                     </div>
                         {
                             linksFooter.map((footerItem, findex) => {

@@ -34,7 +34,7 @@ export default function ThemeSwitcher(){
         } else {
             setIsDark(false);
         }
-    }, []);
+    }, [theme]);
 
     return (
         <div className="w-full py-5 px-2 select-none">

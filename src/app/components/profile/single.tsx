@@ -56,7 +56,7 @@ export default function SingleProfile(params: ISingleProfile){
             }
         }
         getProfile();
-    }, []);
+    }, [params.uid]);
 
     if(loading){
         return (

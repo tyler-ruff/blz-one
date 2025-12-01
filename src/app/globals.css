@@ -6,7 +6,9 @@
 @tailwind utilities;
 
 @import "tw-animate-css";
-@plugin "daisyui";
+@plugin "daisyui" {
+  exclude: properties;
+}
 
 @plugin 'tailwindcss-animate';
 

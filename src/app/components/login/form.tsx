@@ -164,14 +164,7 @@ export function LoginForm({
             }
             } );
             return () => unsubscribe();
-    /*
-       if(user){
-        router.push('/');
-       } else {
-        setLoading(false);
-       }
-    */
-    }, []);
+    }, [router, user]);
 
   if(loading){
     return (

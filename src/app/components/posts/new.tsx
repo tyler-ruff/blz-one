@@ -99,7 +99,7 @@ export function NewPostForm({
         if(user){
             setValue('author', user?.uid);
         }
-    }, []);
+    }, [setValue, user]);
 
     const handleOpenFilePicker = () => {
         fileInputRef.current?.click();

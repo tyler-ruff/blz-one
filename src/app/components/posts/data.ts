@@ -10,19 +10,21 @@ export interface IFormPostSchema{
     visibility: Visibility;
 }
 
-/*
-export interface IPostCard{
+export interface PostCardProps{
     id: string;
-    author: string;
+    author: {
+      uid: string;
+      displayName: string;
+      avatar: string;
+    };
     publishDate: string;
     updatedDate?: string;
     content: string;
     media?: string[];
     visibility: string;
-    //hearts?: string[];
-    //heartsCount: number;
+    heartsCount: number;
+    commentsCount: number;
 }
-*/
 
 export interface IPostCard {
   id: string;

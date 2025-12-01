@@ -147,7 +147,7 @@ async function seedRealtime(uidList){
         [...Array(3).keys()].map(async () => {
             const id = uuidv4();
             const postRef = postsRef.child(`${id}`);
-            const author = adminUser.uid;
+            const author = randomUser(uidList);
             const randomDate = faker.date.anytime();
             await postRef.set({
                 id: id,

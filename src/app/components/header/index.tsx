@@ -37,7 +37,7 @@ export default function Header(){
                 }
             }
         }
-    }, [size.width]);
+    }, [size.width, isOpen]);
 
     return (
          <header role="banner" id="top">

@@ -68,7 +68,7 @@ export default function BasicTable(props: {
             pageIndex: 0,
             pageSize: itemsPerPage
         });
-    }, []);
+    }, [itemsPerPage, props.data]);
 
     const table = useReactTable({
         columns: props.columns || [],

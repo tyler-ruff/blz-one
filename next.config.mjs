@@ -21,8 +21,7 @@ const nextConfig = {
 const withMDX = createMDX({
   options: {
     remarkPlugins: [],
-    rehypePlugins: [],
-    extension: /\.(md|mdx)$/,
+    rehypePlugins: []
   }
 });
 //module.exports = withMDX(nextConfig);

@@ -157,7 +157,7 @@ export function ForgotForm({ ...props }: React.ComponentProps<typeof Card>) {
                 }
                 } );
                 return () => unsubscribe();
-        }, []);
+        }, [router, user]);
 
     if(loading){
         return (

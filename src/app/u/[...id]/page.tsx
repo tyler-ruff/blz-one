@@ -1,4 +1,4 @@
-//'use client'
+
 import { Metadata, ResolvingMetadata } from "next";
 import { redirect } from "next/navigation";
 import { use } from 'react';

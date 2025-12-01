@@ -1,10 +1,16 @@
-//import { PostCardProps } from "@/interfaces/PostCardProps";
+'use client'
+
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { useAuthContext } from "@/src/context/AuthContext";
+import { User } from "@/src/lib/types/user";
+
 import { PostCardProps } from './data';
 
-import { useUser } from '@/src/lib/cache';
+import { timeAgo } from '@/src/lib/functions';
+
+import { LinkIt } from 'react-linkify-it';
 
 import {
   Card,
@@ -16,6 +22,27 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/src/app/components/ui/ava
 import { Button } from "@/src/app/components/ui/button";
 import { Badge } from "@/src/app/components/ui/badge";
 import { EllipsisVertical, Heart, MessageCircle, Share2 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "@/src/app/components/ui/dropdown-menu";
+
+import {
+  ButtonGroup,
+} from '@/src/app/components/ui/button-group';
+import { Toggle } from '@/src/app/components/ui/toggle';
+
+import { HASHTAG_REGEX } from '@/src/config/posts';
 
 export default function PostCard({
   id,
@@ -26,16 +53,54 @@ export default function PostCard({
   visibility,
   profile
 }: PostCardProps) {
-  //const author = useUser(author).data;
+  const { user } = useAuthContext() as { user: User };
+
+  const HeartButton = () => {
+    if(user){
+      return (
+        <ButtonGroup className="group" title="Love This">
+            <Toggle
+                aria-label="Love this post"
+                size="default"
+                variant="outline"
+                disabled={user.uid === author ? true : false}
+                className="px-5 bg-white data-[state=on]:*:[svg]:fill-red-500 data-[state=on]:*:[svg]:stroke-red-500 cursor-pointer"
+                >
+                    <Heart />
+            </Toggle>
+            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300 group-hover:bg-gray-400" title={`99 users have loved this post`}>
+                99
+            </Button>
+        </ButtonGroup>
+      )
+    } else {
+      return (
+        <ButtonGroup className="group" title="Please login or register to Love posts">
+            <Toggle
+                aria-label="Love this post"
+                disabled={true}
+                size="default"
+                variant="outline"
+                className="px-5 bg-white data-[state=on]:*:[svg]:fill-red-500 data-[state=on]:*:[svg]:stroke-red-500 cursor-pointer"
+                >
+                    <Heart />
+            </Toggle>
+            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300 group-hover:bg-gray-300">
+                99
+            </Button>
+        </ButtonGroup>
+      )
+    }
+  }
   return (
-    <Card className="w-full max-w-2xl mx-auto mb-6 shadow-sm rounded-2xl border border-base-300 bg-base-100">
+    <Card className="w-full max-w-2xl mx-auto mb-3 shadow-sm rounded-2xl border border-base-300 bg-base-100">
       
       {/* Header */}
       <CardHeader className="flex flex-row items-start justify-between pb-0">
         
         {/* Left: Avatar + Name */}
         <div className="flex items-center gap-3">
-          <Link href={`/u/${author}`}>
+          <Link href={`/u/${author}`} className="select-none">
             <Avatar className="h-10 w-10">
                 <AvatarImage src={profile?.avatar} alt={profile?.displayName} />
                 <AvatarFallback>
@@ -44,38 +109,81 @@ export default function PostCard({
             </Avatar>
           </Link>
 
-          <div className="flex flex-col">
-            <Link href={`/u/${author}`} className="hover:underline">
+          <div className="flex flex-col select-none">
+            <Link href={`/u/${author}`} title={`User: ${profile?.displayName}`} className="hover:underline">
                 <span className="font-semibold leading-tight">
                     {profile?.displayName}
                 </span>
             </Link>
             <span className="text-xs opacity-70">
-              {new Date(publishDate).toLocaleString()}
+              {new Date(publishDate).toLocaleString()} &bull; {timeAgo(new Date(publishDate))}
             </span>
           </div>
         </div>
 
         {/* Post Options */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="rounded-full hover:bg-base-200"
-        >
-          <EllipsisVertical className="h-5 w-5" />
-        </Button>
+        { user?.uid === author ?
+        (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full hover:bg-base-200"
+            >
+              <EllipsisVertical className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-36" align="start">
+              <DropdownMenuGroup>
+                  <Link href={`/post/${id}`}>
+                    <DropdownMenuItem>
+                      View Post
+                    </DropdownMenuItem>
+                  </Link>
+                  <DropdownMenuItem>
+                    Edit
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    Delete
+                  </DropdownMenuItem>
+              </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        ) : (<div></div>)
+      }
+
       </CardHeader>
 
-      {/* Visibility Badge */}
-      <div className="px-6 pt-2">
-        <Badge variant="secondary" className="text-xs">
-          {visibility}
-        </Badge>
+      <div className="flex space-x-2 text-center select-none ml-6 mt-2">
+        {/* View Post Link */}
+        <div className="inline-flex pt-2" title="View Post">
+          <Badge variant="default">
+            <Link href={`/post/${id}`}>View Post</Link>
+          </Badge>
+        </div>
+        {/* Visibility Badge */}
+        <div className="inline-flex pt-2" title="Post Visibility">
+          <Badge variant="secondary" className="text-xs">
+            {visibility}
+          </Badge>
+        </div>
       </div>
 
       {/* Content */}
       <CardContent className="pt-4 space-y-3">
-        <p className="text-base leading-relaxed">{content}</p>
+        <p className="text-base leading-relaxed">
+          <LinkIt
+            regex={HASHTAG_REGEX}
+            component={(match, key) => (
+              <Link title={`Discover ${match} on Blazed One`} className="hover:underline text-gray-800/80" href={`/h/${encodeURIComponent(match.slice(1))}`} key={key}>
+                {match}
+              </Link>
+            )}>
+            {content}
+          </LinkIt>
+          </p>
 
         {/*
           {
@@ -113,19 +221,24 @@ export default function PostCard({
       </CardContent>
 
       {/* Footer / Actions */}
-      <CardFooter className="flex items-center justify-between pt-3 border-t border-base-300">
-        <div className="flex gap-3">
+      <CardFooter className="grid w-full pt-5 border-t border-base-300 select-none">
+        <div className="flex justify-between gap-3">
+          {/*
           <Button variant="ghost" size="sm" className="gap-2">
             <Heart className="h-5 w-5" />
             <span className="hidden sm:block">Like</span>
           </Button>
+          */}
+          <HeartButton />
+          
+          <Link href={`/post/${id}#comments`}>
+            <Button variant="ghost" size="default" className="gap-2 px-5 flex cursor-pointer">
+              <MessageCircle className="h-5 w-5" />
+              <span className="hidden sm:block">Comment</span>
+            </Button>
+          </Link>
 
-          <Button variant="ghost" size="sm" className="gap-2">
-            <MessageCircle className="h-5 w-5" />
-            <span className="hidden sm:block">Comment</span>
-          </Button>
-
-          <Button variant="ghost" size="sm" className="gap-2">
+          <Button variant="ghost" size="default" className="gap-2 px-5 flex cursor-pointer">
             <Share2 className="h-5 w-5" />
             <span className="hidden sm:block">Share</span>
           </Button>
@@ -134,146 +247,3 @@ export default function PostCard({
     </Card>
   );
 }
-
-
-{/*
-  ****** Heart Button ******
-
-  <ButtonGroup className="">
-      <Toggle
-          disabled={(user && user.uid == params.author) ? true : false}
-          aria-label="Love this post"
-          size="default"
-          variant="outline"
-          className="px-5 bg-white data-[state=on]:*:[svg]:fill-red-500 data-[state=on]:*:[svg]:stroke-red-500"
-          >
-              <Heart />
-      </Toggle>
-      <Button variant="secondary" className="bg-zinc-300" title={`99 users have loved this post`}>
-          99
-      </Button>
-  </ButtonGroup>
-
-      ******* REPORT & SHARE BUTTONS *******
-
-    <ButtonGroup className="hidden md:flex">
-      <Popover>
-          <Button variant="outline" title="Report content as inappropriate">
-              Report
-          </Button>
-          <PopoverTrigger asChild>
-              <Button variant="outline">
-                  <Share />
-                  Share
-              </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-80">
-              <div className="grid gap-4 mb-5">
-                  <div className="space-y-2">
-                      <h4 className="leading-none font-medium">
-                          Share Post
-                      </h4>
-                      <p className="text-muted-foreground text-sm">
-                          Share this post with friends.
-                      </p>
-                  </div>
-              </div>
-              <div className="grid gap-2">
-                  <div className="grid grid-cols-3 items-center gap-4">
-                  <Label htmlFor="permalink">URL</Label>
-                  <Input
-                      id="permalink"
-                      defaultValue={`${url}/post/${params.id}`}
-                      readOnly={true}
-                      className="col-span-2 h-8 select-all cursor-pointer"
-                      onClick={handleFocus}
-                  />
-                  </div>
-                  <div className="mt-5">
-                      <ShareButtons 
-                          title={`Post by ${author?.displayName || ''}`} 
-                          url={`${url}/post/${params.id}`} 
-                      />
-                  </div>
-              </div>
-          </PopoverContent>
-      </Popover>
-  </ButtonGroup>
-
-    ****** VIEW POST BUTTON & 'three dots' dropdown *******
-
-    <div className="flex content-end justify-end space-x-2">
-      <ButtonGroup className="hidden lg:flex select-none">
-          <Link href={`/post/${params.id}`}>
-              <Button title="Reveal post in browser" variant="outline">
-                  View Post
-              </Button>
-          </Link>
-      </ButtonGroup>
-      <ButtonGroup>
-          <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon" aria-label="More Options">
-              <MoreHorizontalIcon />
-              </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-52">
-              <DropdownMenuGroup>
-              <DropdownMenuItem>
-                  <MailCheckIcon />
-                  Mark as Read
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                  <ArchiveIcon />
-                  Archive
-              </DropdownMenuItem>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-              <DropdownMenuItem>
-                  <ClockIcon />
-                  Snooze
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                  <CalendarPlusIcon />
-                  Add to Calendar
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                  <ListFilterPlusIcon />
-                  Add to List
-              </DropdownMenuItem>
-              <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>
-                  <TagIcon />
-                  Label As...
-                  </DropdownMenuSubTrigger>
-                  <DropdownMenuSubContent>
-                  <DropdownMenuRadioGroup
-                  >
-                      <DropdownMenuRadioItem value="personal">
-                      Personal
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="work">
-                      Work
-                      </DropdownMenuRadioItem>
-                      <DropdownMenuRadioItem value="other">
-                      Other
-                      </DropdownMenuRadioItem>
-                  </DropdownMenuRadioGroup>
-                  </DropdownMenuSubContent>
-              </DropdownMenuSub>
-              </DropdownMenuGroup>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-              <DropdownMenuItem>
-                  <Trash2Icon />
-                  Trash
-              </DropdownMenuItem>
-              </DropdownMenuGroup>
-          </DropdownMenuContent>
-          </DropdownMenu>
-      </ButtonGroup>
-  </div>
-</div>
-
-    */}

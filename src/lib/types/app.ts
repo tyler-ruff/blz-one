@@ -45,4 +45,5 @@ export interface Config {
     description?: string;
     defaultAvatar?: string;
     sessionId?: string;
+    apiVersion?: string;
 }

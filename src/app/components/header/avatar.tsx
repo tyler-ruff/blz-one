@@ -277,17 +277,13 @@ export default function UserAvatar(){
             await sleep(400);
             if(user){
                 setLoggedIn(true);
+                setLoading(false);
             } else {
                 setLoggedIn(false);
                 setLoading(false);
             }
-
-            if(profile){
-                setLoading(false);
-            }
         }
         checkProfile();
-        /*
         const unsubscribe = onAuthStateChanged( auth, ( user ) => {
                 setLoading(true);
                 if ( user ) {
@@ -301,8 +297,7 @@ export default function UserAvatar(){
                 setLoading( false );
                 } );
                 return () => unsubscribe();
-        */
-    }, [profile]);
+    }, [user]);
 
     if(loading){
         return (

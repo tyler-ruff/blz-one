@@ -6,9 +6,10 @@ const url = process.env.NODE_ENV === "development" ?
 const config = {
     name: "Blazed One",
     fbAppId: "503698127531557",
-    description: "Blazed One social network.",
+    description: "Blazed One is an amazing new social network. Many others are on Blazed One, why aren't you?",
     defaultAvatar: "https://blazed.sirv.com/util/default-avatar.jpg",
     sessionId: "blz-one-session",
+    apiVersion: "0.0.1"
 } as Config;
 
 const social = {

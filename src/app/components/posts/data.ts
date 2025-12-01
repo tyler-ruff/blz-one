@@ -32,6 +32,10 @@ export interface PostCardProps{
     visibility: string;
 }
 
+export interface ISinglePost{
+  
+}
+
 /*
 export interface IPostCard {
   id: string;

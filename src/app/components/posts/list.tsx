@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
@@ -20,7 +20,6 @@ import { Button } from "@/src/app/components/ui/button";
 import type { PostCardProps } from "./data";
 import type { Profile } from "@/src/lib/types/user";
 
-// Replace this with your actual API / hook function
 async function fetchUserProfile(authorId: string): Promise<Profile> {
     try{
         const response = await fetch(`/api/profile?uid=${authorId}`);

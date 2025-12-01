@@ -10,8 +10,8 @@ import { ChangeEvent, FormEvent, useEffect, useState, useRef } from "react";
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { ErrorMessage } from "@hookform/error-message";
 
-import { useAuthContext } from "@/src/context/AuthContext";
 import { capitalizeEachWord, enumKeys } from '@/src/lib/functions';
+import { useAuthContext } from "@/src/context/AuthContext";
 import { Profile, User } from "@/src/lib/types/user";
 
 import { ArrowRightIcon, Plus, Search, UserX } from "lucide-react"
@@ -117,7 +117,7 @@ export function NewPostForm({
 
     if(!user){
         return (
-            <div className="grid w-full max-w-xl relative mx-auto items-center gap-4 select-none">
+            <div className="grid w-full max-w-2xl relative mx-auto items-center gap-4 select-none">
                 <Alert>
                     <UserX className="pb-2" />
                     <AlertTitle className="pt-1 pl-3">
@@ -129,7 +129,7 @@ export function NewPostForm({
     }
 
     return (
-        <div>
+        <div className="relative mx-auto max-w-2xl">
             <form onSubmit={handleSubmit(onSubmit)} {...props}>
                 <FieldGroup>
                     <InputGroup>

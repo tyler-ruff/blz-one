@@ -156,6 +156,10 @@ export function timeAgo(date: Date | string): string {
     }
   }
 
+  if(date > now){
+    return "in the future"
+  }
+  
   return 'just now';
 }
 

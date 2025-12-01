@@ -18,7 +18,6 @@ export function customInitApp() {
         initializeApp(firebaseAdminConfig);
     }
 }
-
 */
 
 /* DO NOT DELETE - Prod Config */

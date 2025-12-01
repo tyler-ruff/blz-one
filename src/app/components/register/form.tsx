@@ -212,7 +212,7 @@ export function SignupForm({
             }
           } );
           return () => unsubscribe();
-    }, [router]);
+    }, [router, user]);
 
   if(loading){
     return (

@@ -82,7 +82,7 @@ export function ListPosts() {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [userProfiles]);
 
   function normalizePost(raw: any): PostCardProps {
     return {

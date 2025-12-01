@@ -24,8 +24,7 @@ export default function PostCard({
   media,
   publishDate,
   visibility,
-  heartsCount,
-  commentsCount
+  profile
 }: PostCardProps) {
   //const author = useUser(author).data;
   return (
@@ -38,9 +37,9 @@ export default function PostCard({
         <div className="flex items-center gap-3">
           <Link href={`/u/${author}`}>
             <Avatar className="h-10 w-10">
-                <AvatarImage src={author?.avatar} alt={author?.displayName} />
+                <AvatarImage src={profile?.avatar} alt={profile?.displayName} />
                 <AvatarFallback>
-                {author?.displayName?.slice(0, 2)?.toUpperCase()}
+                {profile?.displayName?.slice(0, 2)?.toUpperCase()}
                 </AvatarFallback>
             </Avatar>
           </Link>
@@ -48,7 +47,7 @@ export default function PostCard({
           <div className="flex flex-col">
             <Link href={`/u/${author}`} className="hover:underline">
                 <span className="font-semibold leading-tight">
-                    {author?.displayName}
+                    {profile?.displayName}
                 </span>
             </Link>
             <span className="text-xs opacity-70">

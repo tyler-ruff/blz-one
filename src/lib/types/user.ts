@@ -8,7 +8,7 @@ export interface Profile{
     uid: string;
     avatar?: string;
     displayName: string;
-    theme: string;
+    theme?: string;
     lastOnline?: string;
     createdAt?: string;
     bio?: string;

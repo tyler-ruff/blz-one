@@ -89,3 +89,8 @@ Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
 
 Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
  
+[debug] [2025-12-01T06:30:24.529Z] Checked if tokens are valid: true, expires at: 1764572217574
+[debug] [2025-12-01T06:30:24.529Z] Checked if tokens are valid: true, expires at: 1764572217574
+[debug] [2025-12-01T06:30:24.530Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig [none]
+[debug] [2025-12-01T06:30:25.103Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig 200
+[debug] [2025-12-01T06:30:25.103Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig {"projectId":"blz-one-9e383","databaseURL":"https://blz-one-9e383-default-rtdb.firebaseio.com","storageBucket":"blz-one-9e383.appspot.com","locationId":"us-east4"}

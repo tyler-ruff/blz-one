@@ -1,10 +1,8 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { realtime } from "@/src/lib/firebase";
-
-import { useUser } from "@/src/hooks/useUser";
 
 import PostCard from "./card";
 import Loading from "../loading";
@@ -16,80 +14,95 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/src/app/components/ui/empty";
-
 import { ArrowUpRightIcon } from "lucide-react";
 import { Button } from "@/src/app/components/ui/button";
 
 import type { PostCardProps } from "./data";
-
 import type { Profile } from "@/src/lib/types/user";
+
+// Replace this with your actual API / hook function
+async function fetchUserProfile(authorId: string): Promise<Profile> {
+    try{
+        const response = await fetch(`/api/profile?uid=${authorId}`);
+        if(!response.ok){
+            throw new Error("Failed to fetch data");
+        }
+        const result = await response.json();
+        return result;
+    } catch (err: any) {
+        return {
+          uid: authorId,
+          displayName: `User ${authorId}`,
+          avatar: ""
+        };
+    }
+}
 
 export function ListPosts() {
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<PostCardProps[]>([]);
   const [userProfiles, setUserProfiles] = useState<Record<string, Profile>>({});
 
-  // Optional: use ref to avoid multiple subscriptions
-  const loadedRef = useRef(false);
-
   useEffect(() => {
-    if (loadedRef.current) return;
-    loadedRef.current = true;
-
     const postRef = ref(realtime, "posts");
 
-    const unsubscribe = onValue(postRef, (snapshot) => {
+    const unsubscribe = onValue(postRef, async (snapshot) => {
       const postList: PostCardProps[] = [];
       const authorsToFetch = new Set<string>();
 
       snapshot.forEach((child) => {
         const rawData = child.val();
-        //postList.push(normalizePost(rawData));
         const post = normalizePost(rawData);
         postList.push(post);
 
-        if (!userProfiles[post.author.uid]) {
-          authorsToFetch.add(post.author.uid);
+        if (!userProfiles[post.author]) {
+          authorsToFetch.add(post.author);
         }
       });
+
       setPosts(postList);
 
-      // Fetch missing user profiles
-      authorsToFetch.forEach((authorId) => {
-        const { data } = useUser(authorId); // Assuming useUser is synchronous or returns cached data
-        if (data) {
-          setUserProfiles((prev) => ({ ...prev, [authorId]: data }));
-        }
+      // Fetch all missing author profiles in parallel
+      const profilesArray = await Promise.all(
+        Array.from(authorsToFetch).map(async (id) => {
+          const profile = await fetchUserProfile(id);
+          return [id, profile] as [string, Profile];
+        })
+      );
+
+      // Merge profiles into state
+      setUserProfiles((prev) => {
+        const copy = { ...prev };
+        profilesArray.forEach(([id, profile]) => {
+          copy[id] = profile;
+        });
+        return copy;
       });
 
       setLoading(false);
     });
 
-    // Clean up listener
     return () => unsubscribe();
-  }, [userProfiles]);
+  }, []);
 
-  // Normalize raw Firebase post to PostCardProps
   function normalizePost(raw: any): PostCardProps {
     return {
       id: String(raw.id ?? raw.key ?? Date.now()),
-      author: {
-        uid: String(raw.author?.id ?? "unknown"),
-        displayName: String(raw.author?.name ?? "Unknown"),
-        avatar: raw.author?.avatarUrl ?? null,
+      author: String(raw.author),
+      profile: {
+        uid: String(raw.author?.uid ?? "unknown"),
+        displayName: String(raw.author?.displayName ?? "Unknown"),
+        avatar: raw.author?.avatar ?? ""
       },
       content: String(raw.content ?? ""),
       media: Array.isArray(raw.media)
-        ? raw.media.filter((m: string) => m && typeof m === "object")
+        ? raw.media.filter((m: any) => m && typeof m === "object")
         : [],
       publishDate: raw.publishDate ?? Date.now(),
       visibility: raw.visibility ?? "public",
-      heartsCount: 0,
-      commentsCount: 0
     };
   }
 
-  // Loading state
   if (loading) {
     return (
       <div className="py-5 flex justify-center">
@@ -98,7 +111,6 @@ export function ListPosts() {
     );
   }
 
-  // Empty state
   if (posts.length === 0) {
     return (
       <Empty className="select-none">
@@ -123,9 +135,10 @@ export function ListPosts() {
 
   return (
     <div className="space-y-3">
-      {posts.map((post, index) => (
-        <PostCard key={index} {...post} />
-      ))}
+      {posts.map((post) => {
+        const profile = userProfiles[post.author];
+        return <PostCard key={post.id} {...post} profile={profile} />;
+      })}
     </div>
   );
 }

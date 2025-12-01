@@ -9,7 +9,7 @@ export interface Profile{
     avatar?: string;
     displayName: string;
     theme: string;
-    lastOnline: string;
-    createdAt: string;
+    lastOnline?: string;
+    createdAt?: string;
     bio?: string;
 }

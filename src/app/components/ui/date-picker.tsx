@@ -12,19 +12,17 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/src/app/components/ui/popover"
+} from "@/src/app/components/ui/popover";
+
+//import { v4 as uuidv4 } from 'uuid';
+
  
-export function DatePicker(params: {
-  id: string;
-  value: any;
-  name?: string;
-  onChange: FormEventHandler<HTMLDivElement>;
-}) {
+export function DatePicker(params: any) {
   const [open, setOpen] = useState(false);
-  const [date, setDate] = useState<Date>(params.value);
+  const [date, setDate] = useState<Date>(new Date());
  
   return (
-    <div className="flex flex-col gap-3" id={params.id}>
+    <div className="flex flex-col gap-3">
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -34,15 +32,15 @@ export function DatePicker(params: {
           >
             <CalendarIcon />
             {date ? format(date, "PPP") : <span>Pick a date</span>}
-            <input type="hidden" name={params.name} value={format(date, "yyyy-MM-dd")} />
+            <input type="hidden" value={format(date, "yyyy-MM-dd")} {... params} />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-          <Calendar 
+          <Calendar
             required 
             mode="single" 
             selected={date} 
-            onSelect={(date) => {setDate(date);setOpen(false);}}
+            onSelect={(newDate) => {setDate(newDate);setOpen(false);}}
             className="rounded-lg border" />
         </PopoverContent>
       </Popover>

@@ -171,8 +171,9 @@ h1, h2, h3{
 .dark input[type=email], .dark input[type=text],
 .dark button, .dark input[type=submit], .dark input[type=reset],
 .dark .btn {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.5);
   border-color: rgba(0, 0, 0, 0.6);
+  color: rgba(255, 255, 255, 0.5);
   box-shadow: none;
 }
 
@@ -313,4 +314,21 @@ h1.bold-title{
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Form Validation Rules */
+input[aria-invalid="true"] {
+  outline-color: #ad0000;
+  border-color: #ad0000;
+  color: #ad0000;
+}
+
+.dark input[aria-invalid="true"] {
+  outline-color: #ff8e8e;
+  border-color: #ff8e8e;
+  color: #ff8e8e;
+}
+
+input[type=checkbox]{
+  display:inline-flex;
 }

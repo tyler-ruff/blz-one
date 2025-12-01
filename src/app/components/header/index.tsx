@@ -8,7 +8,6 @@ import { mainMenu } from '@/src/config/menu';
 import { config } from '@/src/config/app';
 
 import Logo from "./logo";
-import { Cta } from './cta';
 import Burger from "./burger";
 import { MobileNav, Nav } from "./nav";
 import UserAvatar from "./avatar";
@@ -47,7 +46,7 @@ export default function Header(){
                     <Logo title={config.name} />
                     <div className="flex space-x-5 pt-1">
                         <Nav pathname={pathname} />
-                        {mainMenu.cta !== undefined && (<Cta label={mainMenu.cta.label} url={mainMenu.cta.href || ``} />)}
+                        {/*{mainMenu.cta !== undefined && (<Cta label={mainMenu.cta.label} url={mainMenu.cta.href || ``} />)} */}
                         <div className="hidden lg:block">
                             <UserAvatar />
                         </div>

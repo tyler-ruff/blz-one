@@ -3,7 +3,7 @@
 import { z } from 'zod';
 
 import { cn } from "@/lib/utils";
-import { Button } from "@/src/app/components/ui/button"
+import { Button } from "@/src/app/components/ui/button";
 import {
   Field,
   FieldDescription,
@@ -18,7 +18,7 @@ import {
   AlertTitle,
 } from "@/src/app/components/ui/alert";
 import { Input } from "@/src/app/components/ui/input";
-import { auth } from "@/src/lib/firebase";
+import { auth, db } from "@/src/lib/firebase";
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -26,6 +26,8 @@ import Loading from "../loading";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { Profile, User } from "@/src/lib/types/user";
 import { githubLogin, googleLogin, microsoftLogin } from "../access/login";
+
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 
 export function LoginForm({
   className,
@@ -124,13 +126,19 @@ export function LoginForm({
                 .then(async (userCredential) => {
                     setError(false);
                     const user = userCredential.user;
+                    // Set Cookies for Server side Authentication
                     const token = await userCredential.user.getIdToken();
                     await fetch("/api/login", {
                         method: "POST",
                         headers: {
-                        Authorization: `Bearer ${token}`,
+                          Authorization: `Bearer ${token}`,
                         }
-                    })
+                    });
+                    // Update "Last Online"
+                    const profileDocRef = doc(db, "profiles", user.uid);
+                    updateDoc(profileDocRef, {
+                      lastOnline: new Date().toISOString()
+                    });
                 }).catch((error) => {
                     setError(true);
                     setOutput(`${error.message}`);

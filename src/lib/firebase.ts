@@ -7,7 +7,6 @@ import { getStorage } from 'firebase/storage';
 
 //import { firebaseConfig } from '@/src/config/firebase';
 
-
 const app = initializeApp();
 //const app = initializeApp(firebaseConfig);
 

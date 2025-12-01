@@ -6,7 +6,7 @@ import MainHeading from "@/src/app/components/heading/main";
 import HorizontalLargeStats from "@/src/app/components/stats/horizontalLarge";
 import HorizontalSmallStats from "@/src/app/components/stats/horizontalSmall";
 import BasicTable from "@/src/app/components/table/basic";
-import { NewForm } from "./components/posts/new";
+import { NewPostForm } from "./components/posts/new";
 import { ListPosts } from "./components/posts/list";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="max-w-3xl relative mx-auto space-y-4">
+    <div className="max-w-3xl relative mx-auto space-y-4 px-3 md:px-0">
       <BlzBreadcrumb trail={[
         {
           label: "Home",
@@ -32,7 +32,7 @@ export default function Home() {
       />
       */}
       <MainHeading text="Feed" />
-      <NewForm />
+      <NewPostForm />
       <ListPosts />
     </div>
   );

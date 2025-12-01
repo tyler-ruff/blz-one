@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { config } from "@/src/config/app";
 
 import Image from "next/image";
-import Spinner from "../loading/spinner";
+import Spinner from "@/src/app/components/loading/spinner";
 import { IAvatar } from "./data";
 import { useAuthContext } from "@/src/context/AuthContext";
 import { User, Profile } from "@/src/lib/types/user";

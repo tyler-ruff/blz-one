@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export function enumKeys<T extends object>(e: T) {
   const keys = Object.keys(e)
   const isStringEnum = isNaN(Number(keys[0]))
@@ -68,10 +70,26 @@ export function formatTelephone(phoneNumber: string){
 }
 
 export function getInitials(name: string) {
-  return name
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase())
-    .join('');
+    if(name === ""){
+      return "";
+    }
+    if(!name.includes(' ')){
+      if(name.length >= 2){
+        return name.slice(0, 2);
+      } else {
+        return "BL";
+      }
+    } else {
+      return name
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase())
+        .join('');
+    }
+}
+
+export function formatDateAlt(date: Date | string): string{
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return moment(d.toISOString()).format("LLLL");
 }
 
 /**
@@ -84,7 +102,8 @@ export function formatDate(date: Date | string, format: string): string {
   const d = typeof date === 'string' ? new Date(date) : date;
 
   if (isNaN(d.getTime())) {
-    throw new Error('Invalid date');
+    //throw new Error('Invalid date');
+    return "";
   }
 
   const padZero = (num: number) => (num < 10 ? `0${num}` : num);

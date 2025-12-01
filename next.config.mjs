@@ -10,7 +10,9 @@ const nextConfig = {
         'firebasestorage.googleapis.com',
         'blz-one-9e383.appspot.com',
         'storage.googleapis.com',
-        'blazedlabs.com'
+        'blazedlabs.com',
+        'cdn.jsdelivr.net',
+        'avatars.githubusercontent.com'
       ],
       formats: ['image/webp']
     }

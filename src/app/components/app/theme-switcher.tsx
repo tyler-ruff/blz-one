@@ -3,11 +3,22 @@
 import { useTheme } from 'next-themes';
 import { useState, useEffect } from 'react';
 
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+  FieldSeparator
+} from "@/src/app/components/ui/field";
+import { Switch } from "@/src/app/components/ui/switch";
+
 export default function ThemeSwitcher(){
     const { theme, setTheme } = useTheme();
     const [isDark, setIsDark] = useState<boolean>(false);
 
-    const toggleTheme = () => {
+    const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
+    const toggleTheme = async (isChecked: boolean) => {
         if(theme === "dark"){
             setTheme('light');
             setIsDark(false);
@@ -25,7 +36,27 @@ export default function ThemeSwitcher(){
         }
     }, []);
 
+    return (
+        <div className="w-full py-5 px-2 select-none">
+            <Field orientation="horizontal" className="pt-4 pb-6">
+                <FieldContent>
+                    <label htmlFor="theme-switcher-control" className="cursor-pointer">
+                        <FieldLabel htmlFor="theme-switcher-control">
+                            Toggle Dark Mode
+                        </FieldLabel>
+                        <FieldDescription>
+                            Ride on the wild side with this awesome dark mode theme.
+                            Every hacker loves dark mode.
+                        </FieldDescription>
+                    </label>
+                </FieldContent>
+                <Switch id="theme-switcher-control" value="dark" onCheckedChange={toggleTheme} checked={isDark} />
+            </Field>
+            <FieldSeparator />
+        </div>
+    )
     
+    /*
     return (
         <label className="py-5 flex cursor-pointer gap-2 dark:text-white select-none">
             <svg
@@ -57,4 +88,5 @@ export default function ThemeSwitcher(){
             </svg>
         </label>
     )
+    */
 }

@@ -33,3 +33,6 @@ yarn-error.log*
 next-env.d.ts
 
 /apphosting.emulator.yaml
+
+/src/app/test
+/src/app/components/test

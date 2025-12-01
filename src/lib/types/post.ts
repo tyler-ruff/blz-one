@@ -1,19 +1,19 @@
 export enum Visibility{
     PUBLIC="public",
-    FRIENDS="friends",
+    FOLLOWERS="followers",
     PRIVATE="private"
 }
+
 export interface Post{
     id: string;
     author: string;
     publishDate: string;
-    updatedDate: string;
+    updatedDate?: string;
     content: string;
     media?: string[];
     hearts?: string[];
     hashtags?: string[];
-    visibility: Visibility;
-    reactions?: string[];
+    visibility: string;
 }
 
 export interface Comment{

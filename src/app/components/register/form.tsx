@@ -135,7 +135,7 @@ export function SignupForm({
         setErrors(newErrors);
     };
 
-    const handleRegister = async (data: FormData) => {
+    const handleRegister =  async(data: FormData) => {
         try{
             //Validate password
             // Note: Validate password does not work with firebase emulator
@@ -149,8 +149,15 @@ export function SignupForm({
                 setOutput("Please correct the error(s) below.");
             } else {
                 createUserWithEmailAndPassword(auth, data.email, data.password)
-                .then((userCredential) => {
+                .then(async (userCredential) => {
                     setError(false);
+                    const token = await userCredential.user.getIdToken();
+                    await fetch("/api/login", {
+                        method: "POST",
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        }
+                    });
                     // Signed up 
                     const user = userCredential.user;
                     // Update displayName on profile
@@ -166,8 +173,8 @@ export function SignupForm({
                             avatar: ``,
                             displayName: fullName,
                             theme: generateRandomHex(),
-                            createdAt: user.metadata.creationTime,
-                            lastOnline: user.metadata.lastSignInTime,
+                            createdAt: new Date().toISOString(),
+                            lastOnline: new Date().toISOString(),
                             bio: "Just another user."
                         }).then(() => {
                             router.push('/');

@@ -10,7 +10,26 @@ Run the development server:
 npm run dev
 ```
 
+Run the Firebase Emulators:
+
+```bash
+firebase emulators:start
+```
+
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Seeding DB with Test Data
+
+To seed the local DB with test data, run the following script in a power shell terminal:
+```ps1
+.\start-dev.ps1
+```
+
+If you get an error, you may need to enable ps execution, run the following script in a power shell admin terminal:
+
+```ps1
+Set-ExecutionPolicy RemoteSigned
+```
 
 ## Deploy to Firebase App Hosting
 

@@ -1,0 +1,101 @@
+[debug] [2025-11-30T10:31:49.588Z] ----------------------------------------------------------------------
+[debug] [2025-11-30T10:31:49.594Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\TylerRRuff\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js emulators:start
+[debug] [2025-11-30T10:31:49.595Z] CLI Version:   14.20.0
+[debug] [2025-11-30T10:31:49.595Z] Platform:      win32
+[debug] [2025-11-30T10:31:49.595Z] Node Version:  v20.18.0
+[debug] [2025-11-30T10:31:49.595Z] Time:          Sun Nov 30 2025 05:31:49 GMT-0500 (Eastern Standard Time)
+[debug] [2025-11-30T10:31:49.596Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2025-11-30T10:31:50.143Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2025-11-30T10:31:50.144Z] > authorizing via signed-in user (hello@blazed.space)
+[debug] [2025-11-30T10:31:50.522Z] java version "23.0.1" 2024-10-15
+
+[debug] [2025-11-30T10:31:50.523Z] Java(TM) SE Runtime Environment (build 23.0.1+11-39)
+Java HotSpot(TM) 64-Bit Server VM (build 23.0.1+11-39, mixed mode, sharing)
+
+[debug] [2025-11-30T10:31:50.584Z] Parsed Java major version: 23
+[info] i  emulators: Starting emulators: apphosting, auth, firestore, database, storage {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: apphosting, auth, firestore, database, storage"}}
+[debug] [2025-11-30T10:31:50.632Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [apphosting] App Hosting Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [auth] Authentication Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [firestore] Firestore Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [firestore.websocket] websocket server for firestore only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [database] Database Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.633Z] [storage] Storage Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2025-11-30T10:31:50.634Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"apphosting":[{"address":"127.0.0.1","family":"IPv4","port":5020}],"auth":[{"address":"127.0.0.1","family":"IPv4","port":9099}],"firestore":[{"address":"127.0.0.1","family":"IPv4","port":8080}],"firestore.websocket":[{"address":"127.0.0.1","family":"IPv4","port":9150}],"database":[{"address":"127.0.0.1","family":"IPv4","port":9000}],"storage":[{"address":"127.0.0.1","family":"IPv4","port":9199}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2025-11-30T10:31:50.641Z] Emulator locator file path: C:\Users\TYLERR~1\AppData\Local\Temp\hub-blz-one-9e383.json
+[debug] [2025-11-30T10:31:50.641Z] [hub] writing locator at C:\Users\TYLERR~1\AppData\Local\Temp\hub-blz-one-9e383.json
+[debug] [2025-11-30T10:31:50.663Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-30T10:31:50.663Z] Ignoring unsupported arg: single_project_mode_error {"metadata":{"emulator":{"name":"firestore"},"message":"Ignoring unsupported arg: single_project_mode_error"}}
+[debug] [2025-11-30T10:31:50.664Z] Starting Firestore Emulator with command {"binary":"java","args":["-Dgoogle.cloud_firestore.debug_log_level=FINE","-Duser.language=en","-jar","C:\\Users\\TylerRRuff\\.cache\\firebase\\emulators\\cloud-firestore-emulator-v1.19.8.jar","--host","127.0.0.1","--port",8080,"--websocket_port",9150,"--project_id","blz-one-9e383","--rules","C:\\Users\\TylerRRuff\\GitHub\\blz-one\\firestore.rules","--single_project_mode",true],"optionalArgs":["port","webchannel_port","host","rules","websocket_port","functions_emulator","seed_from_export","project_id","single_project_mode"],"joinArgs":false,"shell":false,"port":8080} {"metadata":{"emulator":{"name":"firestore"},"message":"Starting Firestore Emulator with command {\"binary\":\"java\",\"args\":[\"-Dgoogle.cloud_firestore.debug_log_level=FINE\",\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\TylerRRuff\\\\.cache\\\\firebase\\\\emulators\\\\cloud-firestore-emulator-v1.19.8.jar\",\"--host\",\"127.0.0.1\",\"--port\",8080,\"--websocket_port\",9150,\"--project_id\",\"blz-one-9e383\",\"--rules\",\"C:\\\\Users\\\\TylerRRuff\\\\GitHub\\\\blz-one\\\\firestore.rules\",\"--single_project_mode\",true],\"optionalArgs\":[\"port\",\"webchannel_port\",\"host\",\"rules\",\"websocket_port\",\"functions_emulator\",\"seed_from_export\",\"project_id\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":8080}"}}
+[info] i  firestore: Firestore Emulator logging to firestore-debug.log {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator logging to \u001b[1mfirestore-debug.log\u001b[22m"}}
+[info] +  firestore: Firestore Emulator UI websocket is running on 9150. {"metadata":{"emulator":{"name":"firestore"},"message":"Firestore Emulator UI websocket is running on 9150."}}
+[debug] [2025-11-30T10:31:55.142Z] Checked if tokens are valid: false, expires at: 1764492438448
+[debug] [2025-11-30T10:31:55.142Z] Checked if tokens are valid: false, expires at: 1764492438448
+[debug] [2025-11-30T10:31:55.143Z] > refreshing access token with scopes: []
+[debug] [2025-11-30T10:31:55.147Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-30T10:31:55.147Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-30T10:31:55.279Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-30T10:31:55.279Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-30T10:31:55.290Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383 [none]
+[debug] [2025-11-30T10:31:55.686Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383 200
+[debug] [2025-11-30T10:31:55.686Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383 {"projectId":"blz-one-9e383","projectNumber":"817319905653","displayName":"blz-one","name":"projects/blz-one-9e383","resources":{"hostingSite":"blz-one-9e383","realtimeDatabaseInstance":"blz-one-9e383-default-rtdb","locationId":"us-east4"},"state":"ACTIVE","etag":"1_332a0d3a-231b-4eb1-938d-facf1fd9ba93"}
+[debug] [2025-11-30T10:31:55.687Z] database rules config:  [{"instance":"blz-one-9e383-default-rtdb","rules":"C:\\Users\\TylerRRuff\\GitHub\\blz-one\\database.rules.json"}]
+[debug] [2025-11-30T10:31:55.689Z] Ignoring unsupported arg: projectId {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: projectId"}}
+[debug] [2025-11-30T10:31:55.690Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2025-11-30T10:31:55.690Z] Ignoring unsupported arg: rules {"metadata":{"emulator":{"name":"database"},"message":"Ignoring unsupported arg: rules"}}
+[debug] [2025-11-30T10:31:55.690Z] Starting Database Emulator with command {"binary":"java","args":["-Duser.language=en","-jar","C:\\Users\\TylerRRuff\\.cache\\firebase\\emulators\\firebase-database-emulator-v4.11.2.jar","--host","127.0.0.1","--port",9000,"--single_project_mode","Warning"],"optionalArgs":["port","host","functions_emulator_port","functions_emulator_host","single_project_mode"],"joinArgs":false,"shell":false,"port":9000} {"metadata":{"emulator":{"name":"database"},"message":"Starting Database Emulator with command {\"binary\":\"java\",\"args\":[\"-Duser.language=en\",\"-jar\",\"C:\\\\Users\\\\TylerRRuff\\\\.cache\\\\firebase\\\\emulators\\\\firebase-database-emulator-v4.11.2.jar\",\"--host\",\"127.0.0.1\",\"--port\",9000,\"--single_project_mode\",\"Warning\"],\"optionalArgs\":[\"port\",\"host\",\"functions_emulator_port\",\"functions_emulator_host\",\"single_project_mode\"],\"joinArgs\":false,\"shell\":false,\"port\":9000}"}}
+[info] i  database: Database Emulator logging to database-debug.log {"metadata":{"emulator":{"name":"database"},"message":"Database Emulator logging to \u001b[1mdatabase-debug.log\u001b[22m"}}
+[debug] [2025-11-30T10:32:11.715Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"storage"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2025-11-30T10:32:13.901Z] Temp file directory for storage emulator: C:\Users\TYLERR~1\AppData\Local\Temp/firebase/storage/blobs {"metadata":{"emulator":{"name":"storage"},"message":"Temp file directory for storage emulator: C:\\Users\\TYLERR~1\\AppData\\Local\\Temp/firebase/storage/blobs"}}
+[info] i  apphosting: running custom start command: 'npm run dev' {"metadata":{"emulator":{"name":"apphosting"},"message":"running custom start command: 'npm run dev'"}}
+[debug] [2025-11-30T10:32:13.950Z] Checked if tokens are valid: true, expires at: 1764502314280
+[debug] [2025-11-30T10:32:13.951Z] Checked if tokens are valid: true, expires at: 1764502314280
+[debug] [2025-11-30T10:32:13.952Z] >>> [apiv2][query] GET https://firebaseapphosting.googleapis.com/v1beta/projects/blz-one-9e383/locations/-/backends 
+[debug] [2025-11-30T10:32:14.513Z] <<< [apiv2][status] GET https://firebaseapphosting.googleapis.com/v1beta/projects/blz-one-9e383/locations/-/backends 200
+[debug] [2025-11-30T10:32:14.513Z] <<< [apiv2][body] GET https://firebaseapphosting.googleapis.com/v1beta/projects/blz-one-9e383/locations/-/backends {"backends":[{"name":"projects/blz-one-9e383/locations/us-central1/backends/blz-one","createTime":"2024-12-17T13:11:31.970499612Z","updateTime":"2025-10-27T09:27:05.759774Z","uri":"blz-one--blz-one-9e383.us-central1.hosted.app","managedResources":[{"runService":{"service":"projects/817319905653/locations/us-central1/services/blz-one"}}],"codebase":{"repository":"projects/blz-one-9e383/locations/us-central1/connections/apphosting-github-conn-fy6j9me/gitRepositoryLinks/tyler-ruff-blz-one","rootDirectory":"/"},"uid":"5a33dc0a-5979-4a93-b18f-598430bb8eca","etag":"EWDCwDMR4g4hM1WzD7DXoDZouWADI-KoBoxy9hvBh5Y","reconciling":false,"servingLocality":"GLOBAL_ACCESS","serviceAccount":"firebase-app-hosting-compute@blz-one-9e383.iam.gserviceaccount.com","appId":"1:817319905653:web:515217f9d6b697d38bab3c"},{"name":"projects/blz-one-9e383/locations/us-central1/backends/blazed-work","createTime":"2024-12-05T08:54:03.018068941Z","updateTime":"2025-10-26T14:23:40.945986Z","uri":"blazed-work--blz-one-9e383.us-central1.hosted.app","managedResources":[{"runService":{"service":"projects/817319905653/locations/us-central1/services/blazed-work"}}],"codebase":{"repository":"projects/blz-one-9e383/locations/us-central1/connections/apphosting-github-conn-fy6j9me/gitRepositoryLinks/tyler-ruff-blazed-work","rootDirectory":"/"},"uid":"9d8cd121-cedd-4f28-82c2-4e3d1852b48a","etag":"w8uJXO4frTiHCPfK_pjOY3W-8Pt3VVNp0YXBcfIw8X8","reconciling":false,"servingLocality":"GLOBAL_ACCESS","serviceAccount":"firebase-app-hosting-compute@blz-one-9e383.iam.gserviceaccount.com","appId":"1:817319905653:web:8056cd71030f6df78bab3c"}]}
+[debug] [2025-11-30T10:32:14.514Z] Checked if tokens are valid: true, expires at: 1764502314280
+[debug] [2025-11-30T10:32:14.514Z] Checked if tokens are valid: true, expires at: 1764502314280
+[debug] [2025-11-30T10:32:14.514Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:817319905653:web:515217f9d6b697d38bab3c/config [none]
+[debug] [2025-11-30T10:32:15.001Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:817319905653:web:515217f9d6b697d38bab3c/config 200
+[debug] [2025-11-30T10:32:15.001Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/-/webApps/1:817319905653:web:515217f9d6b697d38bab3c/config {"projectId":"blz-one-9e383","appId":"1:817319905653:web:515217f9d6b697d38bab3c","databaseURL":"https://blz-one-9e383-default-rtdb.firebaseio.com","storageBucket":"blz-one-9e383.appspot.com","locationId":"us-east4","apiKey":"AIzaSyAbdLAKwSTtQBmXR_FC5Sp0T5A8E-ZZpg0","authDomain":"blz-one-9e383.firebaseapp.com","messagingSenderId":"817319905653","measurementId":"G-VRY7W9JKHH","projectNumber":"817319905653","version":"2"}
+[info] i  apphosting: connecting apphosting emulator {"metadata":{"emulator":{"name":"apphosting"},"message":"connecting apphosting emulator"}}
+[debug] [2025-11-30T10:32:21.014Z] >>> [apiv2][query] PUT http://127.0.0.1:9000/.settings/rules.json ns=blz-one-9e383-default-rtdb
+[debug] [2025-11-30T10:32:21.015Z] >>> [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json "{\n  \"rules\": {\n    \".read\": true,\n    \".write\": true,\n  \t\"tasks\": {\n      \"$uid\": {\n        \".write\": \"$uid === auth.uid\"\n      }\n    }\n  }\n}"
+[debug] [2025-11-30T10:32:22.130Z] <<< [apiv2][status] PUT http://127.0.0.1:9000/.settings/rules.json 200
+[debug] [2025-11-30T10:32:22.130Z] <<< [apiv2][body] PUT http://127.0.0.1:9000/.settings/rules.json {"status":"ok"}
+[debug] [2025-11-30T10:32:22.141Z] Could not find VSCode notification endpoint: FetchError: request to http://localhost:40001/vscode/notify failed, reason: . If you are not running the Firebase Data Connect VSCode extension, this is expected and not an issue.
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌────────────────┬────────────────┬─────────────────────────────────┐
+│ Emulator       │ Host:Port      │ View in Emulator UI             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ App Hosting    │ localhost:5020 │ n/a                             │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Authentication │ 127.0.0.1:9099 │ http://127.0.0.1:4000/auth      │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Firestore      │ 127.0.0.1:8080 │ http://127.0.0.1:4000/firestore │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Database       │ 127.0.0.1:9000 │ http://127.0.0.1:4000/database  │
+├────────────────┼────────────────┼─────────────────────────────────┤
+│ Storage        │ 127.0.0.1:9199 │ http://127.0.0.1:4000/storage   │
+└────────────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub host: 127.0.0.1 port: 4400
+  Other reserved ports: 4500, 9150
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2025-11-30T13:50:36.085Z] Checked if tokens are valid: false, expires at: 1764502314280
+[debug] [2025-11-30T13:50:36.094Z] Checked if tokens are valid: false, expires at: 1764502314280
+[debug] [2025-11-30T13:50:36.095Z] > refreshing access token with scopes: []
+[debug] [2025-11-30T13:50:36.098Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2025-11-30T13:50:36.099Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-30T13:50:36.303Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2025-11-30T13:50:36.303Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2025-11-30T13:50:36.328Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig [none]
+[debug] [2025-11-30T13:50:36.897Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig 200
+[debug] [2025-11-30T13:50:36.897Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/blz-one-9e383/adminSdkConfig {"projectId":"blz-one-9e383","databaseURL":"https://blz-one-9e383-default-rtdb.firebaseio.com","storageBucket":"blz-one-9e383.appspot.com","locationId":"us-east4"}

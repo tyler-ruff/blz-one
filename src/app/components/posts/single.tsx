@@ -60,6 +60,7 @@ export function SinglePost(params: {
 
       const postId = params.id;
 
+    /*
     useEffect(() => {
         async function load() {
         const p = await getPostById(postId);
@@ -73,6 +74,30 @@ export function SinglePost(params: {
         }
         load();
     }, [postId]);
+    */
+
+    useEffect(() => {
+      async function load() {
+        setLoading(true);
+
+        const p = await getPostById(postId);
+        if (!p) {
+          setPost(null);
+          setLoading(false);
+          return;
+        }
+
+        setPost(p);
+
+        const a = await fetchUserFromAPI(p.author);
+        setAuthor(a);
+
+        setLoading(false);
+      }
+
+      if (postId) load();
+    }, [postId]);
+
 
       if (loading) {
         return (

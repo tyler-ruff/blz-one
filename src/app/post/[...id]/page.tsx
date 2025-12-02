@@ -14,24 +14,26 @@ type Props = {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+/*
 export async function generateMetadata(
     { params, searchParams}: Props,
     parent: ResolvingMetadata
 ): Promise<Metadata> {
     const { id } = await params;
-    const res = await fetch(`${url}/api/posts/${id}`);
-    const data = await res.json();
-    const profileRes = await fetch(`${url}/api/profile?uid=${data.author}`);
-    const authorProfile = await profileRes.json();
-    const previousImages = (await parent).openGraph?.images || [];
+    //const res = await fetch(`${url}/api/posts/${id}`);
+    //const data = await res.json();
+    //const profileRes = await fetch(`${url}/api/profile?uid=${data.author}`);
+    //const authorProfile = await profileRes.json();
+    //const previousImages = (await parent).openGraph?.images || [];
     return {
-        title: `Viewing a post by ${authorProfile.displayName}`,
+        title: `Viewing a single post`,
         description: ``,
         openGraph: {
-        images: [data.avatar, ...previousImages]
+        images: [...previousImages]
         }
     }
 }
+*/
 
 export default function ViewPost({
     params,

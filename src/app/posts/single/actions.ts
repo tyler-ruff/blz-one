@@ -18,8 +18,11 @@ export async function getPostById(id: string) {
         onValue(postRef, (snapshot) => {
             data = snapshot.val();
         })
+        if(data === undefined || data === null){
+            throw new Error("Error: Invalid UID or unknown user");
+        }
         return data as Post;
     } catch (error){
-        
+        return null;
     }
 }

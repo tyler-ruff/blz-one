@@ -80,9 +80,13 @@ export function SinglePost(params: {
       async function load() {
         setLoading(true);
         const p = await getPostById(postId);
+        if(p === null){
+          window.location.reload();
+        }
         if (!p) {
-          setPost(null);
-          setLoading(false);
+          window.location.reload();
+          //setPost(null);
+          //setLoading(false);
           return;
         }
         setPost(p);
@@ -245,6 +249,7 @@ export function SinglePost(params: {
       </div>
 
       <Separator />
+
     
       {/* Sidebar metadata? (optional) */}
       {/* Insert analytics, share panel, related posts, etc. */}

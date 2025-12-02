@@ -272,7 +272,8 @@ export function LoginForm({
           </div>
           <Input 
             id="password" 
-            type="password" 
+            type="password"
+            aria-invalid={errors.password ? true : false}
             {...register("password", 
                   { 
                       required: "Password is required.", 

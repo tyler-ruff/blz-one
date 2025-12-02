@@ -3,6 +3,22 @@
 import { z } from 'zod';
 
 import { cn } from "@/lib/utils";
+
+import { useRouter } from "next/navigation";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+
+import { useAuthContext } from "@/src/context/AuthContext";
+import { Profile, User } from "@/src/lib/types/user";
+
+import { auth, db } from "@/src/lib/firebase";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
+import { githubLogin, googleLogin, microsoftLogin } from "../access/login";
+
+import Loading from "../loading";
+
 import { Button } from "@/src/app/components/ui/button";
 import {
   Field,
@@ -18,16 +34,11 @@ import {
   AlertTitle,
 } from "@/src/app/components/ui/alert";
 import { Input } from "@/src/app/components/ui/input";
-import { auth, db } from "@/src/lib/firebase";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/navigation";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import Loading from "../loading";
-import { useAuthContext } from "@/src/context/AuthContext";
-import { Profile, User } from "@/src/lib/types/user";
-import { githubLogin, googleLogin, microsoftLogin } from "../access/login";
 
-import { doc, setDoc, updateDoc } from "firebase/firestore";
+interface ILoginForm {
+  email: string;
+  password: string;
+}
 
 export function LoginForm({
   className,
@@ -40,8 +51,23 @@ export function LoginForm({
     const [error, setError] = useState<boolean | null>(null);
     const [output, setOutput] = useState<string | null>(null);
 
+    const {
+            register,
+            handleSubmit,
+            watch,
+            control,
+            formState: { errors },
+            setValue
+        } = useForm<ILoginForm>({
+          defaultValues: {
+            email: "",
+            password: ""
+          }
+        })
+
     const errorClasses = "focus:ring-red-500 border-red-500 focus:border-red-500 text-red-500";
 
+    /*
     const loginFormSchema = z.object({
         email: z.email("Please enter a valid email.")
             .min(2, "Email is too short.")
@@ -50,6 +76,7 @@ export function LoginForm({
             .min(8, "Password is too short.")
             .max(255, "Password is too long."),
     });
+    */
 
     const ErrorMessage = (props: {
         message: string;
@@ -69,16 +96,19 @@ export function LoginForm({
         )
     }
 
-    type FormData = z.infer<typeof loginFormSchema>;
-    type FormErrors = Partial<Record<keyof FormData, string[]>>;
+    //type FormData = z.infer<typeof loginFormSchema>;
+    //type FormErrors = Partial<Record<keyof FormData, string[]>>;
 
+    /*
     const [formData, setFormData] = useState<FormData>({
         email: "",
         password: ""
     });
+    */
 
-    const [errors, setErrors] = useState<FormErrors>({});
+    //const [errors, setErrors] = useState<FormErrors>({});
 
+    /*
     const validateForm = (data: FormData, field?: keyof FormData): FormErrors => {
         try{
             loginFormSchema.parse(data);
@@ -91,7 +121,9 @@ export function LoginForm({
             return {};
         }
     }
+    */
 
+    /*
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const newErrors = validateForm(formData);
@@ -102,7 +134,12 @@ export function LoginForm({
             handleLogin(formData);
         }
     };
+    */
+  const onSubmit: SubmitHandler<ILoginForm> = (data) => { 
+    handleLogin(data);
+  }
 
+    /*
     const handleChange = async(
         e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
         ) => {
@@ -114,8 +151,10 @@ export function LoginForm({
         const newErrors = validateForm(updatedFormData);
         setErrors(newErrors);
     };
+    */
 
-    const handleLogin = async (data: FormData) => {
+    
+    const handleLogin = async (data: ILoginForm) => {
         try{
             if(!data.password || !data.email ||
                 data.email.length >= 255 || data.password.length >= 255){
@@ -172,7 +211,7 @@ export function LoginForm({
     )
   }
   return (
-    <form onSubmit={handleSubmit} method="post" className={cn("flex flex-col gap-6", className)} {...props}>
+    <form onSubmit={handleSubmit(onSubmit)} method="post" className={cn("flex flex-col gap-6", className)} {...props}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold select-none">
@@ -190,15 +229,35 @@ export function LoginForm({
           <Input 
             id="email" 
             type="email" 
-            name="email" 
-            placeholder="john.smith@example.com" 
-            required 
-            value={formData.email}
-            onChange={handleChange}
-            className={`${errors.email && errors.email.length > 0 && errorClasses}`}
+            placeholder="john.smith@example.com"
+            aria-invalid={errors.email ? true : false}
+            {...register("email", 
+              {
+                required: "Email Address is required.", 
+                minLength: {
+                    value: 3,
+                    message: "Email Address is too short."
+                }, 
+                maxLength: {
+                    value: 255,
+                    message: "Email Address is too long."
+                },
+                pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                    message: "Email Address is invalid."
+                }
+              }
+            )}
            />
-           {errors.email && errors.email.length > 0 && (
+           {/*errors.email && errors.email.length > 0 && (
                 <p className="mt-2 text-sm text-red-600 dark:text-red-500 sr-only"><span className="font-medium">{errors.email[0]}</span></p>
+            )*/}
+            {errors.email && (
+              <p className="mt-2 text-sm text-red-600 dark:text-red-500 sr-only">
+                <span className="font-medium">
+                    {errors.email.message || errors.email.type}
+                  </span>
+                </p>
             )}
         </Field>
         <Field>
@@ -214,14 +273,29 @@ export function LoginForm({
           <Input 
             id="password" 
             type="password" 
-            name="password" 
-            required 
-            value={formData.password}
-            onChange={handleChange}
-            className={`${errors.password && errors.password.length > 0 && errorClasses}`}
+            {...register("password", 
+                  { 
+                      required: "Password is required.", 
+                      minLength: {
+                          value: 3,
+                          message: "Password is too short."
+                      }, 
+                      maxLength: {
+                          value: 255,
+                          message: "Password is too long."
+                      },
+                  }
+              )}
            />
-           {errors.password && errors.password.length > 0 && (
+           {/*errors.password && errors.password.length > 0 && (
                 <p className="mt-2 text-sm text-red-600 dark:text-red-500 sr-only"><span className="font-medium">{errors.password[0]}</span></p>
+            )*/}
+            {errors.password && (
+              <p className="mt-2 text-sm text-red-600 dark:text-red-500 sr-only">
+                <span className="font-medium">
+                    {errors.password.message || errors.password.type}
+                  </span>
+                </p>
             )}
         </Field>
         <Field>

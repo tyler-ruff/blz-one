@@ -58,7 +58,7 @@ export function SinglePost(params: {
     const [author, setAuthor] = useState<Profile>();
     const [loading, setLoading] = useState(true);
 
-      const postId = params.id;
+    const postId = params.id;
 
     /*
     useEffect(() => {
@@ -79,27 +79,22 @@ export function SinglePost(params: {
     useEffect(() => {
       async function load() {
         setLoading(true);
-
         const p = await getPostById(postId);
         if (!p) {
           setPost(null);
           setLoading(false);
           return;
         }
-
         setPost(p);
-
         const a = await fetchUserFromAPI(p.author);
+        //const { data: author } = useCachedUser(p.author);
         setAuthor(a);
-
         setLoading(false);
       }
-
       if (postId) load();
     }, [postId]);
 
-
-      if (loading) {
+    if (loading || !author?.uid) {
         return (
         <div className="flex justify-center py-20 text-muted-foreground">
             <span className="inline-flex mt-1"><Spinner /></span>

@@ -6,6 +6,8 @@ import BlzBreadcrumb from "@/src/app/components/breadcrumb";
 import MainHeading from "@/src/app/components/heading/main";
 
 import { url } from '@/src/config/app';
+import { getPostById } from '@/src/app/posts/single/actions';
+import { getProfileById } from "@/src/app/u/actions";
 
 import { SinglePost } from "../../components/posts/single";
 

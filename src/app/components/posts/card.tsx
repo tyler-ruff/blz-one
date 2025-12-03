@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
+import { useMemo, memo } from 'react';
+
 import { useAuthContext } from "@/src/context/AuthContext";
 import { User } from "@/src/lib/types/user";
 
@@ -44,7 +46,7 @@ import { Toggle } from '@/src/app/components/ui/toggle';
 
 import { HASHTAG_REGEX } from '@/src/config/posts';
 
-export default function PostCard({
+const PostCard = ({
   id,
   author,
   content,
@@ -52,13 +54,13 @@ export default function PostCard({
   publishDate,
   visibility,
   profile
-}: PostCardProps) {
+}: PostCardProps) => {
   const { user } = useAuthContext() as { user: User };
 
   const HeartButton = () => {
     if(user){
       return (
-        <ButtonGroup className="group" title="Love This">
+        <ButtonGroup title="Love This">
             <Toggle
                 aria-label="Love this post"
                 size="default"
@@ -68,14 +70,14 @@ export default function PostCard({
                 >
                     <Heart />
             </Toggle>
-            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300 group-hover:bg-gray-400" title={`99 users have loved this post`}>
+            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300" title={`99 users have loved this post`}>
                 99
             </Button>
         </ButtonGroup>
       )
     } else {
       return (
-        <ButtonGroup className="group" title="Please login or register to Love posts">
+        <ButtonGroup title="Please login or register to Love posts">
             <Toggle
                 aria-label="Love this post"
                 disabled={true}
@@ -85,13 +87,21 @@ export default function PostCard({
                 >
                     <Heart />
             </Toggle>
-            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300 group-hover:bg-gray-300">
+            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300">
                 99
             </Button>
         </ButtonGroup>
       )
     }
   }
+  //const postPublishDate = new Date(publishDate).toLocaleString();
+
+  const formattedDate = useMemo(() => {
+    return new Date(publishDate).toLocaleString();
+  }, [publishDate]);
+
+  const ago = useMemo(() => timeAgo(new Date(publishDate)), [publishDate]);
+
   return (
     <Card className="w-full max-w-2xl mx-auto mb-3 shadow-sm rounded-2xl border border-base-300 bg-base-100">
       
@@ -116,7 +126,7 @@ export default function PostCard({
                 </span>
             </Link>
             <span className="text-xs opacity-70">
-              {new Date(publishDate).toLocaleString()} &bull; {timeAgo(new Date(publishDate))}
+              {formattedDate} &bull; {ago}
             </span>
           </div>
         </div>
@@ -247,3 +257,5 @@ export default function PostCard({
     </Card>
   );
 }
+
+export default memo(PostCard);

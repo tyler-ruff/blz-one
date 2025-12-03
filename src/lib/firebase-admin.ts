@@ -1,7 +1,6 @@
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 
 /* DO NOT DELETE - Dev Config */
-
 /*
 const firebaseAdminConfig = {
     credential: cert({
@@ -22,9 +21,11 @@ export function customInitApp() {
 
 /* DO NOT DELETE - Prod Config */
 
+
 export function customInitApp() {
     if (getApps().length <= 0) {
         initializeApp();
     }
 }
+
 

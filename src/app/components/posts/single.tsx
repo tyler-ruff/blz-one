@@ -18,6 +18,8 @@ import { Profile, User } from "@/src/lib/types/user";
 
 import { HASHTAG_REGEX } from '@/src/config/posts';
 
+import { config } from '@/src/config/app';
+
 import {
   ArrowLeft,
   Globe,
@@ -40,9 +42,10 @@ import {
 } from "@/src/app/components/ui/input-group";
 
 //import { getPostById, getCommentsForPost } from "@src/lib/api/posts";
-import { useUser } from "@/src/hooks/useUser";
+//import { useUser } from "@/src/hooks/useUser";
+import { getProfileById } from "@/src/app/u/actions";
 
-import { fetchUserFromAPI } from "@/src/lib/db/users";
+//import { fetchUserFromAPI } from "@/src/lib/db/users";
 
 import { Spinner } from '../ui/spinner';
 
@@ -55,7 +58,7 @@ export function SinglePost(params: {
 
     const [post, setPost] = useState<any>(null);
     const [comments, setComments] = useState<any[]>([]);
-    const [author, setAuthor] = useState<Profile>();
+    const [author, setAuthor] = useState<{ avatarURL: string, profile: Profile } | null>(null);
     const [loading, setLoading] = useState(true);
 
     const postId = params.id;
@@ -80,7 +83,7 @@ export function SinglePost(params: {
       async function load() {
         setLoading(true);
         const p = await getPostById(postId);
-        if(p === null){
+        if(p === null || p === undefined){
           window.location.reload();
         }
         if (!p) {
@@ -90,7 +93,8 @@ export function SinglePost(params: {
           return;
         }
         setPost(p);
-        const a = await fetchUserFromAPI(p.author);
+        //const a = await fetchUserFromAPI(p.author);
+        const a = await getProfileById(p.author);
         //const { data: author } = useCachedUser(p.author);
         setAuthor(a);
         setLoading(false);
@@ -98,7 +102,7 @@ export function SinglePost(params: {
       if (postId) load();
     }, [postId]);
 
-    if (loading || !author?.uid) {
+    if (loading || !author?.profile.uid) {
         return (
         <div className="flex justify-center py-20 text-muted-foreground">
             <span className="inline-flex mt-1"><Spinner /></span>
@@ -137,10 +141,10 @@ export function SinglePost(params: {
       <Card className="shadow-sm border-border/50">
         <CardHeader className="flex flex-row items-start gap-4">
           {/* Avatar */}
-          <Link href={`/u/${author?.uid}`}>
+          <Link href={`/u/${author?.profile.uid}`}>
             <Image
-                src={author?.avatar ?? "/default-avatar.png"}
-                alt={author?.displayName || ""}
+                src={author?.avatarURL ?? (config.defaultAvatar || "")}
+                alt={author?.profile.displayName || ""}
                 width={50}
                 height={50}
                 className="rounded-full object-cover select-none"
@@ -149,13 +153,13 @@ export function SinglePost(params: {
           <div className="flex-1">
             <div className="flex items-center justify-between">
               <h2 className="font-semibold text-lg select-all">
-                <Link href={`/u/${author?.uid}`} className="hover:underline">
-                    {author?.displayName}
+                <Link href={`/u/${author?.profile.uid}`} className="hover:underline">
+                    {author?.profile.displayName}
                 </Link>
               </h2>
 
                 {
-                    user?.uid === author?.uid ?
+                    user?.uid === author?.profile.uid ?
                     (
                         <Button variant="ghost" size="icon">
                             <MoreHorizontal className="h-4 w-4" />
@@ -241,9 +245,9 @@ export function SinglePost(params: {
           <p className="text-muted-foreground text-sm select-none">No comments yet.</p>
         ) : (
           <div className="space-y-4">
-            {comments.map((c, i) => (
+            {/*comments.map((c, i) => (
               <CommentItem key={i} comment={c} />
-            ))}
+            ))*/}
           </div>
         )}
       </div>
@@ -285,15 +289,17 @@ function CommentForm(){
     )
 }
 
+/*
 function CommentItem({ comment }: { comment: any }) {
-  const user = useUser(comment.author)?.data;
+  //const user = useUser(comment.author)?.data;
+  const user = getProfileById(comment.author);
 
   return (
     <Card className="border-border/40">
       <CardContent className="flex items-start gap-3 py-4">
         <Image
-          src={user?.avatar ?? "/default-avatar.png"}
-          alt={user?.displayName || ""}
+          src={user?.avatarURL ?? }
+          alt={user?.profile.displayName || (config.defaultAvatar || "")}
           width={40}
           height={40}
           className="rounded-full"
@@ -313,3 +319,4 @@ function CommentItem({ comment }: { comment: any }) {
     </Card>
   );
 }
+*/

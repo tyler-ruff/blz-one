@@ -7,6 +7,7 @@ export interface User{
 export interface Profile{
     uid: string;
     avatar?: string;
+    avatarURL?: string;
     displayName: string;
     theme?: string;
     lastOnline?: string;

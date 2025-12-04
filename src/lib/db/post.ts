@@ -1,13 +1,8 @@
-import { adminDB, adminFirestore } from "@/src/lib/firebase-admin";
+import { adminDB, adminFirestore, adminStorage } from "@/src/lib/firebase-admin";
 
 export async function getPostById(id: string) {
   const snap = await adminDB.ref(`posts/${id}`).get();
   return snap.exists() ? snap.val() : null;
-}
-
-export async function getUserProfile(uid: string) {
-  const snap = await adminFirestore.doc(`profiles/${uid}`).get();
-  return snap.exists ? snap.data() : null;
 }
 
 export async function getPostComments(postId: string) {

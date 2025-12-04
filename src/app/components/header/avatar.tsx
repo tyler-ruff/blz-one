@@ -43,99 +43,8 @@ import {
 } from "@/src/app/components/ui/avatar";
 import { Badge } from "@/src/app/components/ui/badge";
 
+import { IDropdownMenuItem } from "@/src/lib/types/dropdown";
 
-/*
-            <div className="dropdown dropdown-end pt-2">
-                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                    <div className="w-10 rounded-full">
-                        <ProfilePicture />
-                    </div>
-                </div>
-                <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content bg-base-100 dark:bg-gray-900 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                    <li>
-                        <Link href="/user/profile" className="justify-between">
-                            Profile
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/user/account" className="justify-between">
-                            Account
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/user/settings">
-                            Settings
-                        </Link>
-                    </li>
-                    <li>
-                        <a onClick={logoutUser}>
-                            Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-
-
-            <DropdownMenuLabel className="select-none">
-                            My Account
-                        </DropdownMenuLabel>
-                        <DropdownMenuGroup>
-                        <Link href="/user/profile">
-                        <DropdownMenuItem className="cursor-pointer">
-                            Profile
-                        </DropdownMenuItem>
-                        </Link>
-                        <DropdownMenuItem onSelect={() => location.href = "/user/account"} className="cursor-pointer">
-                            Account
-                        </DropdownMenuItem>
-                        <DropdownMenuItem onSelect={() => location.href = "/user/settings"} className="cursor-pointer">
-                            Settings
-                        </DropdownMenuItem>
-                        <DropdownMenuItem>
-                            Keyboard shortcuts
-                            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuGroup>
-                        <DropdownMenuItem>Team</DropdownMenuItem>
-                        <DropdownMenuSub>
-                            <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
-                            <DropdownMenuPortal>
-                            <DropdownMenuSubContent>
-                                <DropdownMenuItem>Email</DropdownMenuItem>
-                                <DropdownMenuItem>Message</DropdownMenuItem>
-                                <DropdownMenuSeparator />
-                                <DropdownMenuItem>More...</DropdownMenuItem>
-                            </DropdownMenuSubContent>
-                            </DropdownMenuPortal>
-                        </DropdownMenuSub>
-                        <DropdownMenuItem>
-                            New Team
-                            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-                        </DropdownMenuGroup>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>GitHub</DropdownMenuItem>
-                        <DropdownMenuItem>Support</DropdownMenuItem>
-                        <DropdownMenuItem disabled>API</DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                        Log out
-                        <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                        </DropdownMenuItem>
-            */
-
-interface IDropdownMenuItem {
-    text: string;
-    href?: string;
-    onClick?: MouseEventHandler<HTMLDivElement>;
-    children?: IDropdownMenuItem[];
-    sideDetail?: string;
-}
 interface IDropdownMenuData {
     children: [
         IDropdownMenuItem[],
@@ -143,6 +52,15 @@ interface IDropdownMenuData {
         IDropdownMenuItem[]
     ];
 }
+/*
+interface IDropdownMenuItem {
+    text: string;
+    href?: string;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+    children?: IDropdownMenuItem[];
+    sideDetail?: string;
+}
+*/
 
 export default function UserAvatar(){
     const { user, profile } = useAuthContext() as { user: User, profile: Profile };

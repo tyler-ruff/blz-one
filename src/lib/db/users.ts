@@ -1,5 +1,6 @@
-import { Profile } from '@/src/lib/types/user';
-export async function fetchUserFromAPI(uid: string): Promise<Profile>{
-    const response = await fetch(`/api/profile?uid=${uid}`);
-    return await response.json();
+import { adminFirestore } from "@/src/lib/firebase-admin";
+
+export async function getUserProfile(uid: string) {
+  const snap = await adminFirestore.doc(`profiles/${uid}`).get();
+  return snap.exists ? snap.data() : null;
 }

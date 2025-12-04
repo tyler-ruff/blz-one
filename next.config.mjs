@@ -12,7 +12,8 @@ const nextConfig = {
         'storage.googleapis.com',
         'blazedlabs.com',
         'cdn.jsdelivr.net',
-        'avatars.githubusercontent.com'
+        'avatars.githubusercontent.com',
+        'localhost'
       ],
       formats: ['image/webp']
     }

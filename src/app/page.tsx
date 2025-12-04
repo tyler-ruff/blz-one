@@ -3,17 +3,17 @@ import Image from "next/image";
 
 import BlzBreadcrumb from "@/src/app/components/breadcrumb";
 import MainHeading from "@/src/app/components/heading/main";
-import HorizontalLargeStats from "@/src/app/components/stats/horizontalLarge";
-import HorizontalSmallStats from "@/src/app/components/stats/horizontalSmall";
-import BasicTable from "@/src/app/components/table/basic";
+
 import { NewPostForm } from "./components/posts/new";
-import { ListPosts } from "./components/posts/list";
+import { ListPosts } from "./components/posts/listNew";
 
 export const metadata: Metadata = {
     title: 'Home',
 }
 
-export default function Home() {
+export default async function Home() {
+  //const posts = await getPosts(5, '');
+
   return (
     <div className="max-w-3xl relative mx-auto space-y-4 px-3 md:px-0">
       <BlzBreadcrumb trail={[

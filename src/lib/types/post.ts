@@ -10,7 +10,13 @@ export interface Post{
     publishDate: string;
     updatedDate?: string;
     content: string;
-    media?: string[];
+    /*media?: string[];*/
+    media?: Array<{
+      id: string;
+      url: string;
+      alt?: string;
+      type: "image" | "video" | "audio" | "file";
+    }>;
     hearts?: string[];
     hashtags?: string[];
     visibility: string;

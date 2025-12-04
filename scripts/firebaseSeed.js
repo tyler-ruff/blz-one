@@ -99,7 +99,7 @@ async function seedAuth(){
         console.log(`added user: ${adminUser.uid}`);
         await firestore.collection("profiles").doc(adminUser.uid).set({
             avatar: adminUser.photoURL,
-            bio: truncateText(faker.lorem.paragraphs()),
+            bio: truncateText(faker.lorem.paragraphs({ min: 1, max: 3 })),
             displayName: 'Admin',
             lastOnline: 'never',
             theme: faker.color.rgb({ format: 'hex', casing: 'lower' }),
@@ -148,14 +148,42 @@ async function seedRealtime(uidList){
             const id = uuidv4();
             const postRef = postsRef.child(`${id}`);
             const author = randomUser(uidList);
-            const randomDate = faker.date.anytime();
+            const randomDate = faker.date.past();
+            const buzzPhrasePost = faker.company.buzzPhrase();
+            const adjectivePost = faker.word.adjective();
+
             await postRef.set({
                 id: id,
                 author: author,
-                randomDate: randomDate.toISOString(),
-                content: "Hello World! Welcome to the AWESOME Blazed One Social Network!",
+                publishDate: randomDate.toISOString(),
+                content: `Hello World! ${adjectivePost} Welcome to the AWESOME Blazed One Social Network! ${buzzPhrasePost}`,
                 visibility: 'public'
             });
+
+            // Create between 0-7 random comments
+            const commentRef = ref(realtime, `posts/${id}/comments`);
+            const randomCommentCountSpecial = getRandomInteger(0, 7);
+            [...Array(randomCommentCountSpecial).keys()].map(async () => {
+                const author = randomUser(uidList);
+                const randomCommentDate = faker.date.between({ from: randomDate, to: Date.now() });
+                const buzzPhraseComment = faker.company.buzzPhrase();
+                const commentContent = faker.lorem.sentences({ min: 1, max: 3 });
+                const adverb = faker.word.adverb();
+                await commentRef.push({
+                    postId: id,
+                    author: author,
+                    publishDate: randomCommentDate,
+                    updatedDate: randomCommentDate,
+                    content: `${adverb} ${commentContent} ${buzzPhraseComment}`
+                }).then(async (comment) => {
+                    const commentId = comment.key;
+                    const commentRefNew = ref(realtime, `posts/${id}/comments/${comment.key}`);
+                    await update(commentRefNew, {
+                        id: commentId
+                    });
+                });
+            });
+
             console.log(`added special post: ${id}`);
         })
        )
@@ -165,13 +193,38 @@ async function seedRealtime(uidList){
                 const id = uuidv4();
                 const postRef = postsRef.child(`${id}`);
                 const author = randomUser(uidList);
-                const randomDate = faker.date.anytime();
+                const randomDate = faker.date.past();
+                const content = faker.lorem.lines({ min: 1, max: 5 });
                 await postRef.set({
                     id: id,
                     author: author,
                     publishDate: randomDate.toISOString(),
-                    content: truncateText(faker.lorem.paragraphs()),
+                    content: content,
                     visibility: 'public'
+                });
+                
+                // Create between 0-3 random comments
+                const commentRef = ref(realtime, `posts/${id}/comments`);
+                const randomCommentCountSpecial = getRandomInteger(0, 3);
+                [...Array(randomCommentCountSpecial).keys()].map(async () => {
+                    const author = randomUser(uidList);
+                    const randomCommentDate = faker.date.between({ from: randomDate, to: Date.now() });
+                    const buzzPhraseComment = faker.company.buzzPhrase();
+                    const commentContent = faker.lorem.sentences({ min: 1, max: 3 });
+                    const adverb = faker.word.adverb();
+                    await commentRef.push({
+                        postId: id,
+                        author: author,
+                        publishDate: randomCommentDate,
+                        updatedDate: randomCommentDate,
+                        content: `${adverb} ${commentContent} ${buzzPhraseComment}`
+                    }).then(async (comment) => {
+                        const commentId = comment.key;
+                        const commentRefNew = ref(realtime, `posts/${id}/comments/${comment.key}`);
+                        await update(commentRefNew, {
+                            id: commentId
+                        });
+                    });
                 });
                 console.log(`added post: ${id}`);
             })

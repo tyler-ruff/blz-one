@@ -334,3 +334,11 @@ input[aria-invalid="true"] {
 input[type=checkbox]{
   display:inline-flex;
 }
+
+textarea{
+  max-width: 100%;
+  overflow-x: hidden;
+  white-space: normal; /* Default behavior, but ensures wrapping */
+  word-wrap: break-word; /* For older browsers */
+  overflow-wrap: break-word; /* For modern browsers */
+}

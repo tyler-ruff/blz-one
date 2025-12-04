@@ -29,26 +29,11 @@ import { PostCardProps } from './data';
 import { Post } from "@/src/lib/types/post";
 import type { Profile } from "@/src/lib/types/user";
 
+import { fetchUserProfile } from "./data";
+
 const PAGE_SIZE = 5;
 
 /* ----------------- Fetch profile (cached by component) ------------------ */
-async function fetchUserProfile(uid: string): Promise<Profile> {
-  if (!uid) {
-    return { uid, displayName: "Unknown", avatar: "" };
-  }
-
-  try {
-    const res = await fetch(`/api/profile?uid=${uid}`);
-    if (!res.ok) throw new Error("Profile not found");
-    return await res.json();
-  } catch {
-    return {
-      uid,
-      displayName: `User ${uid}`,
-      avatar: ""
-    };
-  }
-}
 
 /* ------------------------ Fetch Posts Page ------------------------ */
 async function fetchPostsBatch(limit: number, cursorKey: string | null) {

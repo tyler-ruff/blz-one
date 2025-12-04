@@ -12,6 +12,14 @@ export function toDateInputValue(dateObject: Date){
     return local.toJSON().slice(0,10);
 };
 
+export function truncateText(text: string, maxLength: number = 500){
+  if (!text) return '';
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return `${text.substring(0, maxLength - 3)}...`;
+};
+
 export function slugify(text: string): string {
   if (!text) {
     return '';

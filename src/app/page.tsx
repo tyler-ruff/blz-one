@@ -5,7 +5,7 @@ import BlzBreadcrumb from "@/src/app/components/breadcrumb";
 import MainHeading from "@/src/app/components/heading/main";
 
 import { NewPostForm } from "./components/posts/new";
-import { ListPosts } from "./components/posts/listNew";
+import { ListPosts } from "./components/posts/list";
 
 export const metadata: Metadata = {
     title: 'Home',

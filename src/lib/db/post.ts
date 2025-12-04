@@ -6,7 +6,7 @@ export async function getPostById(id: string) {
 }
 
 export async function getPostComments(postId: string) {
-  const snap = await adminDB.ref(`comments/${postId}`).get();
+  const snap = await adminDB.ref(`posts/${postId}/comments`).get();
   if (!snap.exists()) return [];
   const raw = snap.val();
   return Object.keys(raw).map(k => ({ id: k, ...raw[k] }));

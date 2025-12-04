@@ -24,9 +24,11 @@ export interface Post{
 
 export interface Comment{
     id: string;
+    postId: string;
     author: string;
-    linkedPost: string;
     publishDate: string;
     updatedDate: string;
+    content: string;
     hearts?: string[];
+    replyTo?: string;
 }

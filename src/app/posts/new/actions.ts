@@ -10,6 +10,7 @@ import { realtime } from '@/src/lib/firebase';
 import { ref, set, push, onValue, remove, update } from "firebase/database";
 
 import { IFormPostSchema } from '@/src/app/components/posts/data';
+import { IFormCommentSchema } from '@/src/app/components/comments/data';
 
 export async function createPost(data: IFormPostSchema){
     try{
@@ -32,4 +33,24 @@ export async function createPost(data: IFormPostSchema){
     } finally{
         redirect('/');
    }
+}
+
+export async function createComment(data: IFormCommentSchema){
+    try{
+        //const id = uuidv4();
+        const parsedData = {
+            ...data
+        }
+        const commentRef = ref(realtime, `posts/${data.postId}/comments`);
+
+        push(commentRef, JSON.parse(JSON.stringify(parsedData))).then((comment) => {
+            const id = comment.key;
+            update(ref(realtime, `posts/${data.postId}/comments/${id}`), {
+                id: id
+            });
+        })
+    } catch(error: any){
+        error = true;
+        console.log(`Error submitting form: ${error}`);
+    }
 }

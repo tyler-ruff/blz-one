@@ -1,4 +1,5 @@
 // /app/post/[id]/page.tsx
+import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,13 +7,17 @@ import Link from "next/link";
 import { getPostById, getPostComments } from "@/src/lib/db/post";
 import { getUserProfile } from "@/src/lib/db/users";
 
-import { timeAgo } from '@/src/lib/functions';
+import { timeAgo, truncateText } from '@/src/lib/functions';
 
-import { LikeButton, ShareButton, CommentForm, CommentsList, PostMenu } from "@/src/app/components/posts/cardNew";
+import { LikeButton, ShareButton, PostMenu } from "@/src/app/components/posts/single";
+import { CommentsSection } from "../../components/comments";
+
 import { Post } from "@/src/lib/types/post";
 
 import { HASHTAG_REGEX } from '@/src/config/posts';
 import { LinkIt } from 'react-linkify-it';
+
+import { config, url } from "@/src/config/app";
 
 import {
   Globe,
@@ -21,6 +26,30 @@ import {
 
 export const revalidate = 30; 
 // Static but revalidates every 30 sec (ISR)
+
+type Props = {
+  params: Promise<{ postId: string }>
+  //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata>{
+  const { postId } = await params;
+  const post: Post | null = await getPostById(postId);
+  const profile = post?.author
+    ? await getUserProfile(post.author)
+    : null;
+  const previousImages = (await parent).openGraph?.images || [];
+  return {
+    title: `View Single Post by ${profile?.displayName}`,
+    description: `"${post?.content}"`,
+    openGraph: {
+      images: [profile?.avatar, ...previousImages]
+    }
+  };
+}
 
 export default async function SinglePostPage({
   params,
@@ -31,18 +60,55 @@ export default async function SinglePostPage({
 
   // Fetch everything server-side
   const post: Post | null = await getPostById(postId);
-  //const post = await getPostById('10c94c67-7c59-4c5e-8f1d-0f0d208b3449');
+
   if (!post) return notFound();
 
   const profile = post.author
     ? await getUserProfile(post.author)
     : null;
 
-  //const comments = await getPostComments(postId);
-  const comments: any[] = [];
+  const comments = await getPostComments(postId);
+  const commentCount = comments.length;
 
-  const publishDate = new Date(post.publishDate ?? 0).toLocaleString();
-  const publishAgo = timeAgo(new Date(post.publishDate ?? 0));
+  const authorAvatar = profile?.avatar.startsWith("https") ? 
+  profile?.avatar : `${url}api/image?path=/${profile?.uid}/${profile?.avatar}_98x98.png`;
+
+  const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
+  const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
+  const updateDate = new Date(post.updatedDate ?? new Date()).toLocaleString();
+  const simpleDate = new Date(post.publishDate ?? new Date()).toLocaleDateString();
+
+  const contentWordCount = post.content.length;
+  const headline = truncateText(post.content, 150);
+
+  const postSingleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'SocialMediaPosting',
+    '@id': `${url}/posts/${postId}`,
+    'url': `${url}/posts/${postId}`,
+    'discussionUrl': `${url}/posts/${postId}#comments`,
+    'datePublished': simpleDate,
+    'dateModified': updateDate,
+    'description': `A post by ${profile?.displayName}`,
+    'wordCount': contentWordCount,
+    'commentCount': `${commentCount}`,
+    'text': post.content,
+    'author': {
+      '@type': 'Person',
+      'name': profile?.displayName,
+      'url': `${url}/u/${profile?.uid}`,
+    },
+    'headline': headline,
+    'sharedContent': {
+      '@type': "WebPage",
+      'headline': headline,
+      'url': `${url}/posts/${postId}`,
+      'author':{
+        '@type': 'Person',
+        'name':  profile?.displayName
+      }
+    }
+  }
 
   const visibilityIcon =
       post.visibility === "public" ? (
@@ -58,13 +124,18 @@ export default async function SinglePostPage({
         ← Back
       </Link>
 
+      <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(postSingleSchema) }}
+      />
+
       {/* Post Card */}
       <article className="mt-4 border rounded-xl p-6 bg-background shadow-sm">
         <header className="flex flex-row items-start justify-between gap-4">
           <div className="flex">
             <Link href={`/u/${profile?.uid}`} className="hover:underline select-none mr-5">
               <Image
-                src={profile?.avatar ?? "/default-avatar.png"}
+                src={authorAvatar ?? config.defaultAvatar}
                 alt={profile?.displayName ?? "User"}
                 width={50}
                 height={50}
@@ -93,7 +164,7 @@ export default async function SinglePostPage({
         </header>
 
         {/* Content */}
-        <div className="mt-4 whitespace-pre-line leading-relaxed text-base">
+        <div className="mt-4 pt-3 whitespace-pre-line leading-relaxed text-base">
           <LinkIt
                 regex={HASHTAG_REGEX}
                 component={(match, key) => (
@@ -130,13 +201,7 @@ export default async function SinglePostPage({
       </article>
 
       {/* Comments */}
-      <section className="mt-10">
-        <h3 className="font-semibold text-lg mb-3">Comments</h3>
-
-        <CommentsList comments={comments} />
-
-        <CommentForm postId={postId} />
-      </section>
+      <CommentsSection comments={comments} postId={postId} />
     </div>
   );
 }

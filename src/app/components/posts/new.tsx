@@ -61,9 +61,6 @@ export function NewPostForm({
  ...props   
 }: React.ComponentProps<"form">){
     const { user, profile } = useAuthContext() as { user: User, profile: Profile };
-    
-    const [text, setText] = useState('');
-    const [charCount, setCharCount] = useState(0);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,10 +84,13 @@ export function NewPostForm({
         }
     });
 
+    const contentValue = watch('content');
+    const characterCount = contentValue ? contentValue.length : 0;
+
     const onSubmit: SubmitHandler<IFormPostSchema> = (data) => {
         if (hasPosted) return;
         setValue('publishDate', new Date().toISOString());
-        reset(); setCharCount(0);
+        reset();
         setHasPosted(true);
         createPost(data);
     }
@@ -107,12 +107,6 @@ export function NewPostForm({
 
     const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.files);
-    };
-    
-    const handleChange = (e: any) => {
-        const newText = e.target.value;
-        setText(newText);
-        setCharCount(newText.length);
     };
 
     if(!user){
@@ -150,11 +144,10 @@ export function NewPostForm({
                         <Field>
                             <InputGroupTextarea
                                 id="input-post-content"
-                                placeholder="Create new post..." 
-                                onKeyUp={handleChange}
-                                onCut={handleChange}
+                                placeholder="Create new post..."
                                 maxLength={postMaxLength}
                                 aria-invalid={errors.content ? true : false}
+                                className={Number(characterCount) >= 160 ? `` : `h-160`}
                                 {...register('content', 
                                     {
                                         required: "Post content is required.",
@@ -226,13 +219,13 @@ export function NewPostForm({
                                     }
                                 </span>
                                 <span 
-                                    title={`${charCount} out of ${postMaxLength} characters.`} 
+                                    title={`${characterCount} out of ${postMaxLength} characters.`} 
                                     className="flex space-x-2 mr-1 sm:mr-3 ml-1 sm:ml-0 cursor-default">
                                     <span className="hidden md:flex">
                                         Characters:
                                     </span>
-                                    <span className={`${charCount >= postMaxLength && "text-red-800"}`}>
-                                        {charCount} / {postMaxLength}
+                                    <span className={`${characterCount >= postMaxLength && "text-red-800"}`}>
+                                        {characterCount} / {postMaxLength}
                                     </span>
                                 </span>
                             </InputGroupText>

@@ -50,30 +50,6 @@ async function fetchUserProfile(uid: string): Promise<Profile> {
   }
 }
 
-/*
-async function getPosts(limit: number, cursor: any){
-    const postListRef = ref(realtime, "posts");
-    let postList: Array<Post> = [];
-    if(cursor === ""){
-        const postsQuery = query(postListRef, orderByKey(), limitToFirst(limit));
-        onValue(postsQuery, (snapshot) => {
-            snapshot.forEach((postSnapshot) => {
-                const post = postSnapshot.val() as Post;
-                postList.push(post);
-            })
-        });
-    } else {
-        const postsQuery = query(postListRef, orderByKey(), limitToFirst(limit), startAfter(cursor));
-        onValue(postsQuery, (snapshot) => {
-            snapshot.forEach((postSnapshot) => {
-                const post = postSnapshot.val() as Post;
-                postList.push(post);
-            })
-        });
-    }
-    return postList;
-}
-*/
 /* ------------------------ Fetch Posts Page ------------------------ */
 async function fetchPostsBatch(limit: number, cursorKey: string | null) {
   const postsRef = ref(realtime, "posts");
@@ -168,7 +144,7 @@ export function ListPosts(){
     /* ---------------- Initial load ---------------- */
     useEffect(() => {
         loadNextPage();
-    }, []);
+    }, [loadNextPage]);
 
     /* ---------------- Infinite Scroll Observer ---------------- */
     useEffect(() => {

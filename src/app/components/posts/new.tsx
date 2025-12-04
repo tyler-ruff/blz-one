@@ -152,6 +152,7 @@ export function NewPostForm({
                                 id="input-post-content"
                                 placeholder="Create new post..." 
                                 onKeyUp={handleChange}
+                                onCut={handleChange}
                                 maxLength={postMaxLength}
                                 aria-invalid={errors.content ? true : false}
                                 {...register('content', 

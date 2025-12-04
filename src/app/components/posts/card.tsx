@@ -170,7 +170,7 @@ const PostCard = ({
         {/* View Post Link */}
         <div className="inline-flex pt-2" title="View Post">
           <Badge variant="default">
-            <Link href={`/post/${id}`}>View Post</Link>
+            <Link href={`/posts/${id}`}>View Post</Link>
           </Badge>
         </div>
         {/* Visibility Badge */}
@@ -241,7 +241,7 @@ const PostCard = ({
           */}
           <HeartButton />
           
-          <Link href={`/post/${id}#comments`}>
+          <Link href={`/posts/${id}#comments`}>
             <Button variant="ghost" size="default" className="gap-2 px-5 flex cursor-pointer">
               <MessageCircle className="h-5 w-5" />
               <span className="hidden sm:block">Comment</span>

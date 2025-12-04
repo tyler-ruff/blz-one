@@ -1,12 +1,18 @@
-export async function fetchPostFromAPI(id: string){
-    try{
-        const response = await fetch(`/api/post/single?id=${id}`);
-        if(!response.ok){
-            throw new Error("Failed to fetch data");
-        }
-        const result = await response.json();
-        return result;
-    } catch (err: any) {
-        return null;
-    }
+import { adminDB, adminFirestore } from "@/src/lib/firebase-admin";
+
+export async function getPostById(id: string) {
+  const snap = await adminDB.ref(`posts/${id}`).get();
+  return snap.exists() ? snap.val() : null;
+}
+
+export async function getUserProfile(uid: string) {
+  const snap = await adminFirestore.doc(`profiles/${uid}`).get();
+  return snap.exists ? snap.data() : null;
+}
+
+export async function getPostComments(postId: string) {
+  const snap = await adminDB.ref(`comments/${postId}`).get();
+  if (!snap.exists()) return [];
+  const raw = snap.val();
+  return Object.keys(raw).map(k => ({ id: k, ...raw[k] }));
 }

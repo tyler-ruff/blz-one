@@ -1,7 +1,7 @@
 import { cookies, headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-import { customInitApp } from "@/src/lib/firebase-admin";
+//import { customInitApp } from "@/src/lib/firebase-admin";
 import { auth } from "firebase-admin";
 
 import { config } from "@/src/config/app";
@@ -9,7 +9,7 @@ import { config } from "@/src/config/app";
 export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
-  customInitApp();
+  //customInitApp();
   //const authorization = headers().get("Authorization");
   const hdrs = await headers();
   const authorization = hdrs.get("Authorization");
@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
 }
 export async function GET(request: NextRequest) {
   try{
-  customInitApp();
+  //customInitApp();
   const session = (await cookies()).get(config.sessionId || '')?.value || "";
   
   // Validate if the cookie exist in the request

@@ -161,7 +161,7 @@ async function seedRealtime(uidList){
             });
 
             // Create between 0-7 random comments
-            const commentRef = ref(realtime, `posts/${id}/comments`);
+            const commentRef = realtime.ref(`posts/${id}/comments`);
             const randomCommentCountSpecial = getRandomInteger(0, 7);
             [...Array(randomCommentCountSpecial).keys()].map(async () => {
                 const author = randomUser(uidList);
@@ -177,8 +177,8 @@ async function seedRealtime(uidList){
                     content: `${adverb} ${commentContent} ${buzzPhraseComment}`
                 }).then(async (comment) => {
                     const commentId = comment.key;
-                    const commentRefNew = ref(realtime, `posts/${id}/comments/${comment.key}`);
-                    await update(commentRefNew, {
+                    const commentRefNew = realtime.ref(`posts/${id}/comments/${comment.key}`);
+                    await commentRefNew.update({
                         id: commentId
                     });
                 });
@@ -204,7 +204,7 @@ async function seedRealtime(uidList){
                 });
                 
                 // Create between 0-3 random comments
-                const commentRef = ref(realtime, `posts/${id}/comments`);
+                const commentRef = realtime.ref(`posts/${id}/comments`);
                 const randomCommentCountSpecial = getRandomInteger(0, 3);
                 [...Array(randomCommentCountSpecial).keys()].map(async () => {
                     const author = randomUser(uidList);
@@ -218,10 +218,10 @@ async function seedRealtime(uidList){
                         publishDate: randomCommentDate,
                         updatedDate: randomCommentDate,
                         content: `${adverb} ${commentContent} ${buzzPhraseComment}`
-                    }).then(async (comment) => {
+                    }).then((comment) => {
                         const commentId = comment.key;
                         const commentRefNew = ref(realtime, `posts/${id}/comments/${comment.key}`);
-                        await update(commentRefNew, {
+                        commentRefNew.update({
                             id: commentId
                         });
                     });

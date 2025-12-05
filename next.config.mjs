@@ -2,6 +2,11 @@
 import createMDX from "@next/mdx";
 
 const nextConfig = {
+    /*
+    compiler: {
+      lightningcss: false,
+    },
+    */
     pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
     images: {
       domains: [

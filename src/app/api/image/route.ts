@@ -1,7 +1,7 @@
 // app/api/image/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
-import { adminApp, adminDB, adminFirestore, adminStorage } from "@/src/lib/firebase-admin";
+//import { adminApp, adminDB, adminFirestore, adminStorage } from "@/src/lib/firebase-admin";
 import { getStorage } from "firebase-admin/storage";
 
 // --- GET /api/image?path=<firebase-storage-path> ---
@@ -9,12 +9,14 @@ export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const storagePath = searchParams.get("path");
 
+  const storage = getStorage();
+
   if (!storagePath) {
     return new NextResponse("Missing 'path' query parameter", { status: 400 });
   }
 
   try {
-    const bucket = adminStorage.bucket(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET);
+    const bucket = storage.bucket();
 
     // Download file buffer
     const file = bucket.file(storagePath);

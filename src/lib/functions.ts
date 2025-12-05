@@ -1,5 +1,3 @@
-import moment from "moment";
-
 export function enumKeys<T extends object>(e: T) {
   const keys = Object.keys(e)
   const isStringEnum = isNaN(Number(keys[0]))
@@ -93,11 +91,6 @@ export function getInitials(name: string) {
         .map(word => word.charAt(0).toUpperCase())
         .join('');
     }
-}
-
-export function formatDateAlt(date: Date | string): string{
-  const d = typeof date === 'string' ? new Date(date) : date;
-  return moment(d.toISOString()).format("LLLL");
 }
 
 /**

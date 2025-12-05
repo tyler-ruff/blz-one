@@ -5,7 +5,7 @@ import { ISingleProfile } from './data';
 
 import { url } from '@/src/config/app';
 import { Profile } from '@/src/lib/types/user';
-import { formatDate, formatDateAlt, getInitials } from '@/src/lib/functions';
+import { formatDate, getInitials } from '@/src/lib/functions';
 
 import {
   Avatar,
@@ -107,7 +107,7 @@ export default function SingleProfile(params: ISingleProfile){
                 Account Created
             </ItemTitle>
             <ItemDescription>
-                {profile.createdAt === "never" || profile.createdAt === undefined ? "unknown" : formatDateAlt(profile.createdAt)}
+                {profile.createdAt === "never" || profile.createdAt === undefined ? "unknown" : formatDate(profile.createdAt, 'MM/DD/YYYY')}
             </ItemDescription>
         </ItemContent>
       </Item>
@@ -117,7 +117,7 @@ export default function SingleProfile(params: ISingleProfile){
                 Last Online
             </ItemTitle>
             <ItemDescription>
-                {profile.lastOnline === "never" || profile.lastOnline === undefined ? "never" : formatDateAlt(profile.lastOnline)}
+                {profile.lastOnline === "never" || profile.lastOnline === undefined ? "never" : formatDate(profile.lastOnline, 'MM/DD/YYYY')}
             </ItemDescription>
         </ItemContent>
       </Item>

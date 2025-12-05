@@ -88,12 +88,6 @@ export function CommentForm({postId, replyTo, updateReplyTo, ...props}: CommentF
       "maxWidth": "100%"
     }
 
-    if(loading){
-      return (
-        <Spinner />
-      )
-    }
-
     if(user){
       return (
           <form onSubmit={handleSubmit(onSubmit)} {...props}>

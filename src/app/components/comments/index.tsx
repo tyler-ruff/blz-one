@@ -26,9 +26,19 @@ import { Badge } from "@/src/app/components/ui/badge";
 import { Spinner } from '@/src/app/components/ui/spinner';
 
 import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/src/app/components/ui/empty";
+
+import {
   MessageSquareReply,
   Heart,
-  Share
+  Share,
+  MessageSquare
 } from "lucide-react";
 import { CommentForm } from './form';
 import { ReplyCallback } from './data'
@@ -39,8 +49,6 @@ export function CommentsSection(props: {
     comments: Comment[]
 }){
     const [replyTo, setReplyTo] = useState<string | undefined>(undefined);
-
-    const commentCount = props.comments.length;
 
     const updateReplyTo = (commentId: string | undefined) => {
         setReplyTo(commentId);
@@ -154,6 +162,10 @@ export function CommentsList(props: {
   const [profiles, setProfiles] = useState<Record<string, Profile>>({});
 
   const loadComments = useCallback(async () => {
+    if(props.comments.length === 0){
+      setLoading(false);
+      return;
+    }
     const missingIds = new Set(
         props.comments.map(item => item.author).filter(id => !profiles[id])
     );
@@ -181,6 +193,34 @@ export function CommentsList(props: {
             </div>
         );
     }
+
+  if(props.comments.length === 0){
+    return (
+       <Empty className="from-muted/50 to-background h-full bg-gradient-to-b from-30% select-none">
+        <EmptyHeader>
+          <EmptyMedia variant="icon">
+            <MessageSquare />
+          </EmptyMedia>
+          <EmptyTitle>No Comments</EmptyTitle>
+          <EmptyDescription>
+            No comments yet. Start the discussion!
+          </EmptyDescription>
+        </EmptyHeader>
+        <EmptyContent className="flex">
+          <Link href="/login">
+            <Button className="inline-flex" variant="outline" size="sm">
+              Login
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button className="inline-flex" variant="outline" size="sm">
+              Register
+            </Button>
+          </Link>
+        </EmptyContent>
+      </Empty>
+    )
+  }
 
   return (
       <div id="comments" className="mt-10 mb-5">

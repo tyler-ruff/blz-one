@@ -1,4 +1,3 @@
-'use server'
 
 import { cache } from 'react';
 
@@ -9,7 +8,7 @@ import { ref, getDownloadURL } from 'firebase/storage';
 import { Profile } from '@/src/lib/types/user';
 
 export const preload = (id: string) => {
-  void getUser(id)
+  void getUser(id);
 }
  
 export const getUser = cache(async (uid: string) => {

@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getPostById, getPostComments } from "@/src/lib/db/post";
-import { getUserProfile } from "@/src/lib/db/users";
+//import { getUserProfile } from "@/src/lib/db/users";
+import { getUser } from '@/src/app/u/actions';
 
 import { timeAgo, truncateText } from '@/src/lib/functions';
 
@@ -28,10 +29,31 @@ export const revalidate = 30;
 // Static but revalidates every 30 sec (ISR)
 
 type Props = {
-  params: { postId: string }
+  params: Promise<{ postId: string }>
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+export async function generateMetadata(
+  { params }: { params: { postId: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { postId } = await params;
+
+  const post = await getPostById(postId);
+  const profile = post?.author ? await getUser(post.author) : null;
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: `View Single Post by ${profile?.profile.displayName || "John Doe"}`,
+    description: `"${post?.content}"`,
+    openGraph: {
+      images: [profile?.avatarURL || "", ...previousImages],
+    },
+  };
+}
+
+/*
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -50,12 +72,14 @@ export async function generateMetadata(
     }
   };
 }
+*/
 
 export default async function SinglePostPage({
   params,
 }: {
-  params: { postId: string }
+  params: Promise<{ postId: string }>
 }) {
+  
   const { postId } = await params;
 
   // Fetch everything server-side
@@ -64,14 +88,14 @@ export default async function SinglePostPage({
   if (!post) return notFound();
 
   const profile = post.author
-    ? await getUserProfile(post.author)
+    ? await getUser(post.author)
     : null;
 
   const comments = await getPostComments(postId);
   const commentCount = comments.length;
 
-  const authorAvatar = profile?.avatar.startsWith("https") ? 
-  profile?.avatar : `${url}/api/image?path=profile_pictures/${profile?.uid}/${profile?.avatar}_98x98.png`;
+  const authorAvatar = profile?.avatarURL.startsWith("https") ? 
+  profile?.avatarURL : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${profile?.avatarURL}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
   const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
@@ -89,14 +113,14 @@ export default async function SinglePostPage({
     'discussionUrl': `${url}/posts/${postId}#comments`,
     'datePublished': simpleDate,
     'dateModified': updateDate,
-    'description': `A post by ${profile?.displayName}`,
+    'description': `A post by ${profile?.profile.displayName}`,
     'wordCount': contentWordCount,
     'commentCount': `${commentCount}`,
     'text': post.content,
     'author': {
       '@type': 'Person',
-      'name': profile?.displayName,
-      'url': `${url}/u/${profile?.uid}`,
+      'name': profile?.profile.displayName,
+      'url': `${url}/u/${profile?.profile.uid}`,
     },
     'headline': headline,
     'sharedContent': {
@@ -105,7 +129,7 @@ export default async function SinglePostPage({
       'url': `${url}/posts/${postId}`,
       'author':{
         '@type': 'Person',
-        'name':  profile?.displayName
+        'name':  profile?.profile.displayName
       }
     }
   }
@@ -133,10 +157,10 @@ export default async function SinglePostPage({
       <article className="mt-4 border rounded-xl p-6 bg-background shadow-sm">
         <header className="flex flex-row items-start justify-between gap-4">
           <div className="flex">
-            <Link href={`/u/${profile?.uid}`} className="hover:underline select-none mr-5">
+            <Link href={`/u/${profile?.profile.uid}`} className="hover:underline select-none mr-5">
               <Image
                 src={authorAvatar ?? config.defaultAvatar}
-                alt={profile?.displayName ?? "User"}
+                alt={profile?.profile.displayName ?? "User"}
                 width={50}
                 height={50}
                 className="rounded-full object-cover"
@@ -144,8 +168,8 @@ export default async function SinglePostPage({
             </Link>
             <div className="flex flex-col flex-1">
               <h2 className="font-semibold text-lg">
-                <Link href={`/u/${profile?.uid}`} className="hover:underline select-none">
-                  {profile?.displayName ?? "Unknown User"}
+                <Link href={`/u/${profile?.profile.uid}`} className="hover:underline select-none">
+                  {profile?.profile.displayName ?? "Unknown User"}
                 </Link>
               </h2>
 

@@ -97,11 +97,10 @@ export function CommentForm({postId, replyTo, updateReplyTo, ...props}: CommentF
     if(user){
       return (
           <form onSubmit={handleSubmit(onSubmit)} {...props}>
-              <Separator />
               <div className="grid w-full relative mx-auto max-w-lg gap-6 mt-5">
                   <input type="hidden" {...register('postId')} />
                   <InputGroup>
-                      <InputGroupAddon className="pb-3 font-bold text-md">
+                      <InputGroupAddon className="pb-3 pt-3 font-bold text-md">
                         {
                           user && (
                             <InputGroupText>

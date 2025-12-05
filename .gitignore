@@ -36,3 +36,5 @@ next-env.d.ts
 
 /src/app/test
 /src/app/components/test
+
+/scrips/firebaseSeed.js

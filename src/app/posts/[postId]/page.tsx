@@ -71,7 +71,7 @@ export default async function SinglePostPage({
   const commentCount = comments.length;
 
   const authorAvatar = profile?.avatar.startsWith("https") ? 
-  profile?.avatar : `${url}api/image?path=/${profile?.uid}/${profile?.avatar}_98x98.png`;
+  profile?.avatar : `${url}/api/image?path=profile_pictures/${profile?.uid}/${profile?.avatar}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
   const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));

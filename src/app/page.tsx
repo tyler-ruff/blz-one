@@ -7,12 +7,18 @@ import MainHeading from "@/src/app/components/heading/main";
 import { NewPostForm } from "./components/posts/new";
 import { ListPosts } from "./components/posts/list";
 
+import { 
+  getAuthenticatedAppForUser,
+  getAuthenticatedAppForUser as getUser,
+ } from "@/src/lib/firebase/serverApp";
+
 export const metadata: Metadata = {
     title: 'Home',
 }
 
 export default async function Home() {
-  //const posts = await getPosts(5, '');
+  const { currentUser } = await getUser();
+  const { firebaseServerApp } = await getAuthenticatedAppForUser();
 
   return (
     <div className="max-w-3xl relative mx-auto space-y-4 px-3 md:px-0">
@@ -22,6 +28,11 @@ export default async function Home() {
           active: true
         }
       ]} />
+
+      {/*
+        currentUser?.uid
+      */}
+      
       {/* Brand/Email Header:
       <Image 
         className="relative mx-auto select-none" 

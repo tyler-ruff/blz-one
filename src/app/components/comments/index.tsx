@@ -166,8 +166,8 @@ export function CommentsList(props: {
           for (const [id, prof] of entries) copy[id] = prof;
           return copy;
       });
+      setLoading(false);
     }
-    setLoading(false);
   }, [props.comments, profiles]);
 
   useEffect(() => {

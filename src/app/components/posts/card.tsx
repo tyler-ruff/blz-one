@@ -14,6 +14,8 @@ import { timeAgo } from '@/src/lib/functions';
 
 import { LinkIt } from 'react-linkify-it';
 
+import { HeartButton } from './buttons';
+
 import {
   Card,
   CardHeader,
@@ -39,11 +41,6 @@ import {
   DropdownMenuTrigger,
 } from "@/src/app/components/ui/dropdown-menu";
 
-import {
-  ButtonGroup,
-} from '@/src/app/components/ui/button-group';
-import { Toggle } from '@/src/app/components/ui/toggle';
-
 import { HASHTAG_REGEX } from '@/src/config/posts';
 
 const PostCard = ({
@@ -53,48 +50,10 @@ const PostCard = ({
   media,
   publishDate,
   visibility,
-  profile
+  profile,
+  heartCount
 }: PostCardProps) => {
   const { user } = useAuthContext() as { user: User };
-
-  const HeartButton = () => {
-    if(user){
-      return (
-        <ButtonGroup title="Love This">
-            <Toggle
-                aria-label="Love this post"
-                size="default"
-                variant="outline"
-                disabled={user.uid === author ? true : false}
-                className="px-5 bg-white data-[state=on]:*:[svg]:fill-red-500 data-[state=on]:*:[svg]:stroke-red-500 cursor-pointer"
-                >
-                    <Heart />
-            </Toggle>
-            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300" title={`99 users have loved this post`}>
-                99
-            </Button>
-        </ButtonGroup>
-      )
-    } else {
-      return (
-        <ButtonGroup title="Please login or register to Love posts">
-            <Toggle
-                aria-label="Love this post"
-                disabled={true}
-                size="default"
-                variant="outline"
-                className="px-5 bg-white data-[state=on]:*:[svg]:fill-red-500 data-[state=on]:*:[svg]:stroke-red-500 cursor-pointer"
-                >
-                    <Heart />
-            </Toggle>
-            <Button variant="secondary" className="bg-zinc-300 hover:bg-gray-300">
-                99
-            </Button>
-        </ButtonGroup>
-      )
-    }
-  }
-  //const postPublishDate = new Date(publishDate).toLocaleString();
 
   const formattedDate = useMemo(() => {
     return new Date(publishDate).toLocaleString();
@@ -239,7 +198,7 @@ const PostCard = ({
             <span className="hidden sm:block">Like</span>
           </Button>
           */}
-          <HeartButton />
+          <HeartButton postId={id} author={author} heartCount={heartCount || 0} />
           
           <Link href={`/posts/${id}#comments`}>
             <Button variant="ghost" size="default" className="gap-2 px-5 flex cursor-pointer">

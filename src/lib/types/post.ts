@@ -18,6 +18,7 @@ export interface Post{
       type: "image" | "video" | "audio" | "file";
     }>;
     hearts?: string[];
+    heartsCount: number;
     hashtags?: string[];
     visibility: string;
 }

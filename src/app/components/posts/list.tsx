@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 
 //import { v4 as uuidv4 } from 'uuid';
 
-import { ref, query, limitToFirst, startAfter, orderByKey, onValue, get } from "firebase/database";
+import { ref, query, limitToFirst, startAfter, orderByKey, onValue, get, orderByChild, equalTo } from "firebase/database";
 import { realtime } from "@/src/lib/firebase";
 
 //import { getPosts } from "@/src/lib/db/posts";
@@ -30,24 +30,39 @@ import { Post } from "@/src/lib/types/post";
 import type { Profile } from "@/src/lib/types/user";
 
 import { fetchUserProfile } from "./data";
+import { getListOfPosts } from "../../posts/feed/actions";
 
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 3;
 
 /* ----------------- Fetch profile (cached by component) ------------------ */
 
 /* ------------------------ Fetch Posts Page ------------------------ */
-async function fetchPostsBatch(limit: number, cursorKey: string | null) {
+
+
+/*
+async function fetchPostsBatch(limitNum: number, cursorKey: string | null, userId?: string) {
   const postsRef = ref(realtime, "posts");
 
   let q;
+
   if (!cursorKey) {
     // first page
-    q = query(postsRef, orderByKey(), limitToFirst(limit));
+    q = query(postsRef, orderByKey(), limit(limitNum));
   } else {
     // next pages
-    q = query(postsRef, orderByKey(), startAfter(cursorKey), limitToFirst(limit));
+    q = query(postsRef, orderByKey(), startAfter(cursorKey), limit(limitNum));
   }
 
+
+  /*
+  // Todo: Filter & 
+  if(userId && userId !== null){
+    q = query(postsRef, orderByChild('author'), equalTo(userId))
+  } else {
+    q = query(postsRef);
+  }
+  */
+/*
   const snapshot = await get(q);
 
   const result: Array<{ key: string; post: Post }> = [];
@@ -59,9 +74,11 @@ async function fetchPostsBatch(limit: number, cursorKey: string | null) {
 
   return result;
 }
+*/
 
-
-export function ListPosts(){
+export function ListPosts(props: {
+  userId?: string;
+}){
     const [posts, setPosts] = useState<Array<{ key: string; post: Post }>>([]);
     const [profiles, setProfiles] = useState<Record<string, Profile>>({});
     const [loading, setLoading] = useState(true);
@@ -69,6 +86,7 @@ export function ListPosts(){
     const [lastPostKey, setLastPostKey] = useState<string>("");
     const [totalPosts, setTotalPosts] = useState<number>(0);
     const [hasMore, setHasMore] = useState(true);
+    const firstLoadRef = useRef(true);
 
     const observer = useRef<IntersectionObserver | null>(null);
     //const observerRef = useRef<IntersectionObserver | null>(null);
@@ -78,11 +96,17 @@ export function ListPosts(){
     const loadNextPage = useCallback(async () => {
         if (!hasMore || loadingMore) return;
 
+        if (firstLoadRef.current) {
+          firstLoadRef.current = false;
+          return; // skip first observer-triggered load
+        }
+
         setLoadingMore(true);
 
         const lastKey = posts.length > 0 ? posts[posts.length - 1].post.id : null;
 
-        const batch = await fetchPostsBatch(PAGE_SIZE, lastKey);
+        //const batch = await fetchPostsBatch(PAGE_SIZE, lastKey, props.userId);
+        const batch = await getListOfPosts(PAGE_SIZE, lastKey);
 
         if (batch.length === 0) {
             setHasMore(false);
@@ -124,7 +148,7 @@ export function ListPosts(){
 
         setLoading(false);
         setLoadingMore(false);
-    }, [posts, hasMore, loadingMore, profiles]);
+    }, [posts, hasMore, loadingMore, profiles, firstLoadRef]);
 
     /* ---------------- Initial load ---------------- */
     useEffect(() => {
@@ -133,7 +157,7 @@ export function ListPosts(){
 
     /* ---------------- Infinite Scroll Observer ---------------- */
     useEffect(() => {
-        if (!loadMoreRef.current) return;
+        if (loading || !loadMoreRef.current) return;
 
         if (observer.current) observer.current.disconnect();
 
@@ -141,6 +165,8 @@ export function ListPosts(){
             if (entries[0].isIntersecting) {
                 loadNextPage();
             }
+        },{
+          rootMargin: "200px", // only trigger when 200px near bottom
         });
 
         observer.current.observe(loadMoreRef.current);
@@ -182,15 +208,15 @@ export function ListPosts(){
         <div className="space-y-3">
             {posts.map(({ key, post }) => {
                 const postProps: PostCardProps = {
-                ...post,
-                profile: profiles[post.author] ?? null
+                  ...post,
+                  profile: profiles[post.author] ?? null
                 };
 
                 return <PostCard key={key} {...postProps} />;
             })}
 
             {hasMore && (
-                <div ref={loadMoreRef} className="py-4 flex justify-center">
+                <div ref={loadMoreRef} className="py-20 flex justify-center">
                     <Spinner />
                 </div>
             )}

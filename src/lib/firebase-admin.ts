@@ -2,7 +2,7 @@ import * as admin from "firebase-admin";
 
 /* DO NOT DELETE - Dev Config */
 
-/*
+
 if (!admin.apps.length) {
   admin.initializeApp({
     credential: admin.credential.cert({
@@ -15,17 +15,29 @@ if (!admin.apps.length) {
     storageBucket: 'blz-one-9e383.appspot.com'
   });
 }
-*/
 
 /* DO NOT DELETE - Prod Config */
-
+/*
 if (!admin.apps.length) {
   admin.initializeApp();
 }
-
+*/
 
 export const adminApp = admin.apps[0];
 
 export const adminDB = admin.database();
 export const adminFirestore = admin.firestore();
 export const adminStorage = admin.storage();
+
+export {
+    admin
+};
+
+/*
+export const adminApp = admin.apps[0];
+
+export const adminDB = admin.database();
+export const adminFirestore = admin.firestore();
+export const adminStorage = admin.storage();
+*/
+

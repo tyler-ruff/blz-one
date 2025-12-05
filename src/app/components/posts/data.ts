@@ -31,6 +31,9 @@ export interface PostCardProps{
       alt?: string;
       type: "image" | "video" | "audio" | "file";
     }>;
+    heartCount?: number;
+    commentCount?: number;
+    
     visibility: string;
 }
 

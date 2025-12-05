@@ -1,8 +1,8 @@
 // app/api/image/route.ts
 import { NextRequest, NextResponse } from "next/server";
-import { getStorage } from "firebase-admin/storage";
-//import { initializeApp, cert, getApps } from "firebase-admin/app";
+
 import { adminApp, adminDB, adminFirestore, adminStorage } from "@/src/lib/firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 
 // --- GET /api/image?path=<firebase-storage-path> ---
 export async function GET(req: NextRequest) {

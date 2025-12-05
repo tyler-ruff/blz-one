@@ -32,6 +32,7 @@ type Props = {
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
+/*
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -50,6 +51,7 @@ export async function generateMetadata(
     }
   };
 }
+*/
 
 export default async function SinglePostPage({
   params,

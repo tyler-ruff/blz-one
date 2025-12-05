@@ -28,11 +28,10 @@ export const revalidate = 30;
 // Static but revalidates every 30 sec (ISR)
 
 type Props = {
-  params: Promise<{ postId: string }>
+  params: { postId: string }
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-/*
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
@@ -51,12 +50,11 @@ export async function generateMetadata(
     }
   };
 }
-*/
 
 export default async function SinglePostPage({
   params,
 }: {
-  params: Promise<{ postId: string }>
+  params: { postId: string }
 }) {
   const { postId } = await params;
 

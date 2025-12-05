@@ -172,7 +172,7 @@ export function ListPosts(props: {
         observer.current.observe(loadMoreRef.current);
 
         return () => observer.current?.disconnect();
-    }, [loadMoreRef.current, loading, loadingMore, hasMore, loadNextPage]);
+    }, [loading, loadingMore, hasMore, loadNextPage]);
 
     if (loading && posts.length === 0) {
         return (

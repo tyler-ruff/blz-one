@@ -34,7 +34,7 @@ type Props = {
 }
 
 export async function generateMetadata(
-  { params }: { params: { postId: string } },
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { postId } = await params;

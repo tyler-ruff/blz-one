@@ -1,4 +1,5 @@
 // /app/post/[id]/page.tsx
+/*
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -26,26 +27,14 @@ export default async function SinglePostPage() {
           active: true
         }
       ]} />
-
-      {/*
-        currentUser?.uid
-      */}
       
-      {/* Brand/Email Header:
-      <Image 
-        className="relative mx-auto select-none" 
-        alt="Blazed Labs" 
-        width={600} 
-        height={200} 
-        src="https://blazed.sirv.com/promo/Blazed-Header-600x200.png" 
-      />
-      */}
       <MainHeading text="Post" />
     </div>
   );
 }
+*/
 
-/*
+
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -71,11 +60,12 @@ import {
   Globe,
   Lock,
 } from "lucide-react";
-*/
+
+export const dynamic = "force-dynamic";
 
 //export const revalidate = 30; 
 // Static but revalidates every 30 sec (ISR)
-/*
+
 type Props = {
   params: Promise<{ postId: string }>;
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -115,7 +105,7 @@ export async function generateMetadata(
     return { title: "Post", description: "", openGraph: { images: [] } };
   }
 }
-*/
+
 /*
 export async function generateMetadata(
   { params }: Props,
@@ -158,7 +148,6 @@ export async function generateMetadata(
   };
 }
 */
-/*
 export default async function SinglePostPage({
   params,
 }: {
@@ -316,4 +305,3 @@ export default async function SinglePostPage({
     </div>
   );
 }
-*/

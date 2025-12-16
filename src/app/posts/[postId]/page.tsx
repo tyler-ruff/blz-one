@@ -8,7 +8,7 @@ import { getPostById, getPostComments } from "@/src/lib/db/post";
 //import { getUserProfile } from "@/src/lib/db/users";
 import { getUser } from '@/src/app/u/actions';
 
-//import { timeAgo, truncateText } from '@/src/lib/functions';
+import { timeAgo, truncateText } from '@/src/lib/functions';
 
 import { LikeButton, ShareButton, PostMenu } from "@/src/app/components/posts/single";
 import { CommentsSection } from "../../components/comments";
@@ -34,6 +34,45 @@ type Props = {
 }
 
 export async function generateMetadata(
+  { params }: { params: { postId: string } },
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  try {
+    const post = await getPostById(params.postId);
+
+    if (!post) {
+      return {
+        title: "Post not found",
+        description: "This post does not exist.",
+      };
+    }
+
+    const profile = post.author ? await getUser(post.author) : null;
+    const previousImages = (await parent).openGraph?.images ?? [];
+
+    const images =
+      typeof profile?.avatarURL === "string"
+        ? [profile.avatarURL, ...previousImages]
+        : previousImages;
+
+    return {
+      title: `View Single Post by ${profile?.profile?.displayName ?? "User"}`,
+      description: post.content ?? "",
+      openGraph: {
+        images,
+      },
+    };
+  } catch {
+    // Absolute safety net for build-time execution
+    return {
+      title: "Post",
+      description: "",
+    };
+  }
+}
+
+/*
+export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
@@ -52,6 +91,7 @@ export async function generateMetadata(
     },
   };
 }
+*/
 
 /*
 export async function generateMetadata(
@@ -105,14 +145,12 @@ export default async function SinglePostPage({
     : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${avatar}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
-  //const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
-  const publishAgo = "";
+  const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
   const updateDate = new Date(post.updatedDate ?? new Date()).toLocaleString();
   const simpleDate = new Date(post.publishDate ?? new Date()).toLocaleDateString();
 
   const contentWordCount = post.content.length;
-  //const headline = truncateText(post.content, 150);
-  const headline = "";
+  const headline = truncateText(post.content, 150);
 
   const postSingleSchema = {
     '@context': 'https://schema.org',

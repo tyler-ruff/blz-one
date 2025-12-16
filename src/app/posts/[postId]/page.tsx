@@ -1,4 +1,51 @@
 // /app/post/[id]/page.tsx
+import { Metadata } from "next";
+import Image from "next/image";
+
+import BlzBreadcrumb from "@/src/app/components/breadcrumb";
+import MainHeading from "@/src/app/components/heading/main";
+
+import { 
+  getAuthenticatedAppForUser,
+  getAuthenticatedAppForUser as getUser,
+ } from "@/src/lib/firebase/serverApp";
+
+export const metadata: Metadata = {
+    title: 'Home',
+}
+
+export default async function SinglePostPage() {
+  const { currentUser } = await getUser();
+  const { firebaseServerApp } = await getAuthenticatedAppForUser();
+
+  return (
+    <div className="max-w-3xl relative mx-auto space-y-4 px-3 md:px-0">
+      <BlzBreadcrumb trail={[
+        {
+          label: "Home",
+          active: true
+        }
+      ]} />
+
+      {/*
+        currentUser?.uid
+      */}
+      
+      {/* Brand/Email Header:
+      <Image 
+        className="relative mx-auto select-none" 
+        alt="Blazed Labs" 
+        width={600} 
+        height={200} 
+        src="https://blazed.sirv.com/promo/Blazed-Header-600x200.png" 
+      />
+      */}
+      <MainHeading text="Post" />
+    </div>
+  );
+}
+
+/*
 import { Metadata, ResolvingMetadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
@@ -24,6 +71,7 @@ import {
   Globe,
   Lock,
 } from "lucide-react";
+*/
 
 //export const revalidate = 30; 
 // Static but revalidates every 30 sec (ISR)
@@ -110,7 +158,7 @@ export async function generateMetadata(
   };
 }
 */
-
+/*
 export default async function SinglePostPage({
   params,
 }: {
@@ -131,10 +179,6 @@ export default async function SinglePostPage({
   const comments = await getPostComments(postId);
   const commentCount = comments.length;
 
-  /*
-  const authorAvatar = profile?.avatarURL.startsWith("https") ? 
-  profile?.avatarURL : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${profile?.avatarURL}_98x98.png`;
-  */
   const avatar = profile?.avatarURL ?? "";
 
   const authorAvatar = avatar.startsWith("https")
@@ -202,7 +246,6 @@ export default async function SinglePostPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(postSingleSchema) }}
       />
 
-      {/* Post Card */}
       <article className="mt-4 border rounded-xl p-6 bg-background shadow-sm">
         <header className="flex flex-row items-start justify-between gap-4">
           <div className="flex">
@@ -236,7 +279,6 @@ export default async function SinglePostPage({
           </div>
         </header>
 
-        {/* Content */}
         <div className="mt-4 pt-3 whitespace-pre-line leading-relaxed text-base">
           <LinkIt
                 regex={HASHTAG_REGEX}
@@ -249,7 +291,6 @@ export default async function SinglePostPage({
             </LinkIt>
         </div>
 
-        {/* Media */}
         {post.media && post.media.length > 0 && (
           <div className="grid gap-3 mt-4">
             {post.media.map((m: any) => (
@@ -265,16 +306,14 @@ export default async function SinglePostPage({
           </div>
         )}
 
-        {/* Actions */}
         <div className="flex justify-between items-center mt-6">
           <LikeButton postId={postId} initialLikes={0} />
-          {/*<span className="text-xs opacity-70">{post.visibility}</span>*/}
           <ShareButton />
         </div>
       </article>
 
-      {/* Comments */}
       <CommentsSection comments={comments} postId={postId} />
     </div>
   );
 }
+*/

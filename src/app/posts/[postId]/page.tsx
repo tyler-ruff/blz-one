@@ -94,8 +94,15 @@ export default async function SinglePostPage({
   const comments = await getPostComments(postId);
   const commentCount = comments.length;
 
+  /*
   const authorAvatar = profile?.avatarURL.startsWith("https") ? 
   profile?.avatarURL : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${profile?.avatarURL}_98x98.png`;
+  */
+  const avatar = profile?.avatarURL ?? "";
+
+  const authorAvatar = avatar.startsWith("https")
+    ? avatar
+    : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${avatar}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
   const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));

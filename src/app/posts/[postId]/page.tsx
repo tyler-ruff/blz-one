@@ -8,7 +8,7 @@ import { getPostById, getPostComments } from "@/src/lib/db/post";
 //import { getUserProfile } from "@/src/lib/db/users";
 import { getUser } from '@/src/app/u/actions';
 
-import { timeAgo, truncateText } from '@/src/lib/functions';
+//import { timeAgo, truncateText } from '@/src/lib/functions';
 
 import { LikeButton, ShareButton, PostMenu } from "@/src/app/components/posts/single";
 import { CommentsSection } from "../../components/comments";
@@ -105,12 +105,14 @@ export default async function SinglePostPage({
     : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${avatar}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
-  const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
+  //const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
+  const publishAgo = "";
   const updateDate = new Date(post.updatedDate ?? new Date()).toLocaleString();
   const simpleDate = new Date(post.publishDate ?? new Date()).toLocaleDateString();
 
   const contentWordCount = post.content.length;
-  const headline = truncateText(post.content, 150);
+  //const headline = truncateText(post.content, 150);
+  const headline = "";
 
   const postSingleSchema = {
     '@context': 'https://schema.org',

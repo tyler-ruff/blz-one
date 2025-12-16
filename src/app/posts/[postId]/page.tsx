@@ -25,7 +25,7 @@ import {
   Lock,
 } from "lucide-react";
 
-export const revalidate = 30; 
+//export const revalidate = 30; 
 // Static but revalidates every 30 sec (ISR)
 
 type Props = {

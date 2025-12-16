@@ -29,46 +29,40 @@ export const revalidate = 30;
 // Static but revalidates every 30 sec (ISR)
 
 type Props = {
-  params: Promise<{ postId: string }>
+  params: Promise<{ postId: string }>;
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 export async function generateMetadata(
-  { params }: { params: { postId: string } },
+  { params }: Props,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  try {
-    const post = await getPostById(params.postId);
+  const { postId } = await params; // <-- safe
 
-    if (!post) {
-      return {
-        title: "Post not found",
-        description: "This post does not exist.",
-      };
-    }
-
-    const profile = post.author ? await getUser(post.author) : null;
-    const previousImages = (await parent).openGraph?.images ?? [];
-
-    const images =
-      typeof profile?.avatarURL === "string"
-        ? [profile.avatarURL, ...previousImages]
-        : previousImages;
-
+  // Fetch post safely
+  const post = await getPostById(postId);
+  if (!post) {
     return {
-      title: `View Single Post by ${profile?.profile?.displayName ?? "User"}`,
-      description: post.content ?? "",
-      openGraph: {
-        images,
-      },
-    };
-  } catch {
-    // Absolute safety net for build-time execution
-    return {
-      title: "Post",
-      description: "",
+      title: "Post not found",
+      description: "This post does not exist.",
     };
   }
+
+  const profile = post.author ? await getUser(post.author) : null;
+  const previousImages = (await parent).openGraph?.images ?? [];
+
+  const images =
+    typeof profile?.avatarURL === "string"
+      ? [profile.avatarURL, ...previousImages]
+      : previousImages;
+
+  return {
+    title: `View Single Post by ${profile?.profile?.displayName ?? "User"}`,
+    description: post.content ?? "",
+    openGraph: {
+      images,
+    },
+  };
 }
 
 /*

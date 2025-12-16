@@ -34,35 +34,38 @@ type Props = {
 }
 
 export async function generateMetadata(
-  { params }: Props,
+  { params }: { params: Promise<{ postId: string }> },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const { postId } = await params; // <-- safe
+  try {
+    const { postId } = await params;
+    const post = await getPostById(postId);
 
-  // Fetch post safely
-  const post = await getPostById(postId);
-  if (!post) {
+    if (!post) {
+      return {
+        title: "Post not found",
+        description: "This post does not exist.",
+        openGraph: { images: [] },
+      };
+    }
+
+    const profile = post.author ? await getUser(post.author) : null;
+    const previousImages = (await parent).openGraph?.images ?? [];
+
+    const images =
+      profile?.avatarURL && typeof profile.avatarURL === "string"
+        ? [profile.avatarURL, ...previousImages]
+        : previousImages;
+
     return {
-      title: "Post not found",
-      description: "This post does not exist.",
+      title: `View Single Post by ${profile?.profile?.displayName ?? "User"}`,
+      description: post.content ?? "",
+      openGraph: { images },
     };
+  } catch {
+    // Build-safe fallback
+    return { title: "Post", description: "", openGraph: { images: [] } };
   }
-
-  const profile = post.author ? await getUser(post.author) : null;
-  const previousImages = (await parent).openGraph?.images ?? [];
-
-  const images =
-    typeof profile?.avatarURL === "string"
-      ? [profile.avatarURL, ...previousImages]
-      : previousImages;
-
-  return {
-    title: `View Single Post by ${profile?.profile?.displayName ?? "User"}`,
-    description: post.content ?? "",
-    openGraph: {
-      images,
-    },
-  };
 }
 
 /*
@@ -139,12 +142,17 @@ export default async function SinglePostPage({
     : `${url}/api/image?path=profile_pictures/${profile?.profile.uid}/${avatar}_98x98.png`;
 
   const publishDate = new Date(post.publishDate ?? new Date()).toLocaleString();
-  const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
+  //const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
   const updateDate = new Date(post.updatedDate ?? new Date()).toLocaleString();
   const simpleDate = new Date(post.publishDate ?? new Date()).toLocaleDateString();
 
-  const contentWordCount = post.content.length;
-  const headline = truncateText(post.content, 150);
+  //const contentWordCount = post.content.length;
+  //const headline = truncateText(post.content, 150);
+
+  const content = post.content ?? "";
+  const headline = truncateText(content, 150);
+  const publishAgo = timeAgo(new Date(post.publishDate ?? new Date()));
+  const contentWordCount = content.length;
 
   const postSingleSchema = {
     '@context': 'https://schema.org',
@@ -157,7 +165,7 @@ export default async function SinglePostPage({
     'description': `A post by ${profile?.profile.displayName}`,
     'wordCount': contentWordCount,
     'commentCount': `${commentCount}`,
-    'text': post.content,
+    'text': content,
     'author': {
       '@type': 'Person',
       'name': profile?.profile.displayName,
@@ -237,7 +245,7 @@ export default async function SinglePostPage({
                       {match}
                     </Link>
             )}>
-              {post.content}
+              {content}
             </LinkIt>
         </div>
 

@@ -27,7 +27,7 @@ import {
 
 //export const revalidate = 30; 
 // Static but revalidates every 30 sec (ISR)
-
+/*
 type Props = {
   params: Promise<{ postId: string }>;
   //searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -67,7 +67,7 @@ export async function generateMetadata(
     return { title: "Post", description: "", openGraph: { images: [] } };
   }
 }
-
+*/
 /*
 export async function generateMetadata(
   { params }: Props,

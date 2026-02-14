@@ -93,6 +93,7 @@ export function ListPosts(props: {
     const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
     /* ---------------- Load next page ---------------- */
+  
     const loadNextPage = useCallback(async () => {
         if (!hasMore || loadingMore) return;
 
@@ -149,13 +150,41 @@ export function ListPosts(props: {
         setLoading(false);
         setLoadingMore(false);
     }, [posts, hasMore, loadingMore, profiles, firstLoadRef]);
+    
+   /*
+   const loadNextPage = useCallback(async () => {
+      if (!hasMore || loadingMore) return;
 
+      setLoadingMore(true);
+
+      const lastKey = posts.length > 0
+        ? posts[posts.length - 1].post.id
+        : null;
+
+      const batch = await getListOfPosts(PAGE_SIZE, lastKey);
+
+      if (batch.length === 0) {
+        setHasMore(false);
+        setLoadingMore(false);
+        return;
+      }
+
+      setPosts(prev => {
+        const map = new Map(prev.map(p => [p.key, p]));
+        batch.forEach(item => map.set(item.key, item));
+        return Array.from(map.values());
+      });
+
+      setLoadingMore(false);
+    }, [posts, hasMore, loadingMore]);
+    */
     /* ---------------- Initial load ---------------- */
     useEffect(() => {
         loadNextPage();
     }, [loadNextPage]);
 
     /* ---------------- Infinite Scroll Observer ---------------- */
+    /*
     useEffect(() => {
         if (loading || !loadMoreRef.current) return;
 
@@ -173,6 +202,25 @@ export function ListPosts(props: {
 
         return () => observer.current?.disconnect();
     }, [loading, loadingMore, hasMore, loadNextPage]);
+    */
+   useEffect(() => {
+      const init = async () => {
+        setLoading(true);
+
+        const batch = await getListOfPosts(PAGE_SIZE, null);
+
+        if (batch.length === 0) {
+          setHasMore(false);
+          setLoading(false);
+          return;
+        }
+
+        setPosts(batch);
+        setLoading(false);
+      };
+
+      init();
+    }, []);
 
     if (loading) {
         return (

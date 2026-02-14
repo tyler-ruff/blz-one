@@ -38,44 +38,6 @@ const PAGE_SIZE = 3;
 
 /* ------------------------ Fetch Posts Page ------------------------ */
 
-
-/*
-async function fetchPostsBatch(limitNum: number, cursorKey: string | null, userId?: string) {
-  const postsRef = ref(realtime, "posts");
-
-  let q;
-
-  if (!cursorKey) {
-    // first page
-    q = query(postsRef, orderByKey(), limit(limitNum));
-  } else {
-    // next pages
-    q = query(postsRef, orderByKey(), startAfter(cursorKey), limit(limitNum));
-  }
-
-
-  /*
-  // Todo: Filter & 
-  if(userId && userId !== null){
-    q = query(postsRef, orderByChild('author'), equalTo(userId))
-  } else {
-    q = query(postsRef);
-  }
-  */
-/*
-  const snapshot = await get(q);
-
-  const result: Array<{ key: string; post: Post }> = [];
-
-  snapshot.forEach(child => {
-    const post = child.val() as Post;
-    result.push({ key: child.key!, post });
-  });
-
-  return result;
-}
-*/
-
 export function ListPosts(props: {
   userId?: string;
 }){
@@ -151,58 +113,13 @@ export function ListPosts(props: {
         setLoadingMore(false);
     }, [posts, hasMore, loadingMore, profiles, firstLoadRef]);
     
-   /*
-   const loadNextPage = useCallback(async () => {
-      if (!hasMore || loadingMore) return;
-
-      setLoadingMore(true);
-
-      const lastKey = posts.length > 0
-        ? posts[posts.length - 1].post.id
-        : null;
-
-      const batch = await getListOfPosts(PAGE_SIZE, lastKey);
-
-      if (batch.length === 0) {
-        setHasMore(false);
-        setLoadingMore(false);
-        return;
-      }
-
-      setPosts(prev => {
-        const map = new Map(prev.map(p => [p.key, p]));
-        batch.forEach(item => map.set(item.key, item));
-        return Array.from(map.values());
-      });
-
-      setLoadingMore(false);
-    }, [posts, hasMore, loadingMore]);
-    */
     /* ---------------- Initial load ---------------- */
     useEffect(() => {
         loadNextPage();
     }, [loadNextPage]);
 
     /* ---------------- Infinite Scroll Observer ---------------- */
-    /*
-    useEffect(() => {
-        if (loading || !loadMoreRef.current) return;
-
-        if (observer.current) observer.current.disconnect();
-
-        observer.current = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                loadNextPage();
-            }
-        },{
-          rootMargin: "200px", // only trigger when 200px near bottom
-        });
-
-        observer.current.observe(loadMoreRef.current);
-
-        return () => observer.current?.disconnect();
-    }, [loading, loadingMore, hasMore, loadNextPage]);
-    */
+    
    useEffect(() => {
       const init = async () => {
         setLoading(true);

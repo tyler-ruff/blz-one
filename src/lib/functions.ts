@@ -197,3 +197,16 @@ export function capitalizeEachWord(sentence: string): string {
     })
     .join(" "); // Join the capitalized words back into a sentence
 }
+
+export function isValidHttpUrl(urlString: string | undefined): boolean {
+  if(urlString == undefined){
+    return true;
+  }
+  try {
+    const url = new URL(urlString);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch (err) {
+    // If the constructor throws an error, the string is not a valid URL format
+    return false;
+  }
+}

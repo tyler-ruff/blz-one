@@ -3,14 +3,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-import { useMemo, memo } from 'react';
+import { useState, useEffect, useMemo, memo } from 'react';
+
+import { ref, getDownloadURL } from "firebase/storage";
+
+import { storage } from '@/src/lib/firebase';
 
 import { useAuthContext } from "@/src/context/AuthContext";
 import { User } from "@/src/lib/types/user";
 
 import { PostCardProps } from './data';
 
-import { timeAgo } from '@/src/lib/functions';
+import { timeAgo, isValidHttpUrl } from '@/src/lib/functions';
 
 import { LinkIt } from 'react-linkify-it';
 
@@ -42,6 +46,18 @@ import {
 } from "@/src/app/components/ui/dropdown-menu";
 
 import { HASHTAG_REGEX } from '@/src/config/posts';
+import { config } from '@/src/config/app';
+
+async function getFileUrl(filePath: string) {
+  const fileRef = ref(storage, filePath);
+  try {
+    const downloadURL = await getDownloadURL(fileRef);
+    return downloadURL;
+  } catch (error) {
+    console.error("Error getting download URL:", error);
+    throw error;
+  }
+}
 
 const PostCard = ({
   id,
@@ -55,11 +71,35 @@ const PostCard = ({
 }: PostCardProps) => {
   const { user } = useAuthContext() as { user: User };
 
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(config.defaultAvatar);
+  const [error, setError] = useState(null);
+
   const formattedDate = useMemo(() => {
     return new Date(publishDate).toLocaleString();
   }, [publishDate]);
 
   const ago = useMemo(() => timeAgo(new Date(publishDate)), [publishDate]);
+  
+  useEffect(() => {
+    if(profile?.avatar == undefined){
+      return;
+    }
+    if(profile.avatar !== "" && !isValidHttpUrl(profile.avatar)){
+          const fetchUrl = async () => {
+            try {
+              const fileName = profile.avatar || "";
+              const filePath = `profile_pictures/${profile.uid}/${fileName}_98x98.png`;
+              const fileUrl = await getFileUrl(filePath);
+              setAvatarUrl(fileUrl);
+            } catch (err) {
+              console.log("error");
+            }
+          };
+        fetchUrl();
+      } else {
+        setAvatarUrl(profile.avatar);
+      }
+  }, [profile]); // Rerun if the file path changes
 
   return (
     <Card className="w-full max-w-2xl mx-auto mb-3 shadow-sm rounded-2xl border border-base-300 bg-base-100">
@@ -71,7 +111,7 @@ const PostCard = ({
         <div className="flex items-center gap-3">
           <Link href={`/u/${author}`} className="select-none">
             <Avatar className="h-10 w-10">
-                <AvatarImage src={profile?.avatar} alt={profile?.displayName} />
+                <AvatarImage src={avatarUrl} alt={profile?.displayName} />
                 <AvatarFallback>
                 {profile?.displayName?.slice(0, 2)?.toUpperCase()}
                 </AvatarFallback>

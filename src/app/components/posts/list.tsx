@@ -174,7 +174,7 @@ export function ListPosts(props: {
         return () => observer.current?.disconnect();
     }, [loading, loadingMore, hasMore, loadNextPage]);
 
-    if (loading && posts.length === 0) {
+    if (loading) {
         return (
             <div className="py-5 flex justify-center">
                 <Loading />
